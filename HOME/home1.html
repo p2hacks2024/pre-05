@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函館グルメトレンド</title>
+
+    <!-- Google Fontsからおしゃれなフォントを読み込む -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        /* ページ全体の基本設定 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('111.jpg') no-repeat center center fixed;
+            background-size: cover; /* 画像を画面全体にフィットさせる */
+            font-family: 'Playfair Display', serif;  /* 高級感のあるフォント */
+            color: #2c3e50; /* テキストの基本色 */
+            overflow: hidden;  /* スクロールを無効にする */
+        }
+
+        /* 背景に透明感を追加 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒色オーバーレイ */
+            z-index: -1;  /* 背景に配置 */
+        }
+
+        /* コンテナ設定 */
+        .container {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* 透明感のある背景 */
+            border-radius: 15px; /* 角を丸める */
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* タイトルの設定 */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 60px; /* 大きめに設定 */
+            color: white;
+            letter-spacing: 3px;
+            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5); /* 影を強調 */
+            text-transform: uppercase; /* 大文字に */
+            background: linear-gradient(45deg, #ff6f61, #3498db); /* グラデーション */
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: fadeIn 3s ease-in-out; /* アニメーション時間を長く */
+        }
+
+        /* 横ライン */
+        .line {
+            width: 80%;
+            height: 2px;
+            background-color: #2c3e50;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ラインの影 */
+        }
+
+        /* スタートボタンのスタイル */
+        .start-button {
+            font-size: 20px;
+            padding: 15px 40px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50px; /* ボタンを丸く */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* より大きな影 */
+            transition: all 0.4s ease; /* ボタンの動きがスムーズ */
+            margin-top: 30px; /* ボタンの上に少しスペースを追加 */
+            cursor: pointer;
+        }
+
+        /* ボタンホバー時のエフェクト */
+        .start-button:hover {
+            transform: scale(1.1) rotate(5deg); /* ホバー時に少し回転 */
+            background-color: #2980b9; /* ホバー時に色を変更 */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* 強調した影 */
+        }
+
+        /* アニメーション (タイトル) */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px; /* モバイルでのタイトルサイズを調整 */
+            }
+
+            .start-button {
+                padding: 12px 30px; /* ボタンの大きさを調整 */
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- タイトル -->
+        <h1>函館グルメのトレンド</h1>
+
+        <!-- 横ライン -->
+        <div class="line"></div>
+
+        <!-- スタートボタン -->
+        <button class="start-button">スタート</button>
+
+        <!-- 横ライン -->
+        <div class="line"></div>
+    </div>
+
+</body>
+</html>
