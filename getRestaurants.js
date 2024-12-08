@@ -14,20 +14,17 @@ const googlePlacesUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/j
 // 飲食店情報を取得する関数
 async function fetchRestaurants(pageToken = '') {
   try {
-    // APIリクエスト用のパラメータ
     const params = {
       query: 'restaurant',
       location: `${hakodateCenter.lat},${hakodateCenter.lng}`,
-      radius: 15000, // 半径15km以内
-      key: GOOGLE_API_KEY,  // 環境変数からAPIキーを使用
-      pagetoken: pageToken,  // 次ページのデータを取得するためのトークン
+      radius: 15000,
+      key: GOOGLE_API_KEY,
+      pagetoken: pageToken,
     };
 
-    // Google Places APIにリクエストを送信
     const response = await axios.get(googlePlacesUrl, { params });
 
     if (response.data.status === 'OK') {
-      // 飲食店情報を取得
       const restaurants = response.data.results.map((place) => ({
         name: place.name,
         address: place.formatted_address,
@@ -38,13 +35,13 @@ async function fetchRestaurants(pageToken = '') {
 
       console.log('取得した飲食店情報:', restaurants);
 
-      // 飲食店情報をJSONファイルとして保存
       saveRestaurantsToJsonFile(restaurants);
 
-      // 次のページのデータがあれば、再帰的にfetchRestaurantsを呼び出す
       if (response.data.next_page_token) {
         console.log('次のページのデータを取得中...');
-        fetchRestaurants(response.data.next_page_token);  // 再帰呼び出し
+        setTimeout(() => {
+          fetchRestaurants(response.data.next_page_token);
+        }, 2000); // 2秒待機
       }
     } else {
       console.error('APIリクエストエラー:', response.data.status);
@@ -53,6 +50,7 @@ async function fetchRestaurants(pageToken = '') {
     console.error('飲食店情報の取得エラー:', error);
   }
 }
+
 
 // 飲食店情報をJSONファイルとして保存する関数
 function saveRestaurantsToJsonFile(restaurants) {

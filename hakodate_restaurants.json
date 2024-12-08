@@ -418,5 +418,425 @@
     "latitude": 41.7727642,
     "longitude": 140.7255641,
     "place_id": "ChIJISuM_qHznl8Rnqn-jv2PzFc"
+  },
+  {
+    "name": "Gotoken Restaurant Sekkatei",
+    "address": "Japan, 〒040-0053 Hokkaido, Hakodate, Suehirocho, 4−5 五島軒本店",
+    "latitude": 41.7636099,
+    "longitude": 140.7159168,
+    "place_id": "ChIJSzPIfAfznl8RIwc76hLFCFQ"
+  },
+  {
+    "name": "Chamu Seafood Restaurant",
+    "address": "Japan, 〒040-0063 Hokkaido, Hakodate, Wakamatsucho, 9−15 どんぶり横丁市場内",
+    "latitude": 41.7727187,
+    "longitude": 140.7253522,
+    "place_id": "ChIJHyT8_qHznl8RWdAhmul1DU0"
+  },
+  {
+    "name": "Donburi Yokocho Seafood restaurant avenue (hakodate morning market)",
+    "address": "9-15 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7727642,
+    "longitude": 140.7255641,
+    "place_id": "ChIJISuM_qHznl8Rnqn-jv2PzFc"
+  },
+  {
+    "name": "Grano E Acqua",
+    "address": "Japan, 〒040-0065 Hokkaido, Hakodate, Toyokawacho, 2−2 たばこ会館",
+    "latitude": 41.7638351,
+    "longitude": 140.7195403,
+    "place_id": "ChIJ_xOjxgfznl8R4tg3rhdfyds"
+  },
+  {
+    "name": "Ramen Nidaime Hirakiya",
+    "address": "7-23 Honcho, Hakodate, Hokkaido 040-0011, Japan",
+    "latitude": 41.7895046,
+    "longitude": 140.7502017,
+    "place_id": "ChIJT_4B93D0nl8R6DDymoEkz7U"
+  },
+  {
+    "name": "Gyosanko",
+    "address": "19-3 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7725154,
+    "longitude": 140.7291327,
+    "place_id": "ChIJ___4EZ_znl8RtCZa0y4SCdM"
+  },
+  {
+    "name": "Italian cuisine Piccolo",
+    "address": "7-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.7725064,
+    "longitude": 140.7300451,
+    "place_id": "ChIJY4QyejDznl8RnC8v162qDRU"
+  },
+  {
+    "name": "Kitchen DUKE",
+    "address": "2 Chome-40-14 Hondori, Hakodate, Hokkaido 041-0851, Japan",
+    "latitude": 41.8002915,
+    "longitude": 140.7709711,
+    "place_id": "ChIJcXe6ykX0nl8RwRzVrOyVXoU"
+  },
+  {
+    "name": "MOSSTREES",
+    "address": "9-15 Omachi, Hakodate, Hokkaido 040-0052, Japan",
+    "latitude": 41.7685487,
+    "longitude": 140.7112879,
+    "place_id": "ChIJQYYjFa_znl8RjVf2G3zulNI"
+  },
+  {
+    "name": "Hakodate Menya Ichimonji Hakodate Main Branch",
+    "address": "2 Chome-1-3 Yunokawacho, Hakodate, Hokkaido 042-0932, Japan",
+    "latitude": 41.7748946,
+    "longitude": 140.7878955,
+    "place_id": "ChIJbYiMepb0nl8RDchS8g4fCQc"
+  },
+  {
+    "name": "Mako and Yasube Seafood restaurant",
+    "address": "9-15 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7727564,
+    "longitude": 140.7255815,
+    "place_id": "ChIJHyT8_qHznl8R5uklAGo7lHA"
+  },
+  {
+    "name": "Crab House",
+    "address": "7-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.7723831,
+    "longitude": 140.7302757,
+    "place_id": "ChIJH1RDpGjznl8R3oDdXBm30Ts"
+  },
+  {
+    "name": "Kaisendokoro HAKODATEYAMA",
+    "address": "10-15 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.771856,
+    "longitude": 140.7324299,
+    "place_id": "ChIJeSgfSp7znl8R0Y30FAxOIaE"
+  },
+  {
+    "name": "KAIKOUBO",
+    "address": "11-8 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.772948,
+    "longitude": 140.7243323,
+    "place_id": "ChIJi_XJBKLznl8RU6Tw9QLs5jQ"
+  },
+  {
+    "name": "Bistare Bistare",
+    "address": "3 Chome-53-47 Mihara, Hakodate, Hokkaido 041-0806, Japan",
+    "latitude": 41.8221312,
+    "longitude": 140.7405549,
+    "place_id": "ChIJ44SPw4T2nl8R0Pbk60BecZ4"
+  },
+  {
+    "name": "Benten Sushi",
+    "address": "5-16 Omachi, Hakodate, Hokkaido 040-0052, Japan",
+    "latitude": 41.7694629,
+    "longitude": 140.7086856,
+    "place_id": "ChIJ7aFyuq_znl8RcwyMTBfcUV8"
+  },
+  {
+    "name": "Hakodate Dining GAYA",
+    "address": "8-14 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7724853,
+    "longitude": 140.7261435,
+    "place_id": "ChIJfSCK4qHznl8Rsub932KwyjQ"
+  },
+  {
+    "name": "五聚富 Robata",
+    "address": "11-16 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7725917,
+    "longitude": 140.7247619,
+    "place_id": "ChIJW1FjHaLznl8RTY2uNPD8pq4"
+  },
+  {
+    "name": "鰻の成瀬 函館店｜Naruse‘s Unagi Eel Restaurant Hakodate",
+    "address": "35-31 Kashiwagicho, Hakodate, Hokkaido 042-0942, Japan",
+    "latitude": 41.7872418,
+    "longitude": 140.7703352,
+    "place_id": "ChIJR_8QQjH1nl8RQeyUoUKFRFI"
+  },
+  {
+    "name": "Ikasei Daimonten",
+    "address": "6-10 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7718458,
+    "longitude": 140.7280814,
+    "place_id": "ChIJ21vve5_znl8RdOph2JRhso8"
+  },
+  {
+    "name": "居酒屋 さくら井",
+    "address": "22-11 Kamedaminatocho, Hakodate, Hokkaido 041-0822, Japan",
+    "latitude": 41.8074372,
+    "longitude": 140.7254217,
+    "place_id": "ChIJ64e3mhb1nl8RaHMTVeCwMCI"
+  },
+  {
+    "name": "居酒屋FUSHIMI",
+    "address": "32-6 Honcho, Hakodate, Hokkaido 040-0011, Japan",
+    "latitude": 41.788145,
+    "longitude": 140.7515573,
+    "place_id": "ChIJW9_tIez1nl8RrZUPOBu77DQ"
+  },
+  {
+    "name": "Kinka (Kinga) Korean Restaurant",
+    "address": "7-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.77235049999999,
+    "longitude": 140.7303714,
+    "place_id": "ChIJwUqLUqvznl8RMQffJ3EBBh4"
+  },
+  {
+    "name": "enoteca La RICOLMA",
+    "address": "2 Chome-33-12 Tomiokacho, Hakodate, Hokkaido 041-0811, Japan",
+    "latitude": 41.8050995,
+    "longitude": 140.751048,
+    "place_id": "ChIJmcMgvj30nl8R75J9BbDE08I"
+  },
+  {
+    "name": "すし雅",
+    "address": "1-2 Shinkawacho, Hakodate, Hokkaido 040-0032, Japan",
+    "latitude": 41.773367,
+    "longitude": 140.7349166,
+    "place_id": "ChIJAeLG2Z3znl8R8Ab_pGfM-NM"
+  },
+  {
+    "name": "Sukiya Hakodate Isaribi-dori",
+    "address": "3-3 Hironocho, Hakodate, Hokkaido 042-0934, Japan",
+    "latitude": 41.7756611,
+    "longitude": 140.7702324,
+    "place_id": "ChIJuVBGTJv0nl8R8UZ485QKS0w"
+  },
+  {
+    "name": "はこ民食堂",
+    "address": "18-1 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7724039,
+    "longitude": 140.7296388,
+    "place_id": "ChIJi6DhDp_znl8RHrcSFIkO2sk"
+  },
+  {
+    "name": "Nishintei",
+    "address": "8-17 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.7722112,
+    "longitude": 140.7267601,
+    "place_id": "ChIJnSH7X5_znl8RJBshHpPRiOk"
+  },
+  {
+    "name": "Suzuya",
+    "address": "6-11 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.7719448,
+    "longitude": 140.7298014,
+    "place_id": "ChIJ-98JoZ_znl8RTkVFY0293K0"
+  },
+  {
+    "name": "わいどのおでん",
+    "address": "7-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.772388,
+    "longitude": 140.7299507,
+    "place_id": "ChIJia4X2cPznl8RKiUhJ0fFzRg"
+  },
+  {
+    "name": "Kuimonoya Wan Hakodate Goryokaku",
+    "address": "Japan, 〒040-0011 Hokkaido, Hakodate, Honcho, 8−20 みつわビル 2f",
+    "latitude": 41.790481,
+    "longitude": 140.751441,
+    "place_id": "ChIJvbjzN3D0nl8Rp2fJzOuZfl4"
+  },
+  {
+    "name": "KAMIYAMA Kitchen",
+    "address": "3 Chome-28-18 Kamiyama, Hakodate, Hokkaido 041-0832, Japan",
+    "latitude": 41.8181874,
+    "longitude": 140.7698828,
+    "place_id": "ChIJaRUCWNL1nl8ROa0Ssxiw2Es"
+  },
+  {
+    "name": "麺屋 椿TSUBAKI",
+    "address": "3 Chome-9 Tomiokacho, Hakodate, Hokkaido 041-0811, Japan",
+    "latitude": 41.80925939999999,
+    "longitude": 140.7529484,
+    "place_id": "ChIJRSKNHT71nl8RUTEjylrHsJU"
+  },
+  {
+    "name": "Sukiya National Route 5 Hakodate Kameda",
+    "address": "17-11 Kamedamachi, Hakodate, Hokkaido 040-0072, Japan",
+    "latitude": 41.79575639999999,
+    "longitude": 140.7335892,
+    "place_id": "ChIJ13we6Qv0nl8ROHTyv0lH6kg"
+  },
+  {
+    "name": "柏や",
+    "address": "7-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.7723746,
+    "longitude": 140.7303913,
+    "place_id": "ChIJU9QJB5_znl8RlYYzCQvL3t0"
+  },
+  {
+    "name": "Osho Sushi",
+    "address": "5-6 Shinkawacho, Hakodate, Hokkaido 040-0032, Japan",
+    "latitude": 41.7761314,
+    "longitude": 140.7330793,
+    "place_id": "ChIJu9fNiZvznl8R0OfpiKZGc80"
+  },
+  {
+    "name": "Dining Bar Lu",
+    "address": "Japan, 〒041-0852 Hokkaido, Hakodate, Kaji, 1 Chome−33−5 M's ねむの木",
+    "latitude": 41.8072281,
+    "longitude": 140.7626447,
+    "place_id": "ChIJQdxS6Dn0nl8RSCPgOMSCcXU"
+  },
+  {
+    "name": "SYABU-YO Hakodate Kaji",
+    "address": "2 Chome-1 Kaji, Hakodate, Hokkaido 041-0852, Japan",
+    "latitude": 41.8035083,
+    "longitude": 140.773058,
+    "place_id": "ChIJo1-m-pH1nl8RzmdMFWcPTnc"
+  },
+  {
+    "name": "ダイナーカラマーロ",
+    "address": "4-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.7707868,
+    "longitude": 140.7312856,
+    "place_id": "ChIJX9dh6J_znl8R9GQhhufTS1w"
+  },
+  {
+    "name": "Cafe Restaurant GUSTO",
+    "address": "2 Chome-1-3 Kaji, Hakodate, Hokkaido 041-0852, Japan",
+    "latitude": 41.8037148,
+    "longitude": 140.7728859,
+    "place_id": "ChIJBRfbzPP1nl8RSoQ7sHtHOt8"
+  },
+  {
+    "name": "Toui",
+    "address": "Japan, 〒040-0063 Hokkaido, Hakodate, Wakamatsucho, 32−19 1F ロイヤルシティ参番館",
+    "latitude": 41.7773479,
+    "longitude": 140.7302321,
+    "place_id": "ChIJrbwdy5vznl8RqETmTvn0_NI"
+  },
+  {
+    "name": "Very Very Beast",
+    "address": "23-3 Horaicho, Hakodate, Hokkaido 040-0043, Japan",
+    "latitude": 41.7623627,
+    "longitude": 140.7206198,
+    "place_id": "ChIJtZo-Oqjznl8Rt9kH5fxBzo8"
+  },
+  {
+    "name": "La Concha",
+    "address": "14-6 Suehirocho, Hakodate, Hokkaido 040-0053, Japan",
+    "latitude": 41.7657291,
+    "longitude": 140.7162323,
+    "place_id": "ChIJDfBuaajznl8RliMOhbmcegI"
+  },
+  {
+    "name": "Uni Murakami Hakodate station store",
+    "address": "7-1 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.771135,
+    "longitude": 140.7267852,
+    "place_id": "ChIJG79EJ0vznl8R99ummqtGNOY"
+  },
+  {
+    "name": "Rani Kitchen",
+    "address": "1 Chome-20-19 Minatocho, Hakodate, Hokkaido 041-0821, Japan",
+    "latitude": 41.8030096,
+    "longitude": 140.723503,
+    "place_id": "ChIJcXUlVgH0nl8RVJvLF0FEc84"
+  },
+  {
+    "name": "POKHARA DINING",
+    "address": "3 Chome-2-1 Hiyoshicho, Hakodate, Hokkaido 041-0841, Japan",
+    "latitude": 41.7926398,
+    "longitude": 140.7844527,
+    "place_id": "ChIJ32HDjb71nl8RgKpFobp_9pM"
+  },
+  {
+    "name": "Hakodate Bukkake Seafood Restaurant",
+    "address": "9-15 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
+    "latitude": 41.77259,
+    "longitude": 140.725759,
+    "place_id": "ChIJF-76_KHznl8RvY2a0ZjGScw"
+  },
+  {
+    "name": "松風グルカ Asian Restaurant & Bar Matsukaze Gurkha",
+    "address": "18-13 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
+    "latitude": 41.7733048,
+    "longitude": 140.7325015,
+    "place_id": "ChIJs0d0S57znl8R0oar3ubgp6o"
+  },
+  {
+    "name": "matsu",
+    "address": "Japan, 〒040-0015 Hokkaido, Hakodate, Yanagawacho, 18−3 ﾊｲﾙｯｸﾋﾞﾙ1階",
+    "latitude": 41.78999049999999,
+    "longitude": 140.7482998,
+    "place_id": "ChIJ7-KxHXH0nl8RdIAlHD2gh6c"
+  },
+  {
+    "name": "Multi Nationality Dining CLEMENT STREET",
+    "address": "32-29 Honcho, Hakodate, Hokkaido 040-0011, Japan",
+    "latitude": 41.7877886,
+    "longitude": 140.7519958,
+    "place_id": "ChIJGXb7aHr0nl8RwddXyMu7i2c"
+  },
+  {
+    "name": "Tonetsu",
+    "address": "22-2 Horaicho, Hakodate, Hokkaido 040-0043, Japan",
+    "latitude": 41.7618106,
+    "longitude": 140.7196814,
+    "place_id": "ChIJ2b4d9Qbznl8Rd81nHug3lSk"
+  },
+  {
+    "name": "Restaurant Genova",
+    "address": "Japan, 〒040-0054 Hokkaido, Hakodate, Motomachi, 19−7 函館山展望台2F",
+    "latitude": 41.759416,
+    "longitude": 140.7044947,
+    "place_id": "ChIJ__-_gFXynl8R10Ucksxi5NQ"
+  },
+  {
+    "name": "Kourakuen(Hakodate)",
+    "address": "12-1 Otemachi, Hakodate, Hokkaido 040-0064, Japan",
+    "latitude": 41.7684127,
+    "longitude": 140.725315,
+    "place_id": "ChIJvdLfi6Dznl8RtcXB5A9fCp8"
+  },
+  {
+    "name": "Minowa Restaurant",
+    "address": "4-30 Suginamicho, Hakodate, Hokkaido 040-0004, Japan",
+    "latitude": 41.7878561,
+    "longitude": 140.756253,
+    "place_id": "ChIJiU7HIHv0nl8RX6PDYlBTI8E"
+  },
+  {
+    "name": "L'oiseau par Matsunaga",
+    "address": "4-5 Kashiwagicho, Hakodate, Hokkaido 042-0942, Japan",
+    "latitude": 41.790977,
+    "longitude": 140.7644006,
+    "place_id": "ChIJcZd0jGb0nl8RuDwhZMavEiw"
+  },
+  {
+    "name": "Yakiniku restaurant",
+    "address": "34-4 Honcho, Hakodate, Hokkaido 040-0011, Japan",
+    "latitude": 41.78591,
+    "longitude": 140.7510749,
+    "place_id": "ChIJFUTxgXn0nl8RawZxw6WlxbI"
+  },
+  {
+    "name": "Hama Sushi Hakodate Hondori Restaurant",
+    "address": "3 Chome-1-9 Hondori, Hakodate, Hokkaido 041-0851, Japan",
+    "latitude": 41.7911103,
+    "longitude": 140.7764691,
+    "place_id": "ChIJ7Wigql_0nl8RWfjrTEyXT1U"
+  },
+  {
+    "name": "Hakodate BeerHall",
+    "address": "Japan, 〒040-0053 Hokkaido, Hakodate, Suehirocho, 14−12 函館ヒストリープラザ内",
+    "latitude": 41.7666454,
+    "longitude": 140.7162961,
+    "place_id": "ChIJYXuCYajznl8RnzOU4TyKo7Q"
+  },
+  {
+    "name": "ISSHINTEI Hakodate",
+    "address": "5-2 Hironocho, Hakodate, Hokkaido 042-0934, Japan",
+    "latitude": 41.776277,
+    "longitude": 140.771185,
+    "place_id": "ChIJ9UlNLZv0nl8R7HuS3qYRkIg"
+  },
+  {
+    "name": "Kai Foo Rou La Vista Hakodate Bay",
+    "address": "12-6 Toyokawacho, Hakodate, Hokkaido 040-0065, Japan",
+    "latitude": 41.767658,
+    "longitude": 140.7188583,
+    "place_id": "ChIJO-DbrKfznl8Rg9HRHWh7LUU"
   }
 ]
