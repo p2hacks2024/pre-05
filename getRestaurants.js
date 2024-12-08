@@ -1,76 +1,85 @@
 const axios = require('axios');
-const fs = require('fs');  // ファイルシステムモジュール
-require('dotenv').config();  // dotenv を読み込んで環境変数を使えるようにする
+const fs = require('fs').promises;
+require('dotenv').config();
 
-// 環境変数からGoogle APIキーを取得
-const GOOGLE_API_KEY = process.env.GOOGLE_MAP_API_KEY;
-
-// 函館市の中心座標 (緯度, 経度)
+const HOT_PEPPER_API_KEY = process.env.HOT_PEPPER_API_KEY;
 const hakodateCenter = { lat: 41.768793, lng: 140.728810 };
+const hotPepperUrl = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/';
 
-// Google Places APIのURL
-const googlePlacesUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
-
-// 飲食店情報を取得する関数
-async function fetchRestaurants(pageToken = '') {
+async function fetchRestaurants() {
   try {
-    const params = {
-      query: 'restaurant',
-      location: `${hakodateCenter.lat},${hakodateCenter.lng}`,
-      radius: 15000,
-      key: GOOGLE_API_KEY,
-      pagetoken: pageToken,
-    };
+    const allRestaurants = new Map();
+    let page = 1;
+    let total = 0;
 
-    const response = await axios.get(googlePlacesUrl, { params });
+    while (true) {
+      const params = {
+        key: HOT_PEPPER_API_KEY,
+        lat: hakodateCenter.lat,
+        lng: hakodateCenter.lng,
+        range: 3,
+        format: 'json',
+        start: (page - 1) * 100 + 1,
+        count: 100
+      };
 
-    if (response.data.status === 'OK') {
-      const restaurants = response.data.results.map((place) => ({
-        name: place.name,
-        address: place.formatted_address,
-        latitude: place.geometry.location.lat,
-        longitude: place.geometry.location.lng,
-        place_id: place.place_id,
-      }));
+      console.log(`APIリクエスト: ページ ${page}, 開始位置 ${params.start}`);
+      const response = await axios.get(hotPepperUrl, { params });
 
-      console.log('取得した飲食店情報:', restaurants);
-
-      saveRestaurantsToJsonFile(restaurants);
-
-      if (response.data.next_page_token) {
-        console.log('次のページのデータを取得中...');
-        setTimeout(() => {
-          fetchRestaurants(response.data.next_page_token);
-        }, 2000); // 2秒待機
+      if (!response.data.results || !response.data.results.shop) {
+        break;
       }
-    } else {
-      console.error('APIリクエストエラー:', response.data.status);
+
+      const shops = response.data.results.shop;
+      total = response.data.results.results_available;
+      console.log(`取得した店舗数: ${shops.length}`);
+      console.log(`総件数: ${total}`);
+
+      shops.forEach(shop => {
+        if (!allRestaurants.has(shop.id)) {
+          allRestaurants.set(shop.id, {
+            name: shop.name,
+            address: shop.address,
+            latitude: parseFloat(shop.lat),
+            longitude: parseFloat(shop.lng),
+            shop_id: shop.id
+          });
+        }
+      });
+
+      if (params.start + shops.length > total) {
+        break;
+      }
+
+      page++;
     }
+
+    const restaurants = Array.from(allRestaurants.values());
+    await saveRestaurantsToJsonFile(restaurants);
+    return restaurants;
+
   } catch (error) {
-    console.error('飲食店情報の取得エラー:', error);
+    console.error('APIエラー:', error.response?.data || error.message);
+    throw error;
   }
 }
 
-
-// 飲食店情報をJSONファイルとして保存する関数
-function saveRestaurantsToJsonFile(restaurants) {
+async function saveRestaurantsToJsonFile(restaurants) {
   const fileName = 'hakodate_restaurants.json';
-
-  // 既存のファイルがあれば読み込み、新しいデータを追加
-  if (fs.existsSync(fileName)) {
-    const existingData = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-    restaurants = existingData.concat(restaurants);  // 既存データと新しいデータをマージ
+  try {
+    await fs.writeFile(
+      fileName,
+      JSON.stringify(restaurants, null, 2)
+    );
+    console.log(`${fileName} に ${restaurants.length} 件の飲食店情報を保存しました`);
+  } catch (err) {
+    console.error('ファイル書き込みエラー:', err);
+    throw err;
   }
-
-  // JSONデータをファイルに書き込む
-  fs.writeFile(fileName, JSON.stringify(restaurants, null, 2), (err) => {
-    if (err) {
-      console.error('ファイル書き込みエラー:', err);
-    } else {
-      console.log(`${fileName} に飲食店情報を保存しました`);
-    }
-  });
 }
 
-// 飲食店情報を取得
-fetchRestaurants();
+fetchRestaurants()
+  .catch(error => {
+    console.error('処理エラー:', error);
+    process.exit(1);
+  });
