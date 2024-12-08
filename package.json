@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7"
+  },
+  "name": "pre-05",
+  "version": "1.0.0",
+  "description": "プロダクト名  \r ...",
+  "main": "getRestaurants.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
