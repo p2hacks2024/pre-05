@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 require('dotenv').config();
 
 const HOT_PEPPER_API_KEY = process.env.HOT_PEPPER_API_KEY;
-const hakodateCenter = { lat: 41.768793, lng: 140.728810 };
+const sapporoCenter = { lat: 43.062096, lng: 141.354376 }; // 札幌駅付近
 const hotPepperUrl = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/';
 
 async function fetchRestaurants() {
@@ -15,8 +15,8 @@ async function fetchRestaurants() {
     while (true) {
       const params = {
         key: HOT_PEPPER_API_KEY,
-        lat: hakodateCenter.lat,
-        lng: hakodateCenter.lng,
+        lat: sapporoCenter.lat,
+        lng: sapporoCenter.lng,
         range: 3,
         format: 'json',
         start: (page - 1) * 100 + 1,
@@ -65,7 +65,7 @@ async function fetchRestaurants() {
 }
 
 async function saveRestaurantsToJsonFile(restaurants) {
-  const fileName = 'hakodate_restaurants.json';
+  const fileName = 'sapporo_restaurants.json';
   try {
     await fs.writeFile(
       fileName,

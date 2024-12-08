@@ -3,23 +3,23 @@ const fs = require('fs').promises;
 require('dotenv').config();
 
 const HOT_PEPPER_API_KEY = process.env.HOT_PEPPER_API_KEY;
-const hakodateCenter = { lat: 41.768793, lng: 140.728810 };
+const tokyoCenter = { lat: 35.689722, lng: 139.700278 };
 const hotPepperUrl = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/';
 
 async function fetchRestaurants() {
   try {
-    const allRestaurants = new Map();
+    const allRestaurants = new Map(); // shop_idをキーとして使用
     let page = 1;
     let total = 0;
 
     while (true) {
       const params = {
         key: HOT_PEPPER_API_KEY,
-        lat: hakodateCenter.lat,
-        lng: hakodateCenter.lng,
+        lat: tokyoCenter.lat,
+        lng: tokyoCenter.lng,
         range: 3,
         format: 'json',
-        start: (page - 1) * 100 + 1,
+        start: (page - 1) * 100 + 1, // 開始位置を正しく計算
         count: 100
       };
 
@@ -35,6 +35,7 @@ async function fetchRestaurants() {
       console.log(`取得した店舗数: ${shops.length}`);
       console.log(`総件数: ${total}`);
 
+      // 新しい店舗のみを追加
       shops.forEach(shop => {
         if (!allRestaurants.has(shop.id)) {
           allRestaurants.set(shop.id, {
@@ -47,6 +48,7 @@ async function fetchRestaurants() {
         }
       });
 
+      // 終了条件: 取得店舗数が総数に達した場合
       if (params.start + shops.length > total) {
         break;
       }
@@ -54,6 +56,7 @@ async function fetchRestaurants() {
       page++;
     }
 
+    // 結果を保存
     const restaurants = Array.from(allRestaurants.values());
     await saveRestaurantsToJsonFile(restaurants);
     return restaurants;
@@ -65,7 +68,7 @@ async function fetchRestaurants() {
 }
 
 async function saveRestaurantsToJsonFile(restaurants) {
-  const fileName = 'hakodate_restaurants.json';
+  const fileName = 'tokyo_restaurants.json';
   try {
     await fs.writeFile(
       fileName,

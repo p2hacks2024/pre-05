@@ -1,282 +1,625 @@
 [
   {
-    "name": "POKHARA DINING",
-    "address": "3 Chome-2-1 Hiyoshicho, Hakodate, Hokkaido 041-0841, Japan",
-    "latitude": 41.7926398,
-    "longitude": 140.7844527,
-    "place_id": "ChIJ32HDjb71nl8RgKpFobp_9pM"
+    "name": "はな優膳",
+    "address": "北海道函館市大手町-16-12",
+    "latitude": 41.7692401251,
+    "longitude": 140.7268423468,
+    "shop_id": "J003450708"
   },
   {
-    "name": "Benten Sushi",
-    "address": "5-16 Omachi, Hakodate, Hokkaido 040-0052, Japan",
-    "latitude": 41.7694629,
-    "longitude": 140.7086856,
-    "place_id": "ChIJ7aFyuq_znl8RcwyMTBfcUV8"
+    "name": "GanGuro ガングロ",
+    "address": "北海道函館市松風町４－６　クリスタルビル１F",
+    "latitude": 41.7709275508,
+    "longitude": 140.7309324348,
+    "shop_id": "J000728211"
   },
   {
-    "name": "Benten Sushi",
-    "address": "8-10 Yachigashiracho, Hakodate, Hokkaido 040-0046, Japan",
-    "latitude": 41.753626,
-    "longitude": 140.7119677,
-    "place_id": "ChIJ_QwkxOLynl8Rez6xmZWifbU"
+    "name": "やきとり 大吉 函館店",
+    "address": "北海道函館市松風町２－５",
+    "latitude": 41.7701504603,
+    "longitude": 140.7321543113,
+    "shop_id": "J000643278"
   },
   {
-    "name": "ラーニキッチン 昭和店",
-    "address": "3 Chome-30-55 Showa, Hakodate, Hokkaido 041-0812, Japan",
-    "latitude": 41.8228567,
-    "longitude": 140.7385261,
-    "place_id": "ChIJNRNDJND3nl8R69VTTitMZCM"
+    "name": "Bar Twilight トワイライト ホテルリソル函館",
+    "address": "北海道函館市若松町6-3　ホテルリソル函館内10階",
+    "latitude": 41.771564039,
+    "longitude": 140.7276879728,
+    "shop_id": "J001000082"
   },
   {
-    "name": "Hakodate Menya Ichimonji Hakodate Main Branch",
-    "address": "2 Chome-1-3 Yunokawacho, Hakodate, Hokkaido 042-0932, Japan",
-    "latitude": 41.7748946,
-    "longitude": 140.7878955,
-    "place_id": "ChIJbYiMepb0nl8RDchS8g4fCQc"
+    "name": "shot bar ちゃもい",
+    "address": "北海道函館市松風町-611 大丸ビル２F",
+    "latitude": 41.7718515712,
+    "longitude": 140.7298127629,
+    "shop_id": "J001292681"
   },
   {
-    "name": "麺屋 椿TSUBAKI",
-    "address": "3 Chome-9 Tomiokacho, Hakodate, Hokkaido 041-0811, Japan",
-    "latitude": 41.80925939999999,
-    "longitude": 140.7529484,
-    "place_id": "ChIJRSKNHT71nl8RUTEjylrHsJU"
+    "name": "大衆酒場 やきとりこころ",
+    "address": "北海道函館市松風町６－１３",
+    "latitude": 41.7718174171,
+    "longitude": 140.7300830179,
+    "shop_id": "J003516930"
   },
   {
-    "name": "五聚富 Robata",
-    "address": "11-16 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
-    "latitude": 41.7725917,
-    "longitude": 140.7247619,
-    "place_id": "ChIJW1FjHaLznl8RTY2uNPD8pq4"
+    "name": "たろ吉",
+    "address": "北海道函館市松風町5－12",
+    "latitude": 41.7715558082,
+    "longitude": 140.7309221227,
+    "shop_id": "J003559763"
   },
   {
-    "name": "HAKOYA Seafood Restaurant",
-    "address": "511 Takamatsucho, Hakodate, Hokkaido 042-0952, Japan",
-    "latitude": 41.7754377,
-    "longitude": 140.8162002,
-    "place_id": "ChIJy_oncQ71nl8Rv8-QKzjI59g"
+    "name": "海鮮居酒屋 大漁旗",
+    "address": "北海道函館市若松町7-17",
+    "latitude": 41.7717445553,
+    "longitude": 140.7271296802,
+    "shop_id": "J001009823"
   },
   {
-    "name": "Edomatsu",
-    "address": "25-19 Yachigashiracho, Hakodate, Hokkaido 040-0046, Japan",
-    "latitude": 41.7531835,
-    "longitude": 140.7157642,
-    "place_id": "ChIJYaK90eLynl8RpCyx3XyU2-s"
+    "name": "箱館居酒屋 熾美",
+    "address": "北海道函館市松風町6-14",
+    "latitude": 41.7718235335,
+    "longitude": 140.7302755,
+    "shop_id": "J003450379"
   },
   {
-    "name": "UOBEI Hokutonanaehama",
-    "address": "Japan, 〒049-0111 Hokkaido, Hokuto, Nanaehama, 5 Chome−１６−8",
-    "latitude": 41.8234916,
-    "longitude": 140.7107643,
-    "place_id": "ChIJeTX0vcD2nl8RMpvkNGm83E4"
+    "name": "海鮮居酒屋 いかり屋",
+    "address": "北海道函館市松風町６－１１　キャピトルビル１Ｆ",
+    "latitude": 41.7719457256,
+    "longitude": 140.7297838713,
+    "shop_id": "J001178386"
   },
   {
-    "name": "AJISAI Ramen shop, Kurenai, Hakodate Bay Bishoku Club",
-    "address": "12-7 Toyokawacho, Hakodate, Hokkaido 040-0065, Japan",
-    "latitude": 41.7672328,
-    "longitude": 140.7193245,
-    "place_id": "ChIJYzOhuqfznl8R0ASErhMFHvk"
+    "name": "HOTBOX 函館",
+    "address": "北海道函館市松風町3-11 ",
+    "latitude": 41.7710920082,
+    "longitude": 140.731976497,
+    "shop_id": "J001051086"
   },
   {
-    "name": "岩見沢精肉卸直営焼肉 牛乃家 函館美原店",
-    "address": "Japan, 〒041-0806 Hokkaido, Hakodate, Mihara, 1 Chome−20−11 1F カワシロビル",
-    "latitude": 41.8138845,
-    "longitude": 140.7531994,
-    "place_id": "ChIJaZ9agWD1nl8R2hOCWVgFrdE"
+    "name": "鉄板焼 大門亭",
+    "address": "北海道函館市松風町2丁目8番 大門ビル7F",
+    "latitude": 41.7705065449,
+    "longitude": 140.7326709109,
+    "shop_id": "J003516967"
   },
   {
-    "name": "Yondaime Ramen",
-    "address": "6-10 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
-    "latitude": 41.77201549999999,
-    "longitude": 140.7297078,
-    "place_id": "ChIJETOIoJ_znl8RWEp9yAtC40s"
+    "name": "屋台 ライダーキック",
+    "address": "北海道函館市松風町１－１－６",
+    "latitude": 41.7700643854,
+    "longitude": 140.7329784077,
+    "shop_id": "J003516933"
   },
   {
-    "name": "とんき大門店",
-    "address": "5-13 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
-    "latitude": 41.77144699999999,
-    "longitude": 140.7308545,
-    "place_id": "ChIJheXQvp_znl8RMyTDtTr0afA"
+    "name": "濱焼北海道魚萬 函館南口駅前店",
+    "address": "北海道函館市若松町１６－１０ 函館駅前ビル１Ｆ２Ｆ",
+    "latitude": 41.7722373135,
+    "longitude": 140.7283923152,
+    "shop_id": "J001201736"
   },
   {
-    "name": "鰻の成瀬 函館店｜Naruse‘s Unagi Eel Restaurant Hakodate",
-    "address": "35-31 Kashiwagicho, Hakodate, Hokkaido 042-0942, Japan",
-    "latitude": 41.7872418,
-    "longitude": 140.7703352,
-    "place_id": "ChIJR_8QQjH1nl8RQeyUoUKFRFI"
+    "name": "ヤン衆漁場 二代目 昌栄丸",
+    "address": "北海道函館市松風町10－3",
+    "latitude": 41.7716188817,
+    "longitude": 140.7317314898,
+    "shop_id": "J000796240"
   },
   {
-    "name": "Lucky Pierrot Hakodate Ekimae branch",
-    "address": "Japan, 〒040-0063 Hokkaido, Hakodate, Wakamatsucho, 8−8 ２階",
-    "latitude": 41.7717666,
-    "longitude": 140.7255401,
-    "place_id": "ChIJ_____57znl8RaGQJufpTH28"
+    "name": "居酒屋次郎",
+    "address": "北海道函館市松風町７－２",
+    "latitude": 41.7722526412,
+    "longitude": 140.7300399419,
+    "shop_id": "J000684374"
   },
   {
-    "name": "Kitchen DUKE",
-    "address": "2 Chome-40-14 Hondori, Hakodate, Hokkaido 041-0851, Japan",
-    "latitude": 41.8002915,
-    "longitude": 140.7709711,
-    "place_id": "ChIJcXe6ykX0nl8RwRzVrOyVXoU"
+    "name": "ラムしゃぶ函館吉田",
+    "address": "北海道函館市松風町-8-2",
+    "latitude": 41.772178218,
+    "longitude": 140.730429355,
+    "shop_id": "J003450975"
   },
   {
-    "name": "MOSSTREES",
-    "address": "9-15 Omachi, Hakodate, Hokkaido 040-0052, Japan",
-    "latitude": 41.7685487,
-    "longitude": 140.7112879,
-    "place_id": "ChIJQYYjFa_znl8RjVf2G3zulNI"
+    "name": "マルカン漁業部 海がき 本店",
+    "address": "北海道函館市松風町８－２",
+    "latitude": 41.7721854395,
+    "longitude": 140.7304343541,
+    "shop_id": "J001137516"
   },
   {
-    "name": "Bistare Bistare",
-    "address": "3 Chome-53-47 Mihara, Hakodate, Hokkaido 041-0806, Japan",
-    "latitude": 41.8221312,
-    "longitude": 140.7405549,
-    "place_id": "ChIJ44SPw4T2nl8R0Pbk60BecZ4"
+    "name": "ONE WEEK",
+    "address": "北海道函館市松風町10-2 Aゲートホテル1F 久保田写真館隣",
+    "latitude": 41.7715738944,
+    "longitude": 140.7319653599,
+    "shop_id": "J003797000"
   },
   {
-    "name": "Hakodate BeerHall",
-    "address": "Japan, 〒040-0053 Hokkaido, Hakodate, Suehirocho, 14−12 函館ヒストリープラザ内",
-    "latitude": 41.7666454,
-    "longitude": 140.7162961,
-    "place_id": "ChIJYXuCYajznl8RnzOU4TyKo7Q"
+    "name": "やさい肉巻き まいった",
+    "address": "北海道函館市松風町１０－１５",
+    "latitude": 41.7717977504,
+    "longitude": 140.7317731426,
+    "shop_id": "J003693159"
   },
   {
-    "name": "POKHARA DINING",
-    "address": "3 Chome-2-1 Hiyoshicho, Hakodate, Hokkaido 041-0841, Japan",
-    "latitude": 41.7926398,
-    "longitude": 140.7844527,
-    "place_id": "ChIJ32HDjb71nl8RgKpFobp_9pM"
+    "name": "ROKAN ローカン",
+    "address": "北海道函館市大森町２－４　サンリフレ函館１F",
+    "latitude": 41.7651834958,
+    "longitude": 140.7301983792,
+    "shop_id": "J000796224"
   },
   {
-    "name": "Benten Sushi",
-    "address": "5-16 Omachi, Hakodate, Hokkaido 040-0052, Japan",
-    "latitude": 41.7694629,
-    "longitude": 140.7086856,
-    "place_id": "ChIJ7aFyuq_znl8RcwyMTBfcUV8"
+    "name": "花もめん",
+    "address": "北海道函館市松風町7-5 大門横丁内",
+    "latitude": 41.7723979079,
+    "longitude": 140.7302440818,
+    "shop_id": "J001295511"
   },
   {
-    "name": "Benten Sushi",
-    "address": "8-10 Yachigashiracho, Hakodate, Hokkaido 040-0046, Japan",
-    "latitude": 41.753626,
-    "longitude": 140.7119677,
-    "place_id": "ChIJ_QwkxOLynl8Rez6xmZWifbU"
+    "name": "函館おばんざい　酒肴",
+    "address": "北海道函館市松風町7-5 大門横丁 17区画",
+    "latitude": 41.7723979079,
+    "longitude": 140.7302440818,
+    "shop_id": "J001295698"
   },
   {
-    "name": "Hakodate Menya Ichimonji Hakodate Main Branch",
-    "address": "2 Chome-1-3 Yunokawacho, Hakodate, Hokkaido 042-0932, Japan",
-    "latitude": 41.7748946,
-    "longitude": 140.7878955,
-    "place_id": "ChIJbYiMepb0nl8RDchS8g4fCQc"
+    "name": "函館いか家",
+    "address": "北海道函館市松風町-7-5 大門横丁内",
+    "latitude": 41.7723979079,
+    "longitude": 140.7302440818,
+    "shop_id": "J001295708"
   },
   {
-    "name": "Donburi Yokocho Seafood restaurant avenue (hakodate morning market)",
-    "address": "9-15 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
-    "latitude": 41.7727642,
-    "longitude": 140.7255641,
-    "place_id": "ChIJISuM_qHznl8Rnqn-jv2PzFc"
+    "name": "串焼き　わびすけ",
+    "address": "北海道函館市松風町7-5大門横丁内",
+    "latitude": 41.7723979079,
+    "longitude": 140.7302440818,
+    "shop_id": "J001295826"
   },
   {
-    "name": "MOSSTREES",
-    "address": "9-15 Omachi, Hakodate, Hokkaido 040-0052, Japan",
-    "latitude": 41.7685487,
-    "longitude": 140.7112879,
-    "place_id": "ChIJQYYjFa_znl8RjVf2G3zulNI"
+    "name": "BAR 1096",
+    "address": "北海道函館市松風町7-5 大門横丁内",
+    "latitude": 41.7723979079,
+    "longitude": 140.7302440818,
+    "shop_id": "J001296143"
   },
   {
-    "name": "Lucky Pierrot Hakodate Ekimae branch",
-    "address": "Japan, 〒040-0063 Hokkaido, Hakodate, Wakamatsucho, 8−8 ２階",
-    "latitude": 41.7717666,
-    "longitude": 140.7255401,
-    "place_id": "ChIJ_____57znl8RaGQJufpTH28"
+    "name": "ら ぶべっと",
+    "address": "北海道函館市松風町７－５　ひかりの屋台　大門横丁",
+    "latitude": 41.7724265138,
+    "longitude": 140.7301863077,
+    "shop_id": "J000796671"
   },
   {
-    "name": "Crab House",
-    "address": "7-5 Matsukazecho, Hakodate, Hokkaido 040-0035, Japan",
-    "latitude": 41.7723831,
-    "longitude": 140.7302757,
-    "place_id": "ChIJH1RDpGjznl8R3oDdXBm30Ts"
+    "name": "炉ばた 大謀",
+    "address": "北海道函館市松風町７－５　ひかりの屋台　大門横丁",
+    "latitude": 41.772456229,
+    "longitude": 140.7300760383,
+    "shop_id": "J000796415"
   },
   {
-    "name": "Tsutsuiken",
-    "address": "7-11 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
-    "latitude": 41.7721734,
-    "longitude": 140.7270217,
-    "place_id": "ChIJ4ZH7YJ_znl8RwyrItf8EKuQ"
+    "name": "relax BAR HY",
+    "address": "北海道函館市若松町8-17 ",
+    "latitude": 41.7722630921,
+    "longitude": 140.7267482971,
+    "shop_id": "J001219231"
   },
   {
-    "name": "Lucky Pierrot Bay Area Main Shop",
-    "address": "23-18 Suehirocho, Hakodate, Hokkaido 040-0053, Japan",
-    "latitude": 41.7657792,
-    "longitude": 140.7149638,
-    "place_id": "ChIJL_ypUKjznl8RO_ABCovmrvU"
+    "name": "粉もん屋 とん平 函館駅前店",
+    "address": "北海道函館市若松町19－3",
+    "latitude": 41.7726178428,
+    "longitude": 140.7290122374,
+    "shop_id": "J001211466"
   },
   {
-    "name": "Shoku no Houko HOKKAIDO",
-    "address": "12 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
-    "latitude": 41.7735679,
-    "longitude": 140.7261039,
-    "place_id": "ChIJsQ4s95jznl8RVte1hB_oDNU"
+    "name": "大門一番地大漁酒場マル波商店",
+    "address": "北海道函館市松風町7-6",
+    "latitude": 41.7725217749,
+    "longitude": 140.7300210396,
+    "shop_id": "J000989900"
   },
   {
-    "name": "Hakodate Dining GAYA",
-    "address": "8-14 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
-    "latitude": 41.7724853,
-    "longitude": 140.7261435,
-    "place_id": "ChIJfSCK4qHznl8Rsub932KwyjQ"
+    "name": "はこだて鮨金 総本店",
+    "address": "北海道函館市松風町７－１８",
+    "latitude": 41.7724651265,
+    "longitude": 140.730385454,
+    "shop_id": "J000257575"
   },
   {
-    "name": "Rani Kitchen",
-    "address": "1 Chome-20-19 Minatocho, Hakodate, Hokkaido 041-0821, Japan",
-    "latitude": 41.8030096,
-    "longitude": 140.723503,
-    "place_id": "ChIJcXUlVgH0nl8RVJvLF0FEc84"
+    "name": "北の台所 ヤマタイチ",
+    "address": "北海道函館市松風町７－５　ひかりの屋台　大門横丁",
+    "latitude": 41.7725462164,
+    "longitude": 140.7300210383,
+    "shop_id": "J000643257"
   },
   {
-    "name": "Hama Sushi Hakodate Hondori Restaurant",
-    "address": "3 Chome-1-9 Hondori, Hakodate, Hokkaido 041-0851, Japan",
-    "latitude": 41.7911103,
-    "longitude": 140.7764691,
-    "place_id": "ChIJ7Wigql_0nl8RWfjrTEyXT1U"
+    "name": "ラムジン",
+    "address": "北海道函館市松風町７－５　ひかりの屋台　大門横丁",
+    "latitude": 41.7725612158,
+    "longitude": 140.7300577007,
+    "shop_id": "J000796272"
   },
   {
-    "name": "AJISAI Ramen shop, Kurenai, Hakodate Bay Bishoku Club",
-    "address": "12-7 Toyokawacho, Hakodate, Hokkaido 040-0065, Japan",
-    "latitude": 41.7672328,
-    "longitude": 140.7193245,
-    "place_id": "ChIJYzOhuqfznl8R0ASErhMFHvk"
+    "name": "常寿し",
+    "address": "北海道函館市松風町10-16 ",
+    "latitude": 41.7717363836,
+    "longitude": 140.7322431032,
+    "shop_id": "J000257749"
   },
   {
-    "name": "Restaurant Genova",
-    "address": "Japan, 〒040-0054 Hokkaido, Hakodate, Motomachi, 19−7 函館山展望台2F",
-    "latitude": 41.759416,
-    "longitude": 140.7044947,
-    "place_id": "ChIJ__-_gFXynl8R10Ucksxi5NQ"
+    "name": "CAMP5",
+    "address": "北海道函館市松風町10-6-2F",
+    "latitude": 41.7719419037,
+    "longitude": 140.7319014562,
+    "shop_id": "J001099685"
   },
   {
-    "name": "Edomatsu",
-    "address": "25-19 Yachigashiracho, Hakodate, Hokkaido 040-0046, Japan",
-    "latitude": 41.7531835,
-    "longitude": 140.7157642,
-    "place_id": "ChIJYaK90eLynl8RpCyx3XyU2-s"
+    "name": "函館海鮮ジンギスカン 浜焼きベイベー",
+    "address": "北海道函館市若松町18-22",
+    "latitude": 41.7726400844,
+    "longitude": 140.7297143943,
+    "shop_id": "J001176416"
   },
   {
-    "name": "Sushi Sensho",
-    "address": "どんぶり横丁内, 9-15 Wakamatsucho, Hakodate, Hokkaido 040-0063, Japan",
-    "latitude": 41.7726174,
-    "longitude": 140.7256345,
-    "place_id": "ChIJR8E5_KHznl8RlSKkckO54QA"
+    "name": "ジンギスカン 函館吉田",
+    "address": "北海道函館市松風町８－６　1階",
+    "latitude": 41.77245236,
+    "longitude": 140.7306951487,
+    "shop_id": "J003365592"
   },
   {
-    "name": "Hakodate Bay Gourmet Club",
-    "address": "12-7他 Toyokawacho, Hakodate, Hokkaido 040-0065, Japan",
-    "latitude": 41.7672443,
-    "longitude": 140.7194174,
-    "place_id": "ChIJYzOhuqfznl8RHZdQ3hsgFMI"
+    "name": "食彩酒房 裏横丁",
+    "address": "北海道函館市松風町８",
+    "latitude": 41.7724501402,
+    "longitude": 140.7307626427,
+    "shop_id": "J000852140"
   },
   {
-    "name": "L'oiseau par Matsunaga",
-    "address": "4-5 Kashiwagicho, Hakodate, Hokkaido 042-0942, Japan",
-    "latitude": 41.790977,
-    "longitude": 140.7644006,
-    "place_id": "ChIJcZd0jGb0nl8RuDwhZMavEiw"
+    "name": "函館 チェーズ",
+    "address": "北海道函館市松風町７－５　ひかりの屋台　大門横丁",
+    "latitude": 41.7726167721,
+    "longitude": 140.7302932317,
+    "shop_id": "J000796409"
+  },
+  {
+    "name": "函館ホルモン",
+    "address": "北海道函館市松風町７大門横丁内",
+    "latitude": 41.7726167721,
+    "longitude": 140.7302932317,
+    "shop_id": "J001099670"
+  },
+  {
+    "name": "居酒屋 北の鬼遺産 函館駅前店",
+    "address": "北海道函館市若松町１８－６",
+    "latitude": 41.7727556232,
+    "longitude": 140.729622174,
+    "shop_id": "J003828403"
+  },
+  {
+    "name": "カフェ にしむら",
+    "address": "北海道函館市若松町２０－１　キラリス函館Ｂ１Ｆ",
+    "latitude": 41.7728691926,
+    "longitude": 140.7287291935,
+    "shop_id": "J000796258"
+  },
+  {
+    "name": "大衆串横丁てっちゃん キラリス函館駅前店",
+    "address": "北海道函館市若松町-20-1 キラリス函館１F",
+    "latitude": 41.7728941877,
+    "longitude": 140.7286686421,
+    "shop_id": "J001291861"
+  },
+  {
+    "name": "森山料理店",
+    "address": "北海道函館市松風町10-15",
+    "latitude": 41.7720624551,
+    "longitude": 140.7322291973,
+    "shop_id": "J001230266"
+  },
+  {
+    "name": "Twin Feather ツインフェザー 駅前店",
+    "address": "北海道函館市松風町7-7　松風ビル１F",
+    "latitude": 41.7728020292,
+    "longitude": 140.7303434945,
+    "shop_id": "J001201602"
+  },
+  {
+    "name": "焼肉物語 牛若 ユニゾ函館駅前店",
+    "address": "北海道函館市若松町18-19 ユニゾインエクスプレス函館駅前1階",
+    "latitude": 41.772887004,
+    "longitude": 140.7298682553,
+    "shop_id": "J003565000"
+  },
+  {
+    "name": "紅茶専門店 ハーヴェスト",
+    "address": "北海道函館市松風町7-7　松風ビル２Ｆ",
+    "latitude": 41.7728111947,
+    "longitude": 140.7303432162,
+    "shop_id": "J000257690"
+  },
+  {
+    "name": "夜景バー エステラード",
+    "address": "北海道函館市若松町14番10号",
+    "latitude": 41.772661652,
+    "longitude": 140.7266424511,
+    "shop_id": "J001269124"
+  },
+  {
+    "name": "ハーバーダイニング",
+    "address": "北海道函館市若松町14番10号",
+    "latitude": 41.772661652,
+    "longitude": 140.7266424511,
+    "shop_id": "J001269198"
+  },
+  {
+    "name": "函館ダイニング 雅家",
+    "address": "北海道函館市若松町８－１４",
+    "latitude": 41.7724561015,
+    "longitude": 140.7260164086,
+    "shop_id": "J000796883"
+  },
+  {
+    "name": "海鮮料理と釜めし あらき",
+    "address": "北海道函館市若松町9-22函館朝市ひろば1階",
+    "latitude": 41.7722941503,
+    "longitude": 140.7251828826,
+    "shop_id": "J001268762"
+  },
+  {
+    "name": "一花亭 たびじ",
+    "address": "北海道函館市若松町９－１４　どんぶり横丁内",
+    "latitude": 41.7726432898,
+    "longitude": 140.7256555977,
+    "shop_id": "J000781820"
+  },
+  {
+    "name": "成吉思汗 登楽居 トライ",
+    "address": "北海道函館市松風町7-12",
+    "latitude": 41.7731067289,
+    "longitude": 140.7307920476,
+    "shop_id": "J001200678"
+  },
+  {
+    "name": "はる鮨",
+    "address": "北海道函館市若松町１８番１７号",
+    "latitude": 41.7732089232,
+    "longitude": 140.7302954205,
+    "shop_id": "J003516965"
+  },
+  {
+    "name": "函館国際ホテル アゼリア",
+    "address": "北海道函館市大手町５－１０",
+    "latitude": 41.7691930537,
+    "longitude": 140.7226230121,
+    "shop_id": "J000796246"
+  },
+  {
+    "name": "ビュメール 函館国際ホテル",
+    "address": "北海道函館市大手町５－１０ 函館国際ホテル西館８階",
+    "latitude": 41.7692324919,
+    "longitude": 140.722574681,
+    "shop_id": "J000796250"
+  },
+  {
+    "name": "函館塩ラーメン しなの",
+    "address": "北海道函館市若松町２０－１０",
+    "latitude": 41.7734610649,
+    "longitude": 140.7286961078,
+    "shop_id": "J000781806"
+  },
+  {
+    "name": "鮨 一路",
+    "address": "北海道函館市若松町20-10",
+    "latitude": 41.7734732864,
+    "longitude": 140.7287227714,
+    "shop_id": "J001145546"
+  },
+  {
+    "name": "日本料理 うなぎ 松前",
+    "address": "北海道函館市大手町５－１０",
+    "latitude": 41.7691930512,
+    "longitude": 140.7225424639,
+    "shop_id": "J000796248"
+  },
+  {
+    "name": "函館 朝市食堂 二番館",
+    "address": "北海道函館市若松町９－１９",
+    "latitude": 41.7726266092,
+    "longitude": 140.7251478671,
+    "shop_id": "J000740163"
+  },
+  {
+    "name": "スカイラウンジ ル・モン・ガギュー",
+    "address": "北海道函館市大手町５－１０",
+    "latitude": 41.7691930502,
+    "longitude": 140.7225102446,
+    "shop_id": "J000100278"
+  },
+  {
+    "name": "おうけい 櫻桂",
+    "address": "北海道函館市若松町９－１５",
+    "latitude": 41.7727557674,
+    "longitude": 140.7253706173,
+    "shop_id": "J000257720"
+  },
+  {
+    "name": "いくら亭",
+    "address": "北海道函館市若松町９－１５　函館朝市内",
+    "latitude": 41.7727793772,
+    "longitude": 140.725421167,
+    "shop_id": "J000100183"
+  },
+  {
+    "name": "鮨処 森山",
+    "address": "北海道函館市松風町17-19",
+    "latitude": 41.7724488159,
+    "longitude": 140.7328149556,
+    "shop_id": "J000691742"
+  },
+  {
+    "name": "ADDICT アディクト",
+    "address": "北海道函館市松風町２０-１ライジングビル２階",
+    "latitude": 41.7732211664,
+    "longitude": 140.7310097991,
+    "shop_id": "J003323451"
+  },
+  {
+    "name": "茶夢",
+    "address": "北海道函館市若松町９－１５",
+    "latitude": 41.7727932597,
+    "longitude": 140.7252695134,
+    "shop_id": "J000100355"
+  },
+  {
+    "name": "うにむらかみ 函館本店",
+    "address": "北海道函館市大手町２２－１",
+    "latitude": 41.7720235923,
+    "longitude": 140.7240702214,
+    "shop_id": "J000100347"
+  },
+  {
+    "name": "はこだて寿司",
+    "address": "北海道函館市若松町－19－11　ホテルテトラ函館駅前　２Ｆ",
+    "latitude": 41.7736324618,
+    "longitude": 140.729608515,
+    "shop_id": "J001276598"
+  },
+  {
+    "name": "函館朝市 味の一番",
+    "address": "北海道函館市若松町１１－１３",
+    "latitude": 41.7728013044,
+    "longitude": 140.7249548194,
+    "shop_id": "J000100415"
+  },
+  {
+    "name": "栄屋食堂 函館朝市",
+    "address": "北海道函館市若松町１１－４",
+    "latitude": 41.7724429889,
+    "longitude": 140.7241507461,
+    "shop_id": "J000796187"
+  },
+  {
+    "name": "海光房",
+    "address": "北海道函館市若松町１１－８",
+    "latitude": 41.7728887751,
+    "longitude": 140.7243576467,
+    "shop_id": "J000637049"
+  },
+  {
+    "name": "函館 茶漬酒房",
+    "address": "北海道函館市若松町-12-8 ハコビバ内",
+    "latitude": 41.7742648146,
+    "longitude": 140.7273434084,
+    "shop_id": "J001292589"
+  },
+  {
+    "name": "はこだてビール",
+    "address": "北海道函館市大手町５－２２",
+    "latitude": 41.7688541647,
+    "longitude": 140.7213203721,
+    "shop_id": "J000100136"
+  },
+  {
+    "name": "海峡 海味鮨",
+    "address": "北海道函館市若松町12-8 ハコビバ内　函館駅前横丁",
+    "latitude": 41.7744275787,
+    "longitude": 140.7275289379,
+    "shop_id": "J001264624"
+  },
+  {
+    "name": "しゃぶしゃぶテムジン",
+    "address": "北海道函館市若松町12-8 ハコビバ1階",
+    "latitude": 41.774429796,
+    "longitude": 140.72738284,
+    "shop_id": "J003950003"
+  },
+  {
+    "name": "高橋屋",
+    "address": "北海道函館市大森町３３－１",
+    "latitude": 41.7694382189,
+    "longitude": 140.7376605158,
+    "shop_id": "J000257814"
+  },
+  {
+    "name": "羊羊亭",
+    "address": "北海道函館市豊川町１２－８　函館ベイ美食倶楽部内",
+    "latitude": 41.7673448424,
+    "longitude": 140.7194334066,
+    "shop_id": "J000637044"
+  },
+  {
+    "name": "函館まるかつ水産 本店",
+    "address": "北海道函館市豊川町１２－１０　函館ベイ美食倶楽部",
+    "latitude": 41.7670004409,
+    "longitude": 140.7194834213,
+    "shop_id": "J000637042"
+  },
+  {
+    "name": "函館Dining雅家 ベイエリア店",
+    "address": "北海道函館市豊川町12-9 ",
+    "latitude": 41.7672392981,
+    "longitude": 140.7193884166,
+    "shop_id": "J003715225"
+  },
+  {
+    "name": "海風楼",
+    "address": "北海道函館市豊川町１２－６　ラビスタ函館ベイ１F",
+    "latitude": 41.7676947847,
+    "longitude": 140.7189362101,
+    "shop_id": "J000780712"
+  },
+  {
+    "name": "シェリーズバー",
+    "address": "北海道函館市豊川町１２－６　ラビスタ函館ベイ１２F",
+    "latitude": 41.7676947847,
+    "longitude": 140.7189362101,
+    "shop_id": "J000796271"
+  },
+  {
+    "name": "ノルテ ラビスタ函館ベイ",
+    "address": "北海道函館市豊川町１２－６　ラビスタ函館ベイ１F",
+    "latitude": 41.7676947847,
+    "longitude": 140.7189362101,
+    "shop_id": "J000742705"
+  },
+  {
+    "name": "紫ぜん",
+    "address": "北海道函館市豊川町１０－１０",
+    "latitude": 41.7662421958,
+    "longitude": 140.7193918055,
+    "shop_id": "J000257842"
+  },
+  {
+    "name": "BAR hanabi",
+    "address": "北海道函館市宝来町34-1蔵",
+    "latitude": 41.7624149399,
+    "longitude": 140.7213612848,
+    "shop_id": "J001099587"
+  },
+  {
+    "name": "restaurant Toui",
+    "address": "北海道函館市若松町３２－１９ロイヤルシティ参番館若松町１F",
+    "latitude": 41.777213158,
+    "longitude": 140.7301010471,
+    "shop_id": "J000257786"
+  },
+  {
+    "name": "サルティンボッカ 函館",
+    "address": "北海道函館市末広町１３－２５",
+    "latitude": 41.7656897122,
+    "longitude": 140.717798093,
+    "shop_id": "J000796165"
+  },
+  {
+    "name": "Woodrow s British Pub ウッドローズ ブリティッシュ パブ",
+    "address": "北海道函館市末広町８-１２",
+    "latitude": 41.7635900109,
+    "longitude": 140.7192744648,
+    "shop_id": "J003323878"
+  },
+  {
+    "name": "the very very BEAST ベリーベリービースト",
+    "address": "北海道函館市宝来町２３－３",
+    "latitude": 41.7623485331,
+    "longitude": 140.720536086,
+    "shop_id": "J000100276"
   }
 ]
