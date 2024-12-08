@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrendTree - 函館山地図</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map {
             height: 100vh;  /* 高さをビューの高さに合わせる */
@@ -16,23 +15,72 @@
     <h1>TrendTree - 函館山</h1>
     <div id="map"></div>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
+
     <script>
-        // 地図の初期設定
-        const map = L.map('map').setView([41.768793, 140.72881], 12); // 初期位置を函館山に設定
+        function initMap() {
+            const hakodate = { lat: 41.768793, lng: 140.72881 }; // 函館山の位置
 
-        // OpenStreetMapのタイルを設定
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
-        }).addTo(map);
+            // 地図の作成
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: hakodate,
+                zoom: 12,  // ズームレベル
+                mapTypeId: google.maps.MapTypeId.SATELLITE,  // 衛星画像モード
+                tilt: 60,  // 60度の傾きでさらに立体感を強調
+                heading: 90,  // 東（90度方向）を向ける
+            });
 
-        // 函館山の場所に円を表示
-        L.circle([41.768793, 140.72881], {
-            color: 'green',  // 円の枠の色
-            fillColor: 'green',  // 円の中の色
-            fillOpacity: 0.5,  // 円の透明度
-            radius: 500  // 半径（メートル単位）
-        }).addTo(map).bindPopup("函館山").openPopup();
+            // 函館山にマーカーを追加
+            const marker = new google.maps.Marker({
+                position: hakodate,
+                map: map,
+                title: "函館山",
+            });
+
+            // マーカーに情報ウィンドウを追加
+            const infoWindow = new google.maps.InfoWindow({
+                content: "<h3>函館山</h3><p>函館山の位置です。</p>",
+            });
+
+            // マーカーをクリックすると情報ウィンドウを表示
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+
+            // ローカルの木の画像の相対パスを使用
+            const treeImageURL = "./114.jpg";  // 画像ファイルの相対パス
+
+            // 木のアイコン設定
+            const treeIcon = {
+                url: treeImageURL,  // アップロードした画像URLを使用
+                scaledSize: new google.maps.Size(50, 50),  // アイコンのサイズを調整
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(25, 50),  // アイコンの位置調整
+            };
+
+            // 木を生やす位置（複数の座標を追加）
+            const trees = [
+                { lat: 41.770000, lng: 140.730000 }, // 1本目の木
+                { lat: 41.767000, lng: 140.725000 }, // 2本目の木
+                { lat: 41.764000, lng: 140.735000 }, // 3本目の木
+            ];
+
+            // 木をマーカーとして追加
+            trees.forEach((tree) => {
+                new google.maps.Marker({
+                    position: tree,
+                    map: map,
+                    icon: treeIcon,
+                    title: "木",
+                });
+            });
+
+            // 3Dビューにするため、ズームインして視点を傾ける
+            map.setTilt(60);  // 視点を60度に傾ける
+            map.setHeading(180);  // 逆方向（西向き）に設定
+        }
     </script>
+
 </body>
 </html>
