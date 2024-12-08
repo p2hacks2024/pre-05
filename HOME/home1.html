@@ -34,7 +34,6 @@
             background-size: cover; /* フル画面 */
             background-attachment: fixed; /* スクロール時の固定 */
             z-index: -2; /* 背景を最背面に配置 */
-            opacity: 1;
         }
 
         /* 背景オーバーレイの設定 */
@@ -49,13 +48,28 @@
             z-index: -1; /* 背景画像の上に配置 */
         }
 
+        /* 枠を囲む外枠 */
+        .frame-container {
+            border: 15px solid #fff; /* 枠の太さを15pxに変更 */
+            padding: 150px; /* 内側のスペースを150pxに増加 */
+            display: inline-block;
+            position: relative;
+            z-index: 1; /* エフェクトより上に表示 */
+        }
+
         /* ホームコンテナ */
         .home-container {
             text-align: center;
             color: #ffffff; /* 白色のテキスト */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 文字に影を追加 */
+        }
+
+        /* ロゴ */
+        .logo {
+            max-width: 150px;
+            margin: 0 auto 20px; /* タイトルとの間隔を追加 */
             opacity: 0; /* 初期は透明 */
-            animation: fadeInContent 2s ease-in-out 1s forwards; /* フェードインアニメーション (遅延あり) */
+            animation: fadeInContent 2s ease-in-out 0.5s forwards; /* フェードインアニメーション */
         }
 
         /* タイトル */
@@ -64,7 +78,8 @@
             font-weight: 700;
             letter-spacing: 2px;
             transform: translateY(20px); /* 初期は下から */
-            animation: slideUp 1.5s ease-out 1.5s forwards; /* 上にスライド */
+            opacity: 0; /* 初期は透明 */
+            animation: slideUp 1.5s ease-out 1s forwards; /* 上にスライド */
         }
 
         /* サブタイトル */
@@ -72,10 +87,32 @@
             font-size: 40px; /* サイズを大きく */
             font-weight: 700;
             margin: 20px 0;
-            opacity: 0;
-            animation: slideUp 1.5s ease-out 2.5s forwards; /* タイトルと同じアニメーション */
+            opacity: 0; /* 初期は透明 */
+            animation: slideUp 1.5s ease-out 2s forwards; /* タイトルと同じアニメーション */
             text-transform: uppercase; /* 大文字に変換 */
             letter-spacing: 4px; /* 文字間隔を広げる */
+        }
+
+        /* スタートボタン */
+        .start-button {
+            font-size: 20px;
+            padding: 15px 40px;
+            background: rgba(255, 77, 77, 0.8); /* 半透明の赤 */
+            color: #ffffff; /* 白色の文字 */
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0; /* 初期は透明 */
+            animation: fadeInButton 2s ease-in-out 3s forwards; /* 遅延後フェードイン */
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        /* ホバー時のスタートボタン */
+        .start-button:hover {
+            background: rgba(255, 51, 51, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* 背景フェードインアニメーション */
@@ -110,28 +147,6 @@
             }
         }
 
-        /* スタートボタン */
-        .start-button {
-            font-size: 20px;
-            padding: 15px 40px;
-            background: rgba(255, 77, 77, 0.8); /* 半透明の赤 */
-            color: #ffffff; /* 白色の文字 */
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0; /* 初期は透明 */
-            animation: fadeInButton 2s ease-in-out 2.5s forwards; /* 遅延後フェードイン */
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        /* ホバー時のスタートボタン */
-        .start-button:hover {
-            background: rgba(255, 51, 51, 0.9);
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
         /* ボタンフェードインアニメーション */
         @keyframes fadeInButton {
             0% {
@@ -147,17 +162,20 @@
     </style>
 </head>
 <body>
+    <div class="frame-container">
+        <div class="home-container">
+            <!-- ロゴ -->
+            <img src="1.png" alt="ロゴ" class="logo">
 
-    <div class="home-container">
-        <!-- タイトル -->
-        <div class="title">函館グルメトレンド</div>
+            <!-- タイトル -->
+            <div class="title">函館グルメトレンド</div>
 
-        <!-- サブタイトル -->
-        <div class="subtitle">最新のトレンドグルメをチェックしよう</div>
+            <!-- サブタイトル -->
+            <div class="subtitle">最新のトレンドグルメをチェックしよう</div>
 
-        <!-- スタートボタン -->
-        <button class="start-button">スタート</button>
+            <!-- スタートボタン -->
+            <button class="start-button">スタート</button>
+        </div>
     </div>
-
 </body>
 </html>
