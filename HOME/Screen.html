@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函館トレンドグルメ</title>
+    <style>
+        /* 全体のレイアウト */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* ヘッダーのスタイル */
+        h1 {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding: 30px 0;  /* ヘッダーの高さを大きく */
+            margin: 0;
+            font-size: 2.5em;
+            background-image: url('113.jpg');  /* 相対パスで画像を指定 */
+            background-size: cover;  /* 画像をカバー全体にフィットさせる */
+            background-position: center;  /* 画像の位置を中央に設定 */
+            background-repeat: no-repeat;  /* 画像を繰り返さない */
+        }
+
+        /* 画像の上にオーバーレイを追加 */
+        h1::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* 黒いオーバーレイ（透明度40%） */
+            z-index: 1;
+        }
+
+        /* ヘッダーのテキストがオーバーレイの上に表示されるように調整 */
+        h1 span {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 地図のスタイル */
+        #map {
+            height: calc(100vh - 130px); /* ヘッダー分だけ地図の高さを調整 */
+            width: 100%;
+            position: relative;
+        }
+
+        /* 花火のスタイル */
+        .fireworks {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 0, 0, 0.8);
+            border-radius: 50%;
+            animation: firework 1s forwards;
+        }
+
+        @keyframes firework {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1><span>函館トレンドグルメ</span></h1>
+    <div id="map"></div>
+
+    <script>
+        // initMap関数をwindowオブジェクトに設定
+        window.initMap = function() {
+            const hakodate = { lat: 41.768793, lng: 140.72881 };  // 函館の緯度経度
+
+            // 地図の作成
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: hakodate,
+                zoom: 12,  // ズームレベル
+                mapTypeId: google.maps.MapTypeId.ROADMAP,  // 通常の地図モード
+            });
+
+            // 地図のオーバーレイを作成して花火を描画
+            class FireworkOverlay extends google.maps.OverlayView {
+                constructor(map, lat, lng) {
+                    super();
+                    this.map = map;
+                    this.lat = lat;
+                    this.lng = lng;
+                    this.div = null;
+                    this.setMap(map);
+                }
+
+                // オーバーレイを初期化
+                onAdd() {
+                    const div = document.createElement('div');
+                    div.classList.add('fireworks');
+                    this.div = div;
+                    const panes = this.getPanes();
+                    panes.overlayLayer.appendChild(div);
+                    this.positionFirework();
+                }
+
+                // 花火の位置を設定
+                positionFirework() {
+                    const projection = this.getProjection();
+                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat, this.lng));
+
+                    // 花火の位置を設定
+                    this.div.style.left = `${position.x - 5}px`;
+                    this.div.style.top = `${position.y - 5}px`;
+
+                    // 1秒後に花火を削除
+                    setTimeout(() => {
+                        this.div.remove();
+                    }, 1000);
+                }
+
+                // オーバーレイを描画
+                draw() {
+                    this.positionFirework();
+                }
+            }
+
+            // 地図が完全に読み込まれた後に花火を繰り返し表示
+            setInterval(() => {
+                new FireworkOverlay(map, 41.7648, 140.7267);  // 函館山の緯度経度
+            }, 3000);  // 3秒ごとに花火を発射
+        };
+    </script>
+
+    <!-- Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
+
+</body>
+</html>
