@@ -3,84 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendTree - 函館山地図</title>
+    <title>函館トレンドグルメ</title>
     <style>
+        /* 全体のレイアウト */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* ヘッダーのスタイル */
+        h1 {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding: 30px 0;  /* ヘッダーの高さを大きく */
+            margin: 0;
+            font-size: 2.5em;
+            background-image: url('113.jpg');  /* 相対パスで画像を指定 */
+            background-size: cover;  /* 画像をカバー全体にフィットさせる */
+            background-position: center;  /* 画像の位置を中央に設定 */
+            background-repeat: no-repeat;  /* 画像を繰り返さない */
+        }
+
+        /* 画像の上にオーバーレイを追加 */
+        h1::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* 黒いオーバーレイ（透明度40%） */
+            z-index: 1;
+        }
+
+        /* ヘッダーのテキストがオーバーレイの上に表示されるように調整 */
+        h1 span {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 地図のスタイル */
         #map {
-            height: 100vh;  /* 高さをビューの高さに合わせる */
+            height: calc(100vh - 130px); /* ヘッダー分だけ地図の高さを調整 */
+            width: 100%;
+        }
+
+        /* レスポンシブ対応 */
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+                padding: 20px 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>TrendTree - 函館山</h1>
+    <h1><span>函館トレンドグルメ</span></h1>
     <div id="map"></div>
 
-    <!-- Google Maps JavaScript API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
-
     <script>
-        function initMap() {
-            const hakodate = { lat: 41.768793, lng: 140.72881 }; // 函館山の位置
+        // initMap関数をwindowオブジェクトに設定
+        window.initMap = function() {
+            const hakodate = { lat: 41.768793, lng: 140.72881 };
 
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: hakodate,
                 zoom: 12,  // ズームレベル
-                mapTypeId: google.maps.MapTypeId.SATELLITE,  // 衛星画像モード
-                tilt: 60,  // 60度の傾きでさらに立体感を強調
-                heading: 90,  // 東（90度方向）を向ける
+                mapTypeId: google.maps.MapTypeId.ROADMAP,  // 通常の地図モード
             });
-
-            // 函館山にマーカーを追加
-            const marker = new google.maps.Marker({
-                position: hakodate,
-                map: map,
-                title: "函館山",
-            });
-
-            // マーカーに情報ウィンドウを追加
-            const infoWindow = new google.maps.InfoWindow({
-                content: "<h3>函館山</h3><p>函館山の位置です。</p>",
-            });
-
-            // マーカーをクリックすると情報ウィンドウを表示
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
-
-            // ローカルの木の画像の相対パスを使用
-            const treeImageURL = "./114.jpg";  // 画像ファイルの相対パス
-
-            // 木のアイコン設定
-            const treeIcon = {
-                url: treeImageURL,  // アップロードした画像URLを使用
-                scaledSize: new google.maps.Size(50, 50),  // アイコンのサイズを調整
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(25, 50),  // アイコンの位置調整
-            };
-
-            // 木を生やす位置（複数の座標を追加）
-            const trees = [
-                { lat: 41.770000, lng: 140.730000 }, // 1本目の木
-                { lat: 41.767000, lng: 140.725000 }, // 2本目の木
-                { lat: 41.764000, lng: 140.735000 }, // 3本目の木
-            ];
-
-            // 木をマーカーとして追加
-            trees.forEach((tree) => {
-                new google.maps.Marker({
-                    position: tree,
-                    map: map,
-                    icon: treeIcon,
-                    title: "木",
-                });
-            });
-
-            // 3Dビューにするため、ズームインして視点を傾ける
-            map.setTilt(60);  // 視点を60度に傾ける
-            map.setHeading(180);  // 逆方向（西向き）に設定
-        }
+        };
     </script>
+
+    <!-- Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
 
 </body>
 </html>
