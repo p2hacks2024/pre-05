@@ -1,11 +1,11 @@
-from django.shortcuts import render
-import json
-from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Shop
 
-def show_json(request):
-    # JSONファイルを開く
-    with open('data.json', 'r') as file:
-        data = json.load(file)
-
-    # JSONの内容を表示
-    return JsonResponse(data, safe=False)  # JsonResponseを使ってJSONデータを返す
+def shop_location(request):
+    shop = get_object_or_404(Shop, name='屋台 ライダーキック')
+    context = {
+        'name': shop.name,
+        'latitude': shop.latitude,
+        'longitude': shop.longitude,
+    }
+    return render(request, 'HOME/Screen.html', context)
