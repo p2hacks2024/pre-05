@@ -1,90 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>函館山の花火</title>
-    <style>
-        /* 全体のレイアウト */
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: #333;
-            background-color: #f4f4f4;
-            overflow: hidden;
-        }
-
-        /* ヘッダーのスタイル */
-        h1 {
-            position: relative;
-            text-align: center;
-            color: white;
-            padding: 30px 0;  /* ヘッダーの高さを大きく */
-            margin: 0;
-            font-size: 2.5em;
-            background-image: url('113.jpg');  /* 相対パスで画像を指定 */
-            background-size: cover;  /* 画像をカバー全体にフィットさせる */
-            background-position: center;  /* 画像の位置を中央に設定 */
-            background-repeat: no-repeat;  /* 画像を繰り返さない */
-        }
-
-        /* 地図のスタイル */
-        #map {
-            height: calc(100vh - 130px); /* ヘッダー分だけ地図の高さを調整 */
-            width: 100%;
-            position: relative;
-            z-index: 1; /* 地図のz-indexを設定 */
-        }
-
-        /* 花火キャンバスのスタイル */
-        #fireworks-container {
-            position: absolute;
-            top: 130px; /* ヘッダーの高さ分下げる */
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 130px); /* 地図と同じ高さに */
-            pointer-events: none;
-            z-index: 2; /* 地図より上のz-indexを設定 */
-        }
-    </style>
-</head>
-<body>
-
-    <h1>函館山夜景</h1>
-    <div id="map"></div>
-    <div id="fireworks-container"></div>
-
-    <script>
-        // initMap関数をwindowオブジェクトに設定
-        window.initMap = function() {
-            const hakodate = { lat: 41.768793, lng: 140.72881 };  // 函館の緯度経度
-
-            // 地図の作成
-            const map = new google.maps.Map(document.getElementById("map"), {
-                center: hakodate,
-                zoom: 12,  // ズームレベ��
-                mapTypeId: google.maps.MapTypeId.ROADMAP,  // 通常の地図モード
-            });
-                }
-        ;
-    </script>
-
-    <script src='three.min.js'></script>
-    <script>
-        // 既存のfireworksコードをここに配置
-        (() => {
-            'use strict';
-
-            let tau = Math.PI * 2;
-            let width, height;
-            let scene, camera, renderer, points;
-
-            let material_fireworks = new THREE.PointsMaterial({
-                size: 7,
-                vertexColors: THREE.VertexColors
-            });
-
-            (() => {
+(() => {
 	'use strict';
 
 	let tau = Math.PI * 2;
@@ -111,7 +25,7 @@
 		friction: .98
 	};
 
-	const bundle_texture = THREE.ImageUtils.loadTexture('pre-05\HOME\bundle_texture.png');
+	const bundle_texture = THREE.ImageUtils.loadTexture( 'images/bundle_texture.png' );
 
 	document.addEventListener('DOMContentLoaded', onDocumentReady);
 	
@@ -298,30 +212,3 @@
 		scene.add(flares_points);
 	}
 })();
-
-            // 初期化を変更
-            function initialize() {
-                scene = new THREE.Scene();
-                scene.background = new THREE.Color(0x040506);
-                scene.background.alpha = 0; // 背景を透明に
-
-                camera = new THREE.PerspectiveCamera(50, 16 / 9, 1, 10000);
-                camera.position.z = 2000;
-
-                renderer = new THREE.WebGLRenderer({ 
-                    alpha: true,  // 透明背景を有効化
-                    preserveDrawingBuffer: true 
-                });
-                renderer.setClearColor(0x000000, 0); // 透明な背景
-
-                document.getElementById('fireworks-container').appendChild(renderer.domElement);
-                // ... 残りの初期化コード
-            }
-        })();
-    </script>
-
-    <!-- Google Maps JavaScript API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
-
-</body>
-</html>
