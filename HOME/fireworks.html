@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explosion Shader</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+<script id="fragmentShader" type="x-shader/x-fragment">
+  #ifdef GL_ES
+  precision mediump float;
+  #endif
+  
+  uniform vec2 iResolution; // 画面解像度
+  uniform float iGlobalTime; // 経過時間
+  
+  #define PI 3.141592653589793238
+  #define S(x, y, z) smoothstep(x, y, z)
+  
+  #define NUM_PARTICLES 70.0
+  #define GRAVITY vec2(0.0, -0.01) // 重力の加速度
+  
+  #define MOD3 vec3(0.1031, 0.11369, 0.13787)
+  vec3 hash31(float p) {
+      vec3 p3 = fract(vec3(p) * MOD3);
+      p3 += dot(p3, p3.yzx + 19.19);
+      return fract(vec3((p3.x + p3.y) * p3.z, (p3.x + p3.z) * p3.y, (p3.y + p3.z) * p3.x));
+  }
+  
+  float light(vec2 uv, vec2 pos, float size) {
+      uv -= pos;
+      size *= size;
+      return size / dot(uv, uv);
+  }
+  
+  vec3 explosion(vec2 uv, vec2 center, float seed, float time) {
+      vec3 color = vec3(0.0);
+      vec3 baseColor = hash31(seed);
+  
+      for (float i = 0.0; i < NUM_PARTICLES; i++) {
+          // 放射状に均等に広がるように角度を計算
+          float angle = i / NUM_PARTICLES * PI * 2.0; // 0から2πまでの均等な角度
+          vec2 direction = vec2(cos(angle), sin(angle)); // 方向ベクトル
+  
+          // 粒子のサイズと速度を決定
+          float speed = 0.1 + hash31(i).x * 0.2; // 初速を小さくして、ゆっくり広がるようにする
+          vec2 velocity = direction * speed; // 速度ベクトル
+  
+          // 初期位置と最終位置を補間
+          vec2 endPos = center + velocity * 0.3;
+          
+          // 重力を加えた位置の更新
+          vec2 position = mix(center, endPos, S(0.0, 1.0, time)); // 時間による補間
+          position += velocity * time + GRAVITY * time * time; // 重力の影響
+  
+          // 粒子の大きさ
+          float size = mix(0.005, 0.002, S(0.2, 0.8, time));
+          size *= S(1.0, 0.2, time); // 粒の消失感
+  
+          // 粒子の光を計算
+          color += baseColor * light(uv, position, size);
+      }
+  
+      return color;
+  }
+  
+  vec3 launcher(vec2 uv, vec2 start, vec2 end, float time) {
+      vec2 pos = mix(start, end, S(0.0, 0.3, time)); // 打ち上げ位置
+      float size = 0.01 * S(0.0, 0.3, time); // 打ち上げ光の大きさ
+      vec3 color = vec3(1.0, 0.8, 0.6); // 打ち上げ光の色
+      return color * light(uv, pos, size);
+  }
+  
+  void main() {
+      vec2 uv = gl_FragCoord.xy / iResolution.xy;
+      uv.x -= 0.5;
+      uv.x *= iResolution.x / iResolution.y;
+  
+      float time = fract(iGlobalTime * 0.5); // 0～1の範囲でループ
+  
+      vec3 color = vec3(0.0);
+  
+      // 打ち上げの開始位置と終了位置
+      vec2 launchStart = vec2(0.0, -0.5); // 画面下部
+      vec2 launchEnd = vec2(0.0, 0.4);    // 爆発位置
+  
+      if (time < 0.3) {
+          // 打ち上げ光を描画
+          color += launcher(uv, launchStart, launchEnd, time);
+      } else {
+          // 打ち上げ後の爆発
+          float explosionTime = (time - 0.3) / 0.7; // 爆発の進捗
+          color += explosion(uv, launchEnd, 1.0, explosionTime);
+      }
+  
+      gl_FragColor = vec4(color, 1.0);
+  }
+  
+</script>
+
+<script>
+    const canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+
+    const gl = canvas.getContext('webgl');
+    const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    };
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const vertexShaderSource = `
+        attribute vec4 a_position;
+        void main() {
+            gl_Position = a_position;
+        }
+    `;
+
+    const fragmentShaderSource = document.getElementById('fragmentShader').textContent;
+
+    const createShader = (gl, type, source) => {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            console.error(gl.getShaderInfoLog(shader));
+            gl.deleteShader(shader);
+            return null;
+        }
+        return shader;
+    };
+
+    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error(gl.getProgramInfoLog(program));
+    }
+
+    gl.useProgram(program);
+
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1, -1,
+         1, -1,
+        -1,  1,
+        -1,  1,
+         1, -1,
+         1,  1,
+    ]), gl.STATIC_DRAW);
+
+    const positionLocation = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+    const iResolutionLocation = gl.getUniformLocation(program, "iResolution");
+    const iGlobalTimeLocation = gl.getUniformLocation(program, "iGlobalTime");
+
+    let startTime = performance.now();
+    const render = () => {
+        gl.uniform2f(iResolutionLocation, canvas.width, canvas.height);
+        gl.uniform1f(iGlobalTimeLocation, (performance.now() - startTime) / 1000);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+    };
+    render();
+</script>
+</body>
+</html>

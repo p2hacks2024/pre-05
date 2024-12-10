@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -55,11 +56,8 @@
         /* 花火のスタイル */
         .fireworks {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 0, 0, 0.8);
-            border-radius: 50%;
-            animation: firework 1s forwards;
+            width: 100px;
+            height: 100px;
         }
 
         @keyframes firework {
@@ -68,12 +66,169 @@
         }
     </style>
 </head>
+
 <body>
 
     <h1><span>函館トレンドグルメ</span></h1>
     <div id="map"></div>
-
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        #ifdef GL_ES
+        precision mediump float;
+        #endif
+        
+        uniform vec2 iResolution; // 画面解像度
+        uniform float iGlobalTime; // 経過時間
+        
+        #define PI 3.141592653589793238
+        #define S(x, y, z) smoothstep(x, y, z)
+        
+        #define NUM_PARTICLES 70.0
+        #define GRAVITY vec2(0.0, -0.01) // 重力の加速度
+        
+        #define MOD3 vec3(0.1031, 0.11369, 0.13787)
+        vec3 hash31(float p) {
+            vec3 p3 = fract(vec3(p) * MOD3);
+            p3 += dot(p3, p3.yzx + 19.19);
+            return fract(vec3((p3.x + p3.y) * p3.z, (p3.x + p3.z) * p3.y, (p3.y + p3.z) * p3.x));
+        }
+        
+        float light(vec2 uv, vec2 pos, float size) {
+            uv -= pos;
+            size *= size;
+            return size / dot(uv, uv);
+        }
+        
+        vec3 explosion(vec2 uv, vec2 center, float seed, float time) {
+            vec3 color = vec3(0.0);
+            vec3 baseColor = hash31(seed);
+        
+            for (float i = 0.0; i < NUM_PARTICLES; i++) {
+                float angle = i / NUM_PARTICLES * PI * 2.0;
+                vec2 direction = vec2(cos(angle), sin(angle));
+                float speed = 0.1 + hash31(i).x * 0.2;
+                vec2 velocity = direction * speed;
+                vec2 endPos = center + velocity * 0.3;
+                vec2 position = mix(center, endPos, S(0.0, 1.0, time));
+                position += velocity * time + GRAVITY * time * time;
+                float size = mix(0.005, 0.002, S(0.2, 0.8, time));
+                size *= S(1.0, 0.2, time);
+                color += baseColor * light(uv, position, size);
+            }
+        
+            return color;
+        }
+        
+        vec3 launcher(vec2 uv, vec2 start, vec2 end, float time) {
+            vec2 pos = mix(start, end, S(0.0, 0.3, time));
+            float size = 0.01 * S(0.0, 0.3, time);
+            vec3 color = vec3(1.0, 0.8, 0.6);
+            return color * light(uv, pos, size);
+        }
+        
+        void main() {
+            vec2 uv = gl_FragCoord.xy / iResolution.xy;
+            uv.x -= 0.5;
+            uv.x *= iResolution.x / iResolution.y;
+        
+            float time = fract(iGlobalTime * 0.5);
+        
+            vec3 color = vec3(0.0);
+        
+            vec2 launchStart = vec2(0.0, -0.5);
+            vec2 launchEnd = vec2(0.0, 0.4);
+        
+            if (time < 0.3) {
+                color += launcher(uv, launchStart, launchEnd, time);
+            } else {
+                float explosionTime = (time - 0.3) / 0.7;
+                color += explosion(uv, launchEnd, 1.0, explosionTime);
+            }
+        
+            // 黒を透過させるためにアルファ値を計算
+            float alpha = length(color); // 色の強さをアルファ値として使用
+            gl_FragColor = vec4(color, alpha);
+        }
+        
+        
+      </script>
     <script>
+        function renderfireworks(canvas){
+            //const canvas = document.createElement('canvas');
+            //document.body.appendChild(canvas);
+
+            const gl = canvas.getContext('webgl');
+            gl.clearColor(0.5, 0, 0, 0.5);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            const resizeCanvas = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            };
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const vertexShaderSource = `
+                attribute vec4 a_position;
+                void main() {
+                    gl_Position = a_position;
+                }
+            `;
+
+            const fragmentShaderSource = document.getElementById('fragmentShader').textContent;
+
+            const createShader = (gl, type, source) => {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            };
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error(gl.getProgramInfoLog(program));
+            }
+
+            gl.useProgram(program);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                -1, -1,
+                1, -1,
+                -1,  1,
+                -1,  1,
+                1, -1,
+                1,  1,
+            ]), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, "a_position");
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const iResolutionLocation = gl.getUniformLocation(program, "iResolution");
+            const iGlobalTimeLocation = gl.getUniformLocation(program, "iGlobalTime");
+
+            let startTime = performance.now();
+            const render = () => {
+                gl.uniform2f(iResolutionLocation, canvas.width, canvas.height);
+                gl.uniform1f(iGlobalTimeLocation, (performance.now() - startTime) / 1000);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            };
+            render();
+        }
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function() {
             const hakodate = { lat: 41.768793, lng: 140.72881 };  // 函館の緯度経度
@@ -98,8 +253,9 @@
 
                 // オーバーレイを初期化
                 onAdd() {
-                    const div = document.createElement('div');
+                    const div = document.createElement('canvas');
                     div.classList.add('fireworks');
+                    renderfireworks(div);
                     this.div = div;
                     const panes = this.getPanes();
                     panes.overlayLayer.appendChild(div);
@@ -112,13 +268,13 @@
                     const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat, this.lng));
 
                     // 花火の位置を設定
-                    this.div.style.left = `${position.x - 5}px`;
-                    this.div.style.top = `${position.y - 5}px`;
+                    this.div.style.left = `${position.x - 50}px`;
+                    this.div.style.top = `${position.y - 50}px`;
 
                     // 1秒後に花火を削除
-                    setTimeout(() => {
-                        this.div.remove();
-                    }, 1000);
+                    //setTimeout(() => {
+                        //this.div.remove();
+                    //}, 1000);
                 }
 
                 // オーバーレイを描画
@@ -128,9 +284,9 @@
             }
 
             // 地図が完全に読み込まれた後に花火を繰り返し表示
-            setInterval(() => {
+            //setInterval(() => {
                 new FireworkOverlay(map, 41.7648, 140.7267);  // 函館山の緯度経度
-            }, 3000);  // 3秒ごとに花火を発射
+            //}, 3000);  // 3秒ごとに花火を発射
         };
     </script>
 
