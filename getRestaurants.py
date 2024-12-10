@@ -51,7 +51,7 @@ def get_data(keywords, count=None):
             '緯度': store.get('lat', 'N/A'),
             '経度': store.get('lng', 'N/A'),
             '住所': store.get('address', 'N/A'),
-            'shopid': store.get('id', 'N/A')
+            'shopid': store.get('id', 'N/A'),
         } for store in stores])
 
         # 全て取得する場合
