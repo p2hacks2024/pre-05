@@ -81,7 +81,7 @@
         #define PI 3.141592653589793238
         #define S(x, y, z) smoothstep(x, y, z)
         
-        #define NUM_PARTICLES 70.0
+        #define NUM_PARTICLES 75.0
         #define GRAVITY vec2(0.0, -0.01) // 重力の加速度
         
         #define MOD3 vec3(0.1031, 0.11369, 0.13787)
@@ -248,11 +248,12 @@
 
             // 地図のオーバーレイを作成して花火を描画
             class FireworkOverlay extends google.maps.OverlayView {
-                constructor(map, lat, lng) {
+                constructor(map, lat, lng, baseSize = 100) {
                     super();
                     this.map = map;
                     this.lat = lat;
                     this.lng = lng;
+                    this.baseSize = baseSize;
                     this.div = null;
                     this.setMap(map);
                 }
@@ -276,13 +277,12 @@
                     // 現在のズームレベルを取得
                     const zoomLevel = this.map.getZoom();
     
-                    // ズームレベルに基づいてスケールを計算
-                     // 基準ズームレベル15からの差分でスケールを調整
+                    // ズームレベルに基づいてスケールを計算(指数関数的にでかくなってくれる)
                     const baseZoom = 15;
                     const scale = Math.pow(2, (zoomLevel - baseZoom));
                     
                     // 基本サイズ100pxをスケールで調整
-                    const size = 100 * scale;
+                    const size = this.baseSize * scale;
                     
                     // キャンバスのサイズを更新
                     this.div.style.width = `${size}px`;
@@ -301,8 +301,8 @@
                     this.positionFirework();
                 }
             }
-            new FireworkOverlay(map, 41.7648, 140.7267);  // 函館山
-            new FireworkOverlay(map, 41.7954, 140.7575);  // 五稜郭
+            new FireworkOverlay(map, 41.7648, 140.7267, 350);  // 函館山
+            new FireworkOverlay(map, 41.7954, 140.7575,80);  // 五稜郭
             // 地図が完全に読み込まれた後に花火を繰り返し表示
             //setInterval(() => {
                 //new FireworkOverlay(map, 41.7648, 140.7267);  // 函館山の緯度経度
