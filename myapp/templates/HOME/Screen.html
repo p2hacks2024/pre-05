@@ -13,41 +13,9 @@
             background-color: #f4f4f4;
         }
 
-        /* ヘッダーのスタイル */
-        h1 {
-            position: relative;
-            text-align: center;
-            color: white;
-            padding: 30px 0;
-            margin: 0;
-            font-size: 2.5em;
-            background-image: url('113.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* 画像の上にオーバーレイを追加 */
-        h1::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 1;
-        }
-
-        /* ヘッダーのテキストがオーバーレイの上に表示されるように調整 */
-        h1 span {
-            position: relative;
-            z-index: 2;
-        }
-
         /* 地図のスタイル */
         #map {
-            height: calc(100vh - 130px);
+            height: 100vh; /* ヘッダーがなくなった分高さを100vhに変更 */
             width: 100%;
             position: relative;
         }
@@ -66,19 +34,71 @@
             0% { transform: scale(0.5); opacity: 1; }
             100% { transform: scale(3); opacity: 0; }
         }
+
+        /* トレンドのお店と店舗名の表示 */
+        #trend-name {
+            position: absolute;
+            top: 100px;  /* 位置を下にずらす */
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        #store-name {
+            position: absolute;
+            top: 130px;  /* トレンドのお店の下に表示 */
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            z-index: 1000;
+        }
+
+        /* 画像コンテナのスタイル */
+        #image-container {
+            position: absolute;
+            top: 170px;  /* トレンドのお店と店名の下に配置 */
+            left: 10px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        #image-container img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
 
-    <h1><span>函館トレンドグルメ</span></h1>
+    <!-- トレンドのお店 -->
+    <div id="trend-name">トレンドのお店</div>
+
+    <!-- 店名 -->
+    <div id="store-name">{{ name }}</div>
+
+    <!-- 画像コンテナ -->
+    <div id="image-container">
+        <img src="2.png">
+    </div>
+
     <div id="map"></div>
 
     <script>
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function() {
             // 函館山の緯度経度をJavaScriptに渡す
-            const lat = {{latitude}};  // 函館山の緯度
-            const lng = {{longitude}};  // 函館山の経度
+            const lat = {{ latitude }};  // 函館山の緯度
+            const lng = {{ longitude }};  // 函館山の経度
 
             const hakodate = { lat: lat, lng: lng };
 
