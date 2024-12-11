@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -148,25 +147,28 @@
             float alpha = length(color); // 色の強さをアルファ値として使用
             gl_FragColor = vec4(color, alpha);
         }
-        
-        
       </script>
+
+
     <script>
         function renderfireworks(canvas){
             //const canvas = document.createElement('canvas');
             //document.body.appendChild(canvas);
-
+            //webGLのコンテキストを取得
             const gl = canvas.getContext('webgl');
-            gl.clearColor(0.5, 0, 0, 0.5);
+            //背景を透明にする
+            gl.clearColor(0, 0, 0, 0);
             gl.clear(gl.COLOR_BUFFER_BIT);
+
             const resizeCanvas = () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+                canvas.width = 100; //画面の幅
+                canvas.height = 100; //画面の高さ
                 gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
             };
+            
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
-
+            //頂点シェーダのソースコード
             const vertexShaderSource = `
                 attribute vec4 a_position;
                 void main() {
@@ -175,7 +177,7 @@
             `;
 
             const fragmentShaderSource = document.getElementById('fragmentShader').textContent;
-
+            //シェーダを作成する関数
             const createShader = (gl, type, source) => {
                 const shader = gl.createShader(type);
                 gl.shaderSource(shader, source);
@@ -187,7 +189,7 @@
                 }
                 return shader;
             };
-
+            //頂点シェーダとフラグメントシェーダを作成
             const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
             const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
 
@@ -224,11 +226,14 @@
                 gl.uniform2f(iResolutionLocation, canvas.width, canvas.height);
                 gl.uniform1f(iGlobalTimeLocation, (performance.now() - startTime) / 1000);
 
-                gl.drawArrays(gl.TRIANGLES, 0, 6);
+               gl.drawArrays(gl.TRIANGLES, 0, 6);
                 requestAnimationFrame(render);
             };
-            render();
+            //レンダリングを開始
+            render();　
         }
+
+
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function() {
             const hakodate = { lat: 41.768793, lng: 140.72881 };  // 函館の緯度経度
@@ -236,9 +241,9 @@
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: hakodate,
-                zoom: 12,  // ズームレベル
+                zoom: 15,  // ズームレベル
                 mapTypeId: google.maps.MapTypeId.HYBRID,  // 衛星写真と地図のハイブリッド
-                tilt: 45,  //角度つける
+                tilt: 45,  //仰角をつける
             });
 
             // 地図のオーバーレイを作成して花火を描画
@@ -268,9 +273,22 @@
                     const projection = this.getProjection();
                     const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat, this.lng));
 
-                    // 花火の位置を設定
-                    this.div.style.left = `${position.x - 50}px`;
-                    this.div.style.top = `${position.y - 50}px`;
+                    // 現在のズームレベルを取得
+                    const zoomLevel = this.map.getZoom();
+    
+                    // ズームレベルに基づいてスケールを計算
+                     // 基準ズームレベル15からの差分でスケールを調整
+                    const baseZoom = 15;
+                    const scale = Math.pow(2, (zoomLevel - baseZoom));
+                    
+                    // 基本サイズ100pxをスケールで調整
+                    const size = 100 * scale;
+                    
+                    // キャンバスのサイズを更新
+                    this.div.style.width = `${size}px`;
+                    this.div.style.height = `${size}px`;
+                    this.div.style.left = `${position.x - size/2}px`;
+                    this.div.style.top = `${position.y - size/2}px`;
 
                     // 1秒後に花火を削除
                     //setTimeout(() => {
@@ -287,7 +305,7 @@
             new FireworkOverlay(map, 41.7954, 140.7575);  // 五稜郭
             // 地図が完全に読み込まれた後に花火を繰り返し表示
             //setInterval(() => {
-                new FireworkOverlay(map, 41.7648, 140.7267);  // 函館山の緯度経度
+                //new FireworkOverlay(map, 41.7648, 140.7267);  // 函館山の緯度経度
             //}, 3000);  // 3秒ごとに花火を発射
         };
     </script>
