@@ -1,2 +1,3 @@
 # .env ファイルを Git で追跡しない
 .env
+node_modules
