@@ -7,5 +7,4 @@ class ShopAdmin(admin.ModelAdmin):
 
 @admin.register(HakodateRestaurant)
 class HakodateRestaurantAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'latitude', 'longitude', 'restaurant_id')
-    
+    list_display = ('name', 'address', 'latitude', 'longitude', 'restaurant_id', 'review_count')  # review_countを追加

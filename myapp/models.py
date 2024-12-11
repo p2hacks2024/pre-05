@@ -16,6 +16,7 @@ class HakodateRestaurant(models.Model):
     latitude = models.FloatField()                # 緯度
     longitude = models.FloatField()               # 経度
     restaurant_id = models.CharField(max_length=255)  # レストランID
+    review_count = models.IntegerField(default=0)  # レビュー数を追加
 
     def __str__(self):
         return self.name
