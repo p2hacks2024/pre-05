@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +14,33 @@
             background-color: #f4f4f4;
         }
 
+        /* 画像の位置を指定するCSS */
+        #top-left-image {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000; /* 地図の上に表示するために高い値を設定 */
+            width: 100px; /* 画像の幅を指定 */
+            height: auto; /* 高さを自動調整 */
+            border: 2px solid black; /* 黒い枠線を追加 */
+            background-color: black; /* 背景色を黒に設定 */
+            border-radius: 50%; /* 丸くする */
+            padding: 5px; /* 枠線と画像の間に余白を追加 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* 画像が丸の外に出ないようにする */
+        }
+        #top-left-image img {
+            width: 90%; /* 画像の幅を指定 */
+            height: auto; /* 高さを自動調整 */
+            border-radius: 50%; /* 画像も丸くする */
+        }
+        #image-container img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
         /* 地図のスタイル */
         #map {
             height: 100vh; /* ヘッダーがなくなった分高さを100vhに変更 */
@@ -77,19 +105,9 @@
 </head>
 
 <body>
-
-    <!-- トレンドのお店 -->
-    <div id="trend-name">トレンドのお店</div>
-
-    <!-- 店名 -->
-    <div id="store-name">{{ name }}</div>
-
-    <!-- 画像コンテナ -->
-    <div id="image-container">
-        <img src="2.png">
-    </div>
-
+    <img id="top-left-image" src="{% static 'images/1.png' %}" alt="Top Left Image">
     <div id="map"></div>
+    
     <script id="fragmentShader" type="x-shader/x-fragment">
         #ifdef GL_ES
         precision mediump float;
@@ -266,7 +284,9 @@
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: hakodate,
                 zoom: 12,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
+                tilt: 45,//角度をつける
             });
 
             // 地図のオーバーレイを作成して花火を描画
@@ -325,11 +345,11 @@
                 }
             }
             new FireworkOverlay(map, 41.7648, 140.7267, 350);  // 函館山
-            new FireworkOverlay(map, 41.7954, 140.7575,80);  // 五稜郭
+            new FireworkOverlay(map,  lat, lng, 80);  // 五稜郭
             // 地図が完全に読み込まれた後に花火を繰り返し表示
-            setInterval(() => {
-                new FireworkOverlay(map, lat, lng);
-            }, 3000);
+            //setInterval(() => {
+               // new FireworkOverlay(map, lat, lng);
+            //}, 3000);
         };
     </script>
 
