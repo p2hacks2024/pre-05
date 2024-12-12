@@ -45,11 +45,11 @@
   <script src="{% static 'js/fireworks.js' %}"></script>
   <script>
     function navigateToScreen() {
-      document.body.classList.add('fade-out');
-      setTimeout(() => {
-        window.location.href = 'Screen.html'; // Screen.htmlに画面遷移
-      }, 1000); // フェードアウトのアニメーションが完了するまで待つ
-    }
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = "{% url 'myapp:screen' %}"; // URLパターン名を指定
+    }, 1000); // フェードアウトのアニメーションが完了するまで待つ
+  }
 
     // アニメーションを開始するためのクラスを追加
     window.onload = function() {

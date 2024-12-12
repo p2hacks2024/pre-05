@@ -9,3 +9,6 @@ def hakodate_restaurant_location(request):
         'longitude': restraunt.longitude,
     }
     return render(request, 'HOME/StartScreen.html', context)
+
+def screen(request):
+    return render(request, 'HOME/Screen.html')
