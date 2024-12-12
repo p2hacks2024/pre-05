@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +13,16 @@
             font-family: 'Arial', sans-serif;
             color: #333;
             background-color: #f4f4f4;
+        }
+
+        /* 画像の位置を指定するCSS */
+        #top-left-image {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000; /* 地図の上に表示するために高い値を設定 */
+            width: 50px; /* 画像の幅を指定 */
+            height: auto; /* 高さを自動調整 */
         }
 
         /* 地図のスタイル */
@@ -77,17 +89,12 @@
 </head>
 
 <body>
-
+    <img id="top-left-image" src="{% static 'images/1.png' %}" alt="Top Left Image">
     <!-- トレンドのお店 -->
     <div id="trend-name">トレンドのお店</div>
 
     <!-- 店名 -->
     <div id="store-name">{{ name }}</div>
-
-    <!-- 画像コンテナ -->
-    <div id="image-container">
-        <img src="2.png">
-    </div>
 
     <div id="map"></div>
     <script id="fragmentShader" type="x-shader/x-fragment">
@@ -267,6 +274,8 @@
                 center: hakodate,
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
+
             });
 
             // 地図のオーバーレイを作成して花火を描画
