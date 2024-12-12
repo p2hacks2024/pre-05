@@ -1,0 +1,127 @@
+body {
+  background: linear-gradient(to bottom, #2c3e50 0%, #3498db 100%); /* 落ち着いた色合いに変更 */
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 花火が画面外に出ないようにする */
+}
+
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* タイトル、アイコン、ボタンの後ろに配置 */
+}
+
+#sky {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#shootingstars {
+  margin: 0;
+  padding: 0;
+  width: 150vh;
+  height: 100vw;
+  position: fixed;
+  overflow: hidden;
+  transform: translatex(calc(50vw - 50%)) translatey(calc(50vh - 50%))
+    rotate(120deg);
+}
+
+.wish {
+  height: 2px;
+  top: 300px;
+  width: 100px;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  background-color: white;
+  position: absolute;
+  background: linear-gradient(-45deg, white, rgba(0, 0, 255, 0));
+  filter: drop-shadow(0 0 6px white);
+  overflow: hidden;
+}
+
+.header {
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  color: #ecf0f1; /* 明るい色に変更 */
+  margin: 20px;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.side-text {
+  width: 400px;
+  position: absolute; /* 絶対位置に変更 */
+  top: 55%; /* 上から50%の位置に配置 */
+  left: 200px; /* 左から20pxの位置に配置 */
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.986); /* 薄い白色 */
+  font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+  font-weight: 700; /* 太字に設定 */
+  font-size: 24px; /* フォントサイズを調整 */
+  line-height: 2; /* 行間を調整 */
+  z-index: 1;
+  text-align: left;
+}
+
+.bg .bg-wrap {
+  position: relative;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.bg.is-animated .bg-wrap::before {
+  animation: bg 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  background: linear-gradient(to right, #8e44ad 0%, #ae2fe9 50%, #d267e7 100%); /* 新しい色合いに変更 */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+}
+
+.bg .bg-wrap .inn {
+  color: #ecf0f1; /* 明るい色に変更 */
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.bg .bg-wrap .title-large {
+  font-size: 48px;
+}
+
+.bg .bg-wrap .title-small {
+  font-size: 24px;
+}
+
+@keyframes bg {
+  0% {
+    opacity: 0;
+    transform: scaleX(0) translateX(-5%);
+  }
+  30% {
+    transform: scaleX(1) translateX(0);
+  }
+  100% {
+    transform: scaleX(1) translateX(0);
+  }
+  30%, 100% {
+    opacity: 1;
+  }
+}

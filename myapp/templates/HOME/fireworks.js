@@ -8,16 +8,14 @@ const PARTICLE_INITIAL_SPEED = 4.5; // 2-8
 // not so fun options =\
 const GRAVITY = 9.8;
 
-
 const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d', { alpha: true });
+const ctx = canvas.getContext('2d');
 
 let particles = [];
 let disableAutoFireworks = false;
 let resetDisable = 0;
 
 let loop = () => {
-
   if (!disableAutoFireworks && Math.random() < FIREWORK_CHANCE) {
     createFirework();
   }
@@ -28,22 +26,19 @@ let loop = () => {
     particle.animate();
     particle.render();
     if (particle.y > canvas.height ||
-    particle.x < 0 ||
-    particle.x > canvas.width ||
-    particle.alpha <= 0)
-    {
+        particle.x < 0 ||
+        particle.x > canvas.width ||
+        particle.alpha <= 0) {
       particles.splice(i, 1);
     }
   });
 
   requestAnimationFrame(loop);
-
 };
 
 let createFirework = (
-x = Math.random() * canvas.width,
-y = Math.random() * canvas.height) =>
-{
+  x = Math.random() * canvas.width,
+  y = Math.random() * canvas.height) => {
 
   let speed = Math.random() * 2 + BASE_PARTICLE_SPEED;
   let maxSpeed = speed;
@@ -70,20 +65,17 @@ y = Math.random() * canvas.height) =>
     let particle = new Particle(x, y, red, green, blue, maxSpeed, true);
     particles.push(particle);
   }
-
 };
 
 class Particle {
-
   constructor(
-  x = 0,
-  y = 0,
-  red = ~~(Math.random() * 255),
-  green = ~~(Math.random() * 255),
-  blue = ~~(Math.random() * 255),
-  speed,
-  isFixedSpeed)
-  {
+    x = 0,
+    y = 0,
+    red = ~~(Math.random() * 255),
+    green = ~~(Math.random() * 255),
+    blue = ~~(Math.random() * 255),
+    speed,
+    isFixedSpeed) {
 
     this.x = x;
     this.y = y;
@@ -111,29 +103,22 @@ class Particle {
 
     this.initialVelocityX = this.velocityX;
     this.initialVelocityY = this.velocityY;
-
   }
 
   animate() {
-
     this.currentDuration = new Date().getTime() - this.startTime;
 
     // initial speed kick
     if (this.currentDuration <= 200) {
-
       this.x += this.initialVelocityX * PARTICLE_INITIAL_SPEED;
       this.y += this.initialVelocityY * PARTICLE_INITIAL_SPEED;
       this.alpha += 0.01;
-
       this.colour = this.getColour(240, 240, 240, 0.9);
-
     } else {
-
       // normal expansion
       this.x += this.velocityX;
       this.y += this.velocityY;
       this.colour = this.getColour(this.red, this.green, this.blue, 0.4 + Math.random() * 0.3);
-
     }
 
     this.velocityY += GRAVITY / 1000;
@@ -145,23 +130,18 @@ class Particle {
     }
 
     if (this.currentDuration >= this.duration + this.duration / 1.1) {
-
       // fade out at the end
       this.alpha -= 0.02;
       this.colour = this.getColour();
-
     } else {
-
       // fade in during expansion
       if (this.alpha < 1) {
         this.alpha += 0.03;
       }
-
     }
   }
 
   render() {
-
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
     ctx.lineWidth = this.lineWidth;
@@ -169,29 +149,22 @@ class Particle {
     ctx.shadowBlur = 8;
     ctx.shadowColor = this.getColour(this.red + 150, this.green + 150, this.blue + 150, 1);
     ctx.fill();
-
   }
 
   getColour(red, green, blue, alpha) {
-
     return `rgba(${red || this.red}, ${green || this.green}, ${blue || this.blue}, ${alpha || this.alpha})`;
-
-  }}
-
-
+  }
+}
 
 let updateCanvasSize = () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 };
 
-
 // run it!
-
 updateCanvasSize();
 window.addEventListener('resize', updateCanvasSize);
-$(canvas).on('click', e => {
-
+canvas.addEventListener('click', e => {
   createFirework(e.clientX, e.clientY);
 
   // stop fireworks when clicked, re-enable after short time
@@ -200,7 +173,6 @@ $(canvas).on('click', e => {
   resetDisable = setTimeout(() => {
     disableAutoFireworks = false;
   }, 5000);
-
 });
 
 loop();
