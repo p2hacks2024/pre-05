@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.fuwafuwa {
+    animation: fadeIn 5s cubic-bezier(0.33, 1, 0.68, 1) forwards,
+               fuwafuwa 5s ease-in-out infinite alternate;
+               
+    background: url('./icon.png') no-repeat center center / 180px auto; /* 60px → 180px に変更 */
+    display: inline-block;
+    transition: 1.5s ease-in-out;
+    width: 210px;
+    height: 210px;
+    margin-top: 15px;
+    opacity: 0;
+}
+
+@keyframes fuwafuwa {
+    0% {
+        transform: translate(0, 0) rotate(-7deg);
+    }
+    50% {
+        transform: translate(0, -7px) rotate(0deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(7deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
