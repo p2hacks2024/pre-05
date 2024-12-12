@@ -8,4 +8,4 @@ def shop_location(request):
         'latitude': shop.latitude,
         'longitude': shop.longitude,
     }
-    return render(request, 'HOME/Screen.html', context)
+    return render(request, 'HOME/StartScreen.html', context)

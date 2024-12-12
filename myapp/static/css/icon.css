@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* サイトの高さを2倍に設定 */
+    margin: 0;
+}
+
+.fuwafuwa {
+    animation: fadeIn 5s cubic-bezier(0.33, 1, 0.68, 1) forwards,
+               fuwafuwa 5s ease-in-out infinite alternate;
+    background: url("../images/icon.png") no-repeat center center / 400px auto;
+    display: inline-block;
+    transition: 1.5s ease-in-out;
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes fuwafuwa {
+    0% {
+        transform: translate(-50%, -50%) rotate(-7deg);
+    }
+    50% {
+        transform: translate(-50%, calc(-50% - 7px)) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(7deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
