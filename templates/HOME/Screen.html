@@ -1,0 +1,122 @@
+<!-- ...existing code... -->
+<!-- トレンドのお店 -->
+<div id="trend-name">トレンドのお店</div>
+
+<!-- 店名 -->
+<div id="store-names" style="display: none;"></div>
+
+<style>
+    #trend-name {
+        position: absolute;  /* 絶対位置を指定 */
+        top: 150px;  /* 上からの位置を指定 */
+        left: 10px;  /* 左からの位置を指定 */
+        background-color: rgba(255, 255, 255, 0.9);  /* 背景色と透明度を指定 */
+        padding: 5px 10px;  /* 内側の余白を指定 */
+        border-radius: 5px;  /* 角を丸くする */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* 影をつける */
+        font-size: 16px;  /* フォントサイズを指定 */
+        z-index: 1000;  /* 重なり順を指定 */
+        cursor: pointer;  /* クリック可能にする */
+    }
+
+    #store-names {
+        position: absolute;  /* 絶対位置を指定 */
+        left: 10px;  /* 左からの位置を指定 */
+        width: 20%;  /* 画面の幅の1/5に設定 */
+        max-height: 80vh;  /* 画面の縦幅の80%を最大高さに設定 */
+        overflow-y: auto;  /* 縦方向のスクロールを有効にする */
+        background-color: rgba(255, 255, 255, 0.9);  /* 背景色と透明度を指定 */
+        padding: 10px;  /* 内側の余白を指定 */
+        border-radius: 5px;  /* 角を丸くする */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* 影をつける */
+        z-index: 1000;  /* 重なり順を指定 */
+        display: none;  /* 初期状態では非表示 */
+        word-wrap: break-word;  /* 幅が足りない場合は改行 */
+    }
+
+    .store-name {
+        position: relative;  /* 親要素に対して相対的に配置 */
+        background-color: rgba(255, 255, 255, 0.9);  /* 背景色と透明度を指定 */
+        padding: 10px;  /* 内側の余白を指定 */
+        border-radius: 5px;  /* 角を丸くする */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* 影をつける */
+        font-size: 18px;  /* フォントサイズを指定 */
+        z-index: 1000;  /* 重なり順を指定 */
+        margin-top: 10px;  /* 各店舗名の間にスペースを追加 */
+        cursor: pointer;  /* クリック可能にする */
+    }
+</style>
+
+<script>
+    let map;  // 地図オブジェクトをグローバルに宣言
+
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded and parsed');  // デバッグ用ログ
+
+        // JSONデータをパース
+        const locations = JSON.parse('{{ fireworks_locations|escapejs }}');
+        const storeNamesDiv = document.getElementById('store-names');
+
+        // 各店舗名を追加
+        locations.forEach((location) => {
+            const storeDiv = document.createElement('div');
+            storeDiv.className = 'store-name';
+            storeDiv.textContent = location.name;
+            storeDiv.dataset.latitude = location.latitude;  // 緯度をデータ属性に追加
+            storeDiv.dataset.longitude = location.longitude;  // 経度をデータ属性に追加
+            storeNamesDiv.appendChild(storeDiv);
+
+            // 店舗名をクリックしたときに地図をズームアップ
+            storeDiv.addEventListener('click', function() {
+                const lat = parseFloat(this.dataset.latitude);
+                const lng = parseFloat(this.dataset.longitude);
+                const position = { lat: lat, lng: lng };
+                console.log('Zooming to:', position);  // デバッグ用ログ
+                map.setCenter(position);
+                map.setZoom(15);  // ズームレベルを設定
+            });
+        });
+
+        // トレンドボックスをクリックしたときに店舗名を表示
+        document.getElementById('trend-name').addEventListener('click', function() {
+            const storeNamesDiv = document.getElementById('store-names');
+            console.log('Trend box clicked');  // デバッグ用ログ
+            if (storeNamesDiv.style.display === 'none') {
+                // トレンドボックスの下に位置を設定
+                const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
+                storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
+                storeNamesDiv.style.display = 'block';
+            } else {
+                storeNamesDiv.style.display = 'none';
+            }
+        });
+    });
+
+    window.initMap = function() {
+        // fireworks_locationsからデータを取得
+        const locations = JSON.parse('{{ fireworks_locations|escapejs }}');
+        
+        // 最初の店舗の位置を地図の中心に設定
+        const initialLocation = {
+            lat: locations[0].latitude,
+            lng: locations[0].longitude
+        };
+
+        // 地図の作成
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: initialLocation,
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.HYBRID,  // ハイブリッド表示
+            mapTypeControl: false,  // 地図タイプの選択タブを非表示
+            tilt: 45,  // 角度をつける
+        });
+
+        console.log('Map initialized:', map);  // デバッグ用ログ
+
+        // ...remaining existing code...
+    };
+</script>
+
+<!-- Google Maps JavaScript API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
+<!-- ...existing code... -->
