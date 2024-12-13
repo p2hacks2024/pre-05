@@ -1,25 +1,36 @@
 from django.shortcuts import render
 from .models import HakodateRestaurant
 import json
+import random
 
 def Start_Screen(request):
     return render(request, 'HOME/StartScreen.html')
 
 def screen(request):
-    # 1000以上のレビュー数を持つレストランをフィルタリング
-    restaurants = HakodateRestaurant.objects.filter(review_count__gte=1000)
-    print(f"Retrieved {restaurants.count()} restaurants with 1000 or more reviews")  # デバッグ用ログ
+    filter_value = request.GET.get('filter', 'all')
+    
+    if filter_value == 'few':
+        restaurants = HakodateRestaurant.objects.filter(review_count__lte=50)
+    elif filter_value == 'medium':
+        restaurants = HakodateRestaurant.objects.filter(review_count__gt=50, review_count__lte=200)
+    elif filter_value == 'many':
+        restaurants = HakodateRestaurant.objects.filter(review_count__gt=200, review_count__lte=500)
+    elif filter_value == 'very-many':
+        restaurants = HakodateRestaurant.objects.filter(review_count__gt=500)
+    else:
+        restaurants = HakodateRestaurant.objects.all()
 
+    # ランダムに10件を抽出
+    restaurants = random.sample(list(restaurants), min(len(restaurants), 10))
 
     fireworks_locations = []
     for restaurant in restaurants:
-        print(f"Restaurant: {restaurant.name}, Latitude: {restaurant.latitude}, Longitude: {restaurant.longitude}")  # デバッグ用ログ
         fireworks_locations.append({
             'name': restaurant.name,
             'latitude': restaurant.latitude,
             'longitude': restaurant.longitude
         })
-
+    
     print("Fireworks Locations:", json.dumps(fireworks_locations, indent=2))
 
     context = {

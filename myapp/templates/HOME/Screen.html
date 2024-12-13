@@ -179,10 +179,11 @@
         }
 
         function filterRestaurants() {
-            const filter = document.querySelector('input[name="review-filter"]:checked').value;
-            // フィルターに基づいて店舗を表示する処理を追加
-            console.log(`Selected filter: ${filter}`);
-        }
+        const filter = document.querySelector('input[name="review-filter"]:checked').value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('filter', filter);
+        window.location.href = url.toString();
+    }
         
         function navigateToStartScreen() {
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
@@ -366,6 +367,28 @@
                 mapTypeId: google.maps.MapTypeId.HYBRID,
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 tilt: 45,//角度をつける
+                styles: [
+                {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }]
+                },
+                {
+                    featureType: "transit",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }]
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }]
+                },
+                {
+                    featureType: "administrative",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }]
+                }
+            ]
             });
 
             // 地図のオーバーレイを作成して花火を描画
@@ -423,7 +446,7 @@
                     this.positionFirework();
                 }
             }
-            // v.....................................................................................................iews.pyから渡された花火の位置情報を使用して花火を表示
+            // v.....................................................................................................views.pyから渡された花火の位置情報を使用して花火を表示
             const fireworksLocations = JSON.parse('{{ fireworks_locations|escapejs }}');
             fireworksLocations.forEach(location => {
                 const lat = location.latitude;
@@ -437,8 +460,76 @@
         }
     </script>
 
-    <!-- Google Maps JavaScript API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
+    <script>
+    const MAX_FIREWORKS = 10 //最大表示する花火の数を10に制限
+    const FIREWORK_INTERVAL = 500; // 花火の表示間隔を増やす（ミリ秒）
+    let activeFireworks = [];
+
+    class FireworkOverlay extends google.maps.OverlayView {
+        constructor(map, lat, lng, baseSize = 100) {
+            super();
+            this.map = map;
+            this.lat = lat;
+            this.lng = lng;
+            this.baseSize = baseSize;
+            this.div = null;
+            this.setMap(map);
+        }
+
+        onAdd() {
+            const div = document.createElement('canvas');
+            div.classList.add('fireworks');
+            renderfireworks(div);
+            this.div = div;
+            const panes = this.getPanes();
+            panes.overlayLayer.appendChild(div);
+            this.positionFirework();
+        }
+
+        positionFirework() {
+            const projection = this.getProjection();
+            const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat, this.lng));
+
+            const zoomLevel = this.map.getZoom();
+            const baseZoom = 15;
+            const scale = Math.pow(2, (zoomLevel - baseZoom));
+            const size = this.baseSize * scale;
+
+            this.div.style.width = `${size}px`;
+            this.div.style.height = `${size}px`;
+            this.div.style.left = `${position.x - size / 2}px`;
+            this.div.style.top = `${position.y - size / 2}px`;
+
+            // 一定時間後に花火を削除
+            setTimeout(() => {
+                this.div.remove();
+                this.setMap(null); // WebGLコンテキストを解放
+                activeFireworks = activeFireworks.filter(fw => fw !== this);
+            }, 1000);
+        }
+
+        draw() {
+            this.positionFirework();
+        }
+    }
+
+    const fireworksLocations = JSON.parse('{{ fireworks_locations|escapejs }}');
+    fireworksLocations.forEach((location, index) => {
+        setTimeout(() => {
+            if (activeFireworks.length >= MAX_FIREWORKS) {
+                const oldestFirework = activeFireworks.shift();
+                oldestFirework.setMap(null);
+            }
+            const lat = location.latitude;
+            const lng = location.longitude;
+            const firework = new FireworkOverlay(map, lat, lng, 100);
+            activeFireworks.push(firework);
+        }, index * FIREWORK_INTERVAL); // 花火の表示を少しずつずらす
+    });
+</script>
+
+<!-- Google Maps JavaScript API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
 
 </body>
 </html>
