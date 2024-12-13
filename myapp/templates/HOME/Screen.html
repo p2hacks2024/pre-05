@@ -17,43 +17,43 @@
         }
 
         /* フィルターメニューのスタイル */
-        /* フィルターメニューのスタイル */
-        .filter-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            background-color: #999999;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(136, 128, 128, 0.2);
-            display: flex;
-            gap: 15px; /* ボタン間のスペース */
-            flex-wrap: wrap; /* ボタンが多い場合折り返す */
-        }
+.filter-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #999999;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(136, 128, 128, 0.2);
+    display: flex;
+    gap: 15px; /* ボタン間のスペース */
+    flex-wrap: wrap; /* ボタンが多い場合折り返す */
+}
 
-        .filter-menu button {
-            background-color: #000000; /* ボタンの背景色 */
-            color: white; /* 文字色 */
-            border: none;
-            border-radius: 6px;
-            padding: 12px 30px; /* 横長にする */
-            font-size: 16px; /* フォントサイズを大きくする */
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            min-width: 150px; /* 最低幅を設定 */
-            text-align: center; /* テキストを中央揃え */
-        }
+.filter-menu button {
+    background-color: #000000; /* ボタンの背景色 */
+    color: white; /* 文字色 */
+    border: none;
+    border-radius: 6px;
+    padding: 12px 30px; /* 横長にする */
+    font-size: 16px; /* フォントサイズを大きくする */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    min-width: 150px; /* 最低幅を設定 */
+    text-align: center; /* テキストを中央揃え */
+}
 
-        .filter-menu button:hover {
-            background-color: #000000; /* ホバー時の色 */
-            transform: scale(1.05); /* 拡大 */
-        }
+.filter-menu button:hover {
+    background-color: #000000; /* ホバー時の色 */
+    transform: scale(1.05); /* 拡大 */
+}
 
-        .filter-menu button:active {
-            background-color: #000000; /* クリック時の色 */
-            transform: scale(0.95); /* 縮小 */
-        }
+.filter-menu button:active {
+    background-color: #000000; /* クリック時の色 */
+    transform: scale(0.95); /* 縮小 */
+}
+
         
         @keyframes fadeIn {
             from {opacity: 0;}
@@ -282,13 +282,15 @@
     </script>
 
 
-        <div class="filter-menu">
-            <button onclick="filterRestaurants('all')">すべて</button>
-            <button onclick="filterRestaurants('few')">開拓者向け (0〜50件)</button>
-            <button onclick="filterRestaurants('medium')">失敗しない (51〜200件)</button>
-            <button onclick="filterRestaurants('many')"> 人気店(201〜500件)</button>
-            <button onclick="filterRestaurants('very-many')">大絶賛(501件以上)</button>
-        </div>
+<div class="filter-menu">
+    <button onclick="filterRestaurants('all')">すべて</button>
+    <button onclick="filterRestaurants('few')">開拓者向け </button>
+    <button onclick="filterRestaurants('medium')">失敗しない </button>
+    <button onclick="filterRestaurants('many')"> 人気店</button>
+    <button onclick="filterRestaurants('very-many')">大絶賛</button>
+    <button onclick="filterRestaurants('very-very-many')">世界レベル！</button>
+</div>
+
 
     <script>
 
@@ -297,10 +299,11 @@
         }
 
         function filterRestaurants(filter) {
-            const url = new URL(window.location.href); // 現在のURLを取得
-            url.searchParams.set('filter', filter); // URLのパラメータを更新
-            window.location.href = url.toString(); // 更新されたURLにリダイレクト
-        }
+    const url = new URL(window.location.href); // 現在のURLを取得
+    url.searchParams.set('filter', filter); // URLのパラメータを更新
+    window.location.href = url.toString(); // 更新されたURLにリダイレクト
+}
+
         
         function navigateToStartScreen() {
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定

@@ -17,6 +17,8 @@ def screen(request):
         restaurants = HakodateRestaurant.objects.filter(review_count__gt=200, review_count__lte=500)
     elif filter_value == 'very-many':
         restaurants = HakodateRestaurant.objects.filter(review_count__gt=500)
+    elif filter_value == 'very-very-many':
+        restaurants = HakodateRestaurant.objects.filter(review_count__gt=1000)
     else:
         restaurants = HakodateRestaurant.objects.all()
 
