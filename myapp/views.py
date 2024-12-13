@@ -30,7 +30,8 @@ def screen(request):
             'name': restaurant.name,
             'latitude': restaurant.latitude,
             'longitude': restaurant.longitude,
-            'description': restaurant.address  # 店の住所を説明として追加
+            'description': restaurant.address,  # 店の住所を説明として追加
+            'review_count': restaurant.review_count  # レビュー数を追加
         })
 
    #print("Fireworks Locations:", json.dumps(fireworks_locations, indent=2))

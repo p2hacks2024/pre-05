@@ -89,30 +89,31 @@
             box-sizing: border-box;
             z-index: 1000;
         }
-     /* InfoWindowのスタイル */
-.info-window {
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: black; /* 文字色を黒に設定 */
-    background-color: white; /* 背景色を白に設定 */
-    padding: 0 10px 10px 10px; /* 上側のパディングを削除 */
-}
-.info-window h3 {
-    margin: 0; /* マージンを削除 */
-    padding: 0 0 5px 0; /* 下に少し余白を追加 */
-    font-size: 16px;
-    color: black; /* 文字色を黒に設定 */
-}
-.info-window p {
-    margin: 0; /* マージンを削除 */
-    padding: 5px 0 0 0; /* 上に少し余白を追加 */
-    color: black; /* 文字色を黒に設定 */
-}
-.info-window .address {
-    font-size: 12px;
-    color: black; /* 文字色を黒に設定 */
-}
+            /* InfoWindowのスタイル */
+        .info-window {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: black; /* 文字色を黒に設定 */
+            background-color: white; /* 背景色を白に設定 */
+            padding: 0 10px 10px 10px; /* 上側のパディングを削除 */
+        }
+        .info-window h3 {
+            margin: 0; /* マージンを削除 */
+            padding: 0 0 5px 0; /* 下に少し余白を追加 */
+            font-size: 16px;
+            color: black; /* 文字色を黒に設定 */
+        }
+        .info-window p {
+            margin: 0; /* マージンを削除 */
+            padding: 5px 0 0 0; /* 上に少し余白を追加 */
+            color: black; /* 文字色を黒に設定 */
+        }
+        .info-window .address {
+            font-size: 12px;
+            color: black; /* 文字色を黒に設定 */
+        }
+        
     </style>
 </head>
 
@@ -451,8 +452,8 @@
                         map: this.map,
                         title: '花火の位置',
                         icon: {
-                                url: 'https://maps.google.com/mapfiles/kml/shapes/target.png', // カスタムアイコンのURL
-                                scaledSize: new google.maps.Size(20, 20) // アイコンのサイズを指定
+                                url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png', // カスタムアイコンのURL
+                                scaledSize: new google.maps.Size(30, 30) // アイコンのサイズを指定
                             }
             });
 
@@ -468,8 +469,10 @@
                 } 
                 // 花火の位置を設定
                 positionFirework() {
+                    
                     const projection = this.getProjection();
-                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat+0.0025, this.lng));
+                    const reviewOffset = this.storeDetails.review_count / 40000; // レビュー数に基づくオフセットを計算
+                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat+reviewOffset, this.lng));
                     // 現在のズームレベルを取得
                     const zoomLevel = this.map.getZoom();
                     // ズームレベルに基づいてスケールを計算(指数関数的にでかくなってくれる)
@@ -477,7 +480,13 @@
                     const scale = Math.pow(2, (zoomLevel - baseZoom));
                     // 基本サイズ100pxをスケールで調整
                     const size = this.baseSize * scale;
+                    let fireworkSize = this.baseSize * scale; // `let` を使用して変数を宣言
+
                     // キャンバスのサイズを更新
+                     // レビュー数が1000件を超えた場合、上昇度を抑える
+                     if (this.storeDetails.review_count > 1000) {
+                        fireworkSize = 1000 + (this.storeDetails.review_count / 50000) ;
+                    }
                     this.div.style.width = `${size}px`;
                     this.div.style.height = `${size}px`;
                     this.div.style.left = `${position.x - size/2}px`;
@@ -496,10 +505,11 @@
             //クリックしたときに店名を表示
             const storeDetails = {
                 name: decodeURIComponent(location.name),
-                description: decodeURIComponent(location.description)
+                description: decodeURIComponent(location.description),
+                review_count: location.review_count // レビュー数を追加
             };
             console.log(storeDetails); // デバッグ用のログ    
-        new FireworkOverlay(map, lat, lng, 100, storeDetails);
+             new FireworkOverlay(map, lat, lng, location.review_count, storeDetails);
             });
         }
 </script>
