@@ -17,15 +17,42 @@
         }
 
         /* フィルターメニューのスタイル */
+        /* フィルターメニューのスタイル */
         .filter-menu {
             position: absolute;
             top: 10px;
             right: 10px;
             z-index: 1000;
-            background-color: white;
+            background-color: #999999;
             padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(136, 128, 128, 0.2);
+            display: flex;
+            gap: 15px; /* ボタン間のスペース */
+            flex-wrap: wrap; /* ボタンが多い場合折り返す */
+        }
+
+        .filter-menu button {
+            background-color: #000000; /* ボタンの背景色 */
+            color: white; /* 文字色 */
+            border: none;
+            border-radius: 6px;
+            padding: 12px 30px; /* 横長にする */
+            font-size: 16px; /* フォントサイズを大きくする */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 150px; /* 最低幅を設定 */
+            text-align: center; /* テキストを中央揃え */
+        }
+
+        .filter-menu button:hover {
+            background-color: #000000; /* ホバー時の色 */
+            transform: scale(1.05); /* 拡大 */
+        }
+
+        .filter-menu button:active {
+            background-color: #000000; /* クリック時の色 */
+            transform: scale(0.95); /* 縮小 */
         }
         
         @keyframes fadeIn {
@@ -89,31 +116,38 @@
             box-sizing: border-box;
             z-index: 1000;
         }
-            /* InfoWindowのスタイル */
+        /* InfoWindowのスタイル */
+        /* クリック後に表示されるUIのスタイル */
         .info-window {
-            font-family: 'Arial', sans-serif;
-            font-size: 14px;
-            line-height: 1.5;
-            color: black; /* 文字色を黒に設定 */
-            background-color: white; /* 背景色を白に設定 */
-            padding: 0 10px 10px 10px; /* 上側のパディングを削除 */
-        }
-        .info-window h3 {
-            margin: 0; /* マージンを削除 */
-            padding: 0 0 5px 0; /* 下に少し余白を追加 */
-            font-size: 16px;
-            color: black; /* 文字色を黒に設定 */
-        }
-        .info-window p {
-            margin: 0; /* マージンを削除 */
-            padding: 5px 0 0 0; /* 上に少し余白を追加 */
-            color: black; /* 文字色を黒に設定 */
-        }
-        .info-window .address {
-            font-size: 12px;
-            color: black; /* 文字色を黒に設定 */
-        }
-        
+                font-family: 'Arial', sans-serif;
+                font-size: 14px;
+                line-height: 1.5;
+                color: black; /* 文字色を黒に設定 */
+                background-color: white; /* 背景色を白に設定 */
+                padding: 0 10px 10px 10px; /* 上側のパディングを削除 */
+                border-radius: 10px;
+                border: 2px solid #000;  /* 黒い枠線を追加 */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* 影を強調 */
+                max-width: 300px;
+            }
+
+            .info-window h3 {
+                margin: 0; /* マージンを削除 */
+                padding: 0 0 5px 0; /* 下に少し余白を追加 */
+                font-size: 16px;
+                color: black; /* 文字色を黒に設定 */
+            }
+
+            .info-window p {
+                margin: 0; /* マージンを削除 */
+                padding: 5px 0 0 0; /* 上に少し余白を追加 */
+                color: black; /* 文字色を黒に設定 */
+            }
+
+            .info-window .address {
+                font-size: 12px;
+                color: black; /* 文字色を黒に設定 */
+            }
     </style>
 </head>
 
@@ -128,44 +162,85 @@
      <div id="store-names" style="display: none;"></div>
 
     <style>
+       @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;  /* 背景色を黒に */
+            color: #fff;  /* 文字色を白に */
+            margin: 0;
+            padding: 0;
+        }
+
         #trend-name {
             position: absolute;  /* 絶対位置を指定 */
             top: 150px;  /* 上からの位置を指定 */
             left: 10px;  /* 左からの位置を指定 */
-            background-color: rgba(255, 255, 255, 0.9);  /* 背景色と透明度を指定 */
-            padding: 5px 10px;  /* 内側の余白を指定 */
+            background-color: #000;  /* 背景色を黒に */
+            color: #fff;  /* 文字色を白に */
+            padding: 10px 20px;  /* 内側の余白を指定 */
             border-radius: 5px;  /* 角を丸くする */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* 影をつける */
-            font-size: 16px;  /* フォントサイズを指定 */
+            border: 2px solid #000;  /* 黒い枠線を追加 */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);  /* 影を強調 */
+            font-size: 18px;  /* フォントサイズを指定 */
             z-index: 1000;  /* 重なり順を指定 */
             cursor: pointer;  /* クリック可能にする */
+            transition: background-color 0.3s ease, transform 0.3s ease;  /* 背景色と変形にアニメーションを追加 */
+        }
+
+        #trend-name:hover {
+            background-color: #ccc;  /* ホバー時の背景色をグレーに */
+            color: #000;  /* ホバー時の文字色を黒に */
+            transform: scale(1.05);  /* ホバー時に拡大 */
         }
 
         #store-names {
             position: absolute;  /* 絶対位置を指定 */
             left: 10px;  /* 左からの位置を指定 */
             width: 20%;  /* 画面の幅の1/5に設定 */
-            max-height: 70vh;  /* 画面の縦幅の80%を最大高さに設定 */
+            max-height: 70vh;  /* 画面の縦幅の70%を最大高さに設定 */
             overflow-y: auto;  /* 縦方向のスクロールを有効にする */
-            background-color: rgba(255, 255, 255, 0.9);  /* 背景色と透明度を指定 */
+            background-color: #000;  /* 背景色を黒に */
+            color: #fff;  /* 文字色を白に */
             padding: 10px;  /* 内側の余白を指定 */
             border-radius: 5px;  /* 角を丸くする */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* 影をつける */
+            border: 2px solid #000;  /* 黒い枠線を追加 */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);  /* 影を強調 */
             z-index: 1000;  /* 重なり順を指定 */
             display: none;  /* 初期状態では非表示 */
             word-wrap: break-word;  /* 幅が足りない場合は改行 */
+            transition: max-height 0.3s ease;  /* 高さの変化にアニメーションを追加 */
+        }
+
+        /* カスタムスクロールバーのスタイル */
+        #store-names::-webkit-scrollbar {
+            width: 0;  /* スクロールバーの幅を0に設定 */
         }
 
         .store-name {
             position: relative;  /* 親要素に対して相対的に配置 */
-            background-color: rgba(255, 255, 255, 0.9);  /* 背景色と透明度を指定 */
+            background-color: #000;  /* 背景色を黒に */
+            color: #fff;  /* 文字色を白に */
             padding: 10px;  /* 内側の余白を指定 */
             border-radius: 5px;  /* 角を丸くする */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* 影をつける */
-            font-size: 18px;  /* フォントサイズを指定 */
+            border: 2px solid #000;  /* 黒い枠線を追加 */
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);  /* 影を追加 */
+            font-size: 16px;  /* フォントサイズを指定 */
             z-index: 1000;  /* 重なり順を指定 */
             margin-top: 10px;  /* 各店舗名の間にスペースを追加 */
             cursor: pointer;  /* クリック可能にする */
+            transition: background-color 0.3s ease, transform 0.3s ease;  /* 背景色と変形にアニメーションを追加 */
+        }
+
+        .store-name:hover {
+            background-color: #ccc;  /* ホバー時の背景色をグレーに */
+            color: #000;  /* ホバー時の文字色を黒に */
+            transform: translateX(10px);  /* ホバー時に右に移動 */
+        }
+
+        .store-name::before {
+            content: '🏠';  /* アイコンを追加 */
+            margin-right: 10px;  /* アイコンとテキストの間にスペースを追加 */
         }
     </style>
 
@@ -207,24 +282,13 @@
     </script>
 
 
-    <div class="filter-menu">
-        <p>口コミ数でフィルター:</p>
-        <label>
-            <input type="radio" name="review-filter" value="all" onclick="filterRestaurants()"> すべて
-        </label><br>
-        <label>
-            <input type="radio" name="review-filter" value="few" onclick="filterRestaurants()"> 少ない口コミ数 (0〜50件)
-        </label><br>
-        <label>
-            <input type="radio" name="review-filter" value="medium" onclick="filterRestaurants()"> 中程度の口コミ数 (51〜200件)
-        </label><br>
-        <label>
-            <input type="radio" name="review-filter" value="many" onclick="filterRestaurants()"> 多い口コミ数 (201〜500件)
-        </label><br>
-        <label>
-            <input type="radio" name="review-filter" value="very-many" onclick="filterRestaurants()"> 非常に多い口コミ数 (501件以上)
-        </label>
-    </div>
+        <div class="filter-menu">
+            <button onclick="filterRestaurants('all')">すべて</button>
+            <button onclick="filterRestaurants('few')">開拓者向け (0〜50件)</button>
+            <button onclick="filterRestaurants('medium')">失敗しない (51〜200件)</button>
+            <button onclick="filterRestaurants('many')"> 人気店(201〜500件)</button>
+            <button onclick="filterRestaurants('very-many')">大絶賛(501件以上)</button>
+        </div>
 
     <script>
 
@@ -232,12 +296,11 @@
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
         }
 
-        function filterRestaurants() {
-        const filter = document.querySelector('input[name="review-filter"]:checked').value;
-        const url = new URL(window.location.href);
-        url.searchParams.set('filter', filter);
-        window.location.href = url.toString();
-    }
+        function filterRestaurants(filter) {
+            const url = new URL(window.location.href); // 現在のURLを取得
+            url.searchParams.set('filter', filter); // URLのパラメータを更新
+            window.location.href = url.toString(); // 更新されたURLにリダイレクト
+        }
         
         function navigateToStartScreen() {
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
