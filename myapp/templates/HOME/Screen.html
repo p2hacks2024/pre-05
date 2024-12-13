@@ -272,8 +272,7 @@
 
     <script>
         function renderfireworks(canvas){
-            //const canvas = document.createElement('canvas');
-            //document.body.appendChild(canvas);
+   
             //webGLのコンテキストを取得
             const gl = canvas.getContext('webgl');
             //背景を透明にする
@@ -356,9 +355,6 @@
 
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function() {
-            // 函館山の緯度経度をJavaScriptに渡す
-            
-            
 
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
@@ -368,37 +364,38 @@
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 tilt: 45,//角度をつける
                 styles: [
-                {
-                    featureType: "poi",
-                    elementType: "labels",
-                    stylers: [{ visibility: "off" }]
-                },
-                {
-                    featureType: "transit",
-                    elementType: "labels",
-                    stylers: [{ visibility: "off" }]
-                },
-                {
-                    featureType: "road",
-                    elementType: "labels",
-                    stylers: [{ visibility: "off" }]
-                },
-                {
-                    featureType: "administrative",
-                    elementType: "labels",
-                    stylers: [{ visibility: "on" }]
-                }
-            ]
+                    {
+                        featureType: "poi",//観光地と飲食店のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    },
+                    {
+                        featureType: "transit",//交通機関のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    },
+                    {
+                        featureType: "road",//道路のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    },
+                    {
+                        featureType: "administrative",//行政区画のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "on" }]
+                    }
+                ]
             });
 
             // 地図のオーバーレイを作成して花火を描画
             class FireworkOverlay extends google.maps.OverlayView {
-                constructor(map, lat, lng, baseSize = 100) {
+                constructor(map, lat, lng, baseSize = 100,storeDetails) {
                     super();
                     this.map = map;
                     this.lat = lat;
                     this.lng = lng;
                     this.baseSize = baseSize;
+                    this.storeDetails = storeDetails; // 店の詳細情報を追加
                     this.div = null;
                     this.setMap(map);
                 }
@@ -412,12 +409,32 @@
                     const panes = this.getPanes();
                     panes.overlayLayer.appendChild(div);
                     this.positionFirework();
-                }
+                    // マーカーを追加
+            const marker = new google.maps.Marker({
+                position: { lat: this.lat, lng: this.lng },
+                map: this.map,
+                title: '花火の位置',
+                icon: {
+                        url: 'https://maps.google.com/mapfiles/kml/shapes/target.png', // カスタムアイコンのURL
+                        scaledSize: new google.maps.Size(20, 20) // アイコンのサイズを指定
+                    }
+            });
+            // InfoWindowを作成
+            const infowindow = new google.maps.InfoWindow({
+                content: `<div><h3>${this.storeDetails.name}</h3><p>${this.storeDetails.description}</p></div>`
+            });
 
+            // マーカークリック時にInfoWindowを表示
+            marker.addListener('click', () => {
+                infowindow.open(this.map, marker);
+            });
+                    
+                }
+                
                 // 花火の位置を設定
                 positionFirework() {
                     const projection = this.getProjection();
-                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat, this.lng));
+                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat+0.0025, this.lng));
 
                     // 現在のズームレベルを取得
                     const zoomLevel = this.map.getZoom();
@@ -446,12 +463,17 @@
                     this.positionFirework();
                 }
             }
-            // v.....................................................................................................views.pyから渡された花火の位置情報を使用して花火を表示
+            // views.pyから渡された花火の位置情報を使用して花火を表示
             const fireworksLocations = JSON.parse('{{ fireworks_locations|escapejs }}');
             fireworksLocations.forEach(location => {
                 const lat = location.latitude;
                 const lng = location.longitude;
-                new FireworkOverlay(map, lat, lng, 100);
+                const storeDetails = {
+                name: location.store_name,
+                description: location.store_description
+            };
+            console.log(storeDetails); // デバッグ用のログ    
+        new FireworkOverlay(map, lat, lng, 100, storeDetails);
             });
             // 地図が完全に読み込まれた後に花火を繰り返し表示
             //setInterval(() => {
