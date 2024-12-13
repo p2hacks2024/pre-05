@@ -12,6 +12,29 @@
             font-family: 'Arial', sans-serif;
             color: #333;
             background-color: #f4f4f4;
+            opacity: 0; /* フェードインのために初期状態を透明に */
+            animation: fadeIn 1s forwards; /* フェードインのアニメーションを追加 */
+        }
+
+        /* フィルターメニューのスタイル */
+        .filter-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* 画像の位置を指定するCSS */
@@ -105,8 +128,44 @@
 </head>
 
 <body>
-    <img id="top-left-image" src="{% static 'images/1.png' %}" alt="Top Left Image">
+    <img id="top-left-image" src="{% static 'images/icon.png' %}" alt="Top Left Image" onclick="navigateToStartScreen()">
     <div id="map"></div>
+
+    <div class="filter-menu">
+        <p>口コミ数でフィルター:</p>
+        <label>
+            <input type="radio" name="review-filter" value="all" onclick="filterRestaurants()"> すべて
+        </label><br>
+        <label>
+            <input type="radio" name="review-filter" value="few" onclick="filterRestaurants()"> 少ない口コミ数 (0〜50件)
+        </label><br>
+        <label>
+            <input type="radio" name="review-filter" value="medium" onclick="filterRestaurants()"> 中程度の口コミ数 (51〜200件)
+        </label><br>
+        <label>
+            <input type="radio" name="review-filter" value="many" onclick="filterRestaurants()"> 多い口コミ数 (201〜500件)
+        </label><br>
+        <label>
+            <input type="radio" name="review-filter" value="very-many" onclick="filterRestaurants()"> 非常に多い口コミ数 (501件以上)
+        </label>
+    </div>
+
+    <script>
+
+        function navigateToStartScreen() {
+            window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
+        }
+
+        function filterRestaurants() {
+            const filter = document.querySelector('input[name="review-filter"]:checked').value;
+            // フィルターに基づいて店舗を表示する処理を追加
+            console.log(`Selected filter: ${filter}`);
+        }
+        
+        function navigateToStartScreen() {
+            window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
+        }
+    </script>
     
     <script id="fragmentShader" type="x-shader/x-fragment">
         #ifdef GL_ES
