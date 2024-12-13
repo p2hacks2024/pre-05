@@ -3,7 +3,7 @@ from .models import HakodateRestaurant
 import json
 
 def Start_Screen(request):
-    return render(request, 'HOME/Start_Screen.html')
+    return render(request, 'HOME/StartScreen.html')
 
 def screen(request):
     # 1000以上のレビュー数を持つレストランをフィルタリング
