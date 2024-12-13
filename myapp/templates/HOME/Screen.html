@@ -354,9 +354,6 @@
 
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function() {
-            // 函館山の緯度経度をJavaScriptに渡す
-            
-            
 
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
@@ -365,16 +362,39 @@
                 mapTypeId: google.maps.MapTypeId.HYBRID,
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 tilt: 45,//角度をつける
+                styles: [
+                    {
+                        featureType: "poi",//観光地と飲食店のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    },
+                    {
+                        featureType: "transit",//交通機関のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    },
+                    {
+                        featureType: "road",//道路のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    },
+                    {
+                        featureType: "administrative",//行政区画のラベル
+                        elementType: "labels",
+                        stylers: [{ visibility: "on" }]
+                    }
+                ]
             });
 
             // 地図のオーバーレイを作成して花火を描画
             class FireworkOverlay extends google.maps.OverlayView {
-                constructor(map, lat, lng, baseSize = 100) {
+                constructor(map, lat, lng, baseSize = 100,storeDetails) {
                     super();
                     this.map = map;
                     this.lat = lat;
                     this.lng = lng;
                     this.baseSize = baseSize;
+                    this.storeDetails = storeDetails; // 店の詳細情報を追加
                     this.div = null;
                     this.setMap(map);
                 }
@@ -392,7 +412,20 @@
             const marker = new google.maps.Marker({
                 position: { lat: this.lat, lng: this.lng },
                 map: this.map,
-                title: '花火の位置'
+                title: '花火の位置',
+                icon: {
+                        url: 'https://maps.google.com/mapfiles/kml/shapes/target.png', // カスタムアイコンのURL
+                        scaledSize: new google.maps.Size(20, 20) // アイコンのサイズを指定
+                    }
+            });
+            // InfoWindowを作成
+            const infowindow = new google.maps.InfoWindow({
+                content: `<div><h3>${this.storeDetails.name}</h3><p>${this.storeDetails.description}</p></div>`
+            });
+
+            // マーカークリック時にInfoWindowを表示
+            marker.addListener('click', () => {
+                infowindow.open(this.map, marker);
             });
                     
                 }
@@ -434,7 +467,12 @@
             fireworksLocations.forEach(location => {
                 const lat = location.latitude;
                 const lng = location.longitude;
-                new FireworkOverlay(map, lat, lng, 100);
+                const storeDetails = {
+                name: location.store_name,
+                description: location.store_description
+            };
+            console.log(storeDetails); // デバッグ用のログ    
+        new FireworkOverlay(map, lat, lng, 100, storeDetails);
             });
             // 地図が完全に読み込まれた後に花火を繰り返し表示
             //setInterval(() => {
