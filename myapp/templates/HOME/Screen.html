@@ -271,8 +271,7 @@
 
     <script>
         function renderfireworks(canvas){
-            //const canvas = document.createElement('canvas');
-            //document.body.appendChild(canvas);
+   
             //webGLのコンテキストを取得
             const gl = canvas.getContext('webgl');
             //背景を透明にする
@@ -389,12 +388,19 @@
                     const panes = this.getPanes();
                     panes.overlayLayer.appendChild(div);
                     this.positionFirework();
+                    // マーカーを追加
+            const marker = new google.maps.Marker({
+                position: { lat: this.lat, lng: this.lng },
+                map: this.map,
+                title: '花火の位置'
+            });
+                    
                 }
-
+                
                 // 花火の位置を設定
                 positionFirework() {
                     const projection = this.getProjection();
-                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat, this.lng));
+                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat+0.0025, this.lng));
 
                     // 現在のズームレベルを取得
                     const zoomLevel = this.map.getZoom();
@@ -423,7 +429,7 @@
                     this.positionFirework();
                 }
             }
-            // v.....................................................................................................iews.pyから渡された花火の位置情報を使用して花火を表示
+            // views.pyから渡された花火の位置情報を使用して花火を表示
             const fireworksLocations = JSON.parse('{{ fireworks_locations|escapejs }}');
             fireworksLocations.forEach(location => {
                 const lat = location.latitude;
