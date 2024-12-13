@@ -131,6 +131,28 @@
     <img id="top-left-image" src="{% static 'images/icon.png' %}" alt="Top Left Image" onclick="navigateToStartScreen()">
     <div id="map"></div>
 
+    <!-- トレンドのお店 -->
+    <div id="trend-name">トレンドのお店</div>
+
+    <!-- 店名 -->
+    <div id="store-names">
+        {% for location in fireworks_locations %}
+            <div class="store-name">{{ location.name }}</div>
+        {% endfor %}
+    </div>
+    <style>
+        .store-name {
+            position: absolute;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            z-index: 1000;
+        }
+    </style>
+
     <div class="filter-menu">
         <p>口コミ数でフィルター:</p>
         <label>
@@ -334,14 +356,12 @@
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function() {
             // 函館山の緯度経度をJavaScriptに渡す
-            const lat = {{ latitude }};  // 函館山の緯度
-            const lng = {{ longitude }};  // 函館山の経度
-
-            const hakodate = { lat: lat, lng: lng };
+            
+            
 
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
-                center: hakodate,
+                center: { lat: 41.7648, lng: 140.7267 },  // 函館山の緯度経度
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.HYBRID,
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
@@ -403,8 +423,13 @@
                     this.positionFirework();
                 }
             }
-            new FireworkOverlay(map, 41.7648, 140.7267, 350);  // 函館山
-            new FireworkOverlay(map,  lat, lng, 80);  // 五稜郭
+            // v.....................................................................................................iews.pyから渡された花火の位置情報を使用して花火を表示
+            const fireworksLocations = JSON.parse('{{ fireworks_locations|escapejs }}');
+            fireworksLocations.forEach(location => {
+                const lat = location.latitude;
+                const lng = location.longitude;
+                new FireworkOverlay(map, lat, lng, 100);
+            });
             // 地図が完全に読み込まれた後に花火を繰り返し表示
             //setInterval(() => {
                // new FireworkOverlay(map, lat, lng);
