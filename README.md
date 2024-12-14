@@ -39,7 +39,7 @@ TREND FLASH
 ・花火の大きさとトレントレベルを対応させ、現在のトレンドを直感的にわかりやすく表現した点。  
 ・CSSアニメーションとWebGLで視覚的に動きのあるサイトを実現した点。  
 ・3つのAPIを組み合わせて今までにないwebサイトを実現した。  
-・GooglePlacesAPIとホットペッパーグルメAPIの組み合わせで、飲食店の情報をより詳細に取得した。
+・GooglePlacesAPIとホットペッパーグルメAPIの組み合わせで、飲食店の情報をより詳細に取得した。  
 ・データをすべてデータベースに格納することで、効率的にデータを取得できるようにした。
 ## 開発技術 
 
@@ -57,9 +57,9 @@ dotenv
   
 ### その他開発に使用したツール・サービス  
 #### デザイン・設計  
-GoogleFonts
-GitHubCopilot
+GoogleFonts  
+GitHubCopilot  
 ### API
-ホットペッパーグルメAPI
-GoogleMapJavaScriptAPI
-GooglePlacesAPI
+ホットペッパーグルメAPI  
+GoogleMapJavaScriptAPI  
+GooglePlacesAPI  
