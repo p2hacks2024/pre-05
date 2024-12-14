@@ -2,130 +2,84 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #000;
-    /* 背景色を黒に */
-    color: #fff;
-    /* 文字色を白に */
+    background-color: #eef6fc; /* 明るい青みがかった背景色 */
+    color: #333; /* 文字色を濃いグレーに */
     margin: 0;
     padding: 0;
 }
 
 #trend-name {
     position: absolute;
-    /* 絶対位置を指定 */
     top: 150px;
-    /* 上からの位置を指定 */
-    left: 10px;
-    /* 左からの位置を指定 */
-    background-color: #000;
-    /* 背景色を黒に */
-    color: #fff;
-    /* 文字色を白に */
-    padding: 10px 20px;
-    /* 内側の余白を指定 */
-    border-radius: 5px;
-    /* 角を丸くする */
-    border: 2px solid #000;
-    /* 黒い枠線を追加 */
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-    /* 影を強調 */
+    left: 20px; /* 左側に少し余裕を持たせる */
+    background-color: rgba(255, 255, 255, 0.9); /* 半透明の白背景 */
+    color: #0078d7; /* 鮮やかな青の文字色 */
+    padding: 12px 24px;
+    border-radius: 10px; /* 角を柔らかく */
+    border: 2px solid #0078d7; /* 青色の枠線 */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* 影を少し強調 */
     font-size: 18px;
-    /* フォントサイズを指定 */
+    font-weight: bold;
     z-index: 1000;
-    /* 重なり順を指定 */
     cursor: pointer;
-    /* クリック可能にする */
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    /* 背景色と変形にアニメーションを追加 */
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
 }
 
 #trend-name:hover {
-    background-color: #ccc;
-    /* ホバー時の背景色をグレーに */
-    color: #000;
-    /* ホバー時の文字色を黒に */
-    transform: scale(1.05);
-    /* ホバー時に拡大 */
+    background-color: #0078d7; /* ホバー時に青色背景 */
+    color: #fff; /* 文字色を白に */
+    transform: scale(1.05); /* 少し拡大 */
 }
 
 #store-names {
     position: absolute;
-    /* 絶対位置を指定 */
-    left: 10px;
-    /* 左からの位置を指定 */
-    width: 20%;
-    /* 画面の幅の1/5に設定 */
+    left: 20px; /* 左側に余裕を持たせる */
+    width: 25%; /* 横幅を少し広げる */
     max-height: 70vh;
-    /* 画面の縦幅の70%を最大高さに設定 */
     overflow-y: auto;
-    /* 縦方向のスクロールを有効にする */
-    background-color: #000;
-    /* 背景色を黒に */
-    color: #fff;
-    /* 文字色を白に */
-    padding: 10px;
-    /* 内側の余白を指定 */
-    border-radius: 5px;
-    /* 角を丸くする */
-    border: 2px solid #000;
-    /* 黒い枠線を追加 */
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-    /* 影を強調 */
+    background-color: rgba(255, 255, 255, 0.9); /* 半透明の白背景 */
+    color: #0078d7; /* 青い文字色 */
+    padding: 15px;
+    border-radius: 12px; /* 角を柔らかく */
+    border: 2px solid #0078d7; /* 青色の枠線 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 影を少し強調 */
     z-index: 1000;
-    /* 重なり順を指定 */
     display: none;
-    /* 初期状態では非表示 */
     word-wrap: break-word;
-    /* 幅が足りない場合は改行 */
-    transition: max-height 0.3s ease;
-    /* 高さの変化にアニメーションを追加 */
+    transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
-/* カスタムスクロールバーのスタイル */
 #store-names::-webkit-scrollbar {
-    width: 0;
-    /* スクロールバーの幅を0に設定 */
+    width: 8px; /* スクロールバーの幅を増やす */
+}
+
+#store-names::-webkit-scrollbar-thumb {
+    background-color: #0078d7; /* スクロールバーを青色に */
+    border-radius: 10px;
 }
 
 .store-name {
     position: relative;
-    /* 親要素に対して相対的に配置 */
-    background-color: #000;
-    /* 背景色を黒に */
-    color: #fff;
-    /* 文字色を白に */
-    padding: 10px;
-    /* 内側の余白を指定 */
-    border-radius: 5px;
-    /* 角を丸くする */
-    border: 2px solid #000;
-    /* 黒い枠線を追加 */
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
-    /* 影を追加 */
+    background-color: rgba(240, 248, 255, 0.8); /* 明るい半透明の背景 */
+    color: #0078d7; /* 青い文字色 */
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #0078d7; /* 青い枠線 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 柔らかい影 */
     font-size: 16px;
-    /* フォントサイズを指定 */
-    z-index: 1000;
-    /* 重なり順を指定 */
     margin-top: 10px;
-    /* 各店舗名の間にスペースを追加 */
     cursor: pointer;
-    /* クリック可能にする */
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    /* 背景色と変形にアニメーションを追加 */
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
 }
 
 .store-name:hover {
-    background-color: #ccc;
-    /* ホバー時の背景色をグレーに */
-    color: #000;
-    /* ホバー時の文字色を黒に */
-    transform: translateX(10px);
-    /* ホバー時に右に移動 */
+    background-color: #0078d7; /* ホバー時に青色背景 */
+    color: #fff; /* 文字色を白に */
+    transform: translateX(10px); /* 少し右にスライド */
 }
 
 .store-name::before {
     content: '🏠';
-    /* アイコンを追加 */
     margin-right: 10px;
-    /* アイコンとテキストの間にスペースを追加 */
+    color: #0078d7; /* アイコンの色を青に */
 }

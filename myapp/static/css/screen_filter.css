@@ -1,47 +1,96 @@
-/* 全体のレイアウト */
-body {
+/* 全体のリセットと背景設定 */
+body, html {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
     font-family: 'Arial', sans-serif;
-    color: #333;
-    background-color: #f4f4f4;
-    opacity: 0; /* フェードインのために初期状態を透明に */
-    animation: fadeIn 1s forwards; /* フェードインのアニメーションを追加 */
 }
 
-/* フィルターメニューのスタイル */
+/* マップを画面全体に表示 */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; /* 画面全体の高さ */
+    width: 100%; /* 画面全体の幅 */
+    z-index: 1; /* 他の要素の背面に配置 */
+    background-color: #d3d3d3; /* マップロード中に明るいグレーを表示 */
+}
+
+/* フィルターメニュー全体のスタイル */
 .filter-menu {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background-color: #999999;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(136, 128, 128, 0.2);
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* 中央寄せ */
+    z-index: 1000; /* マップの上に表示 */
+    background: rgba(255, 255, 255, 0.9); /* 半透明の白背景 */
+    padding: 15px 30px;
+    border-radius: 12px; /* 角を丸く */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 軽い影を追加 */
     display: flex;
-    gap: 15px; /* ボタン間のスペース */
-    flex-wrap: wrap; /* ボタンが多い場合折り返す */
+    justify-content: center; /* コンテンツを中央揃え */
+    gap: 10px; /* ボタン間にスペース */
 }
 
+/* フィルターボタンのスタイル */
 .filter-menu button {
-    background-color: #000000; /* ボタンの背景色 */
-    color: white; /* 文字色 */
-    border: none;
-    border-radius: 6px;
-    padding: 12px 30px; /* 横長にする */
-    font-size: 16px; /* フォントサイズを大きくする */
+    background: #0078d7; /* 鮮やかな青色 */
+    color: white; /* 文字色を白に */
+    border: none; /* 境界線を削除 */
+    border-radius: 8px; /* 角を丸く */
+    padding: 15px 30px; /* 余白を増やしてボタンを大きく */
+    font-size: 18px; /* フォントサイズを大きく */
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    min-width: 150px; /* 最低幅を設定 */
-    text-align: center; /* テキストを中央揃え */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影 */
+    white-space: nowrap; /* 文字が折り返されないようにする */
 }
 
+
+
+/* ボタンホバー時のエフェクト */
 .filter-menu button:hover {
-    background-color: #000000; /* ホバー時の色 */
-    transform: scale(1.05); /* 拡大 */
+    background: #005a9e; /* 濃い青色 */
+    transform: translateY(-2px); /* 浮かせる */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 影を強調 */
 }
 
-.filter-menu button:active {
-    background-color: #000000; /* クリック時の色 */
-    transform: scale(0.95); /* 縮小 */
+/* 左下に情報パネルを配置 */
+.info-panel {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 300px; /* パネルの幅を固定 */
+    max-height: 50%; /* 最大高さを設定（スクロール対応） */
+    background: rgba(255, 255, 255, 0.9); /* 半透明の白背景 */
+    border-radius: 8px; /* 角を丸く */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 軽い影を追加 */
+    padding: 15px;
+    overflow-y: auto; /* コンテンツが多い場合スクロールを有効に */
+    z-index: 1000; /* マップの上に表示 */
+}
+
+/* スクロールバーのカスタマイズ */
+.info-panel::-webkit-scrollbar {
+    width: 6px;
+}
+.info-panel::-webkit-scrollbar-thumb {
+    background: #0078d7; /* スクロールバーの色を青に */
+    border-radius: 4px;
+}
+.info-panel::-webkit-scrollbar-thumb:hover {
+    background: #005a9e; /* ホバー時の濃い青色 */
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
