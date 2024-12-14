@@ -42,20 +42,22 @@ TREND FLASH
 ## 開発技術 
 
 利用したプログラミング言語  
-Python
-JavaScript
-HTML/CSS
-GLSL
+Python(バックエンド全般)
+JavaScript(バックエンド、)
+HTML/CSS(フロントエンド)
+GLSL(花火のシェーダーを書くため)
 
 利用したフレームワーク・ライブラリ  
-Django
+Django(データベース構築)
+Anime.js(スタート画面)
+Reeact
+dotenv
 
 その他開発に使用したツール・サービス
 デザイン・設計
 GooleFonts
 GitHubCopilot
-
 API
-ホットペパーグルメAPI
+ホットペッパーグルメAPI
 GoolemapavaScriptAPI
 GooleplacesAPI
