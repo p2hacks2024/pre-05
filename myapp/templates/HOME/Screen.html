@@ -41,6 +41,7 @@
             // JSONデータをパース
             const locations = JSON.parse('{{ fireworks_locations|escapejs }}');
             const storeNamesDiv = document.getElementById('store-names');
+            const trendNameDiv = document.getElementById('trend-name');
 
             // 各店舗名を追加
             locations.forEach((location) => {
@@ -53,20 +54,23 @@
             });
 
             // トレンドボックスをクリックしたときに店舗名を表示
-            document.getElementById('trend-name').addEventListener('click', function () {
+            document.getElementById('trend-name').addEventListener('click', function() {
                 const storeNamesDiv = document.getElementById('store-names');
                 console.log('Trend box clicked');  // デバッグ用ログ
-                if (storeNamesDiv.style.display === 'none') {
+                    if (storeNamesDiv.style.display === 'none') {
                     // トレンドボックスの下に位置を設定
                     const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
                     storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
                     storeNamesDiv.style.display = 'block';
+                        trendNameDiv.textContent = '閉じる';  // ボタンの名前を変更
+
                 } else {
                     storeNamesDiv.style.display = 'none';
+                        trendNameDiv.textContent = 'トレンドのお店▼';  // ボタンの名前を元に戻す
                 }
             });
+            
         });
-
 
         function navigateToStartScreen() {
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
@@ -350,6 +354,7 @@
                 console.log(storeDetails); // デバッグ用のログ    
                 new FireworkOverlay(map, lat, lng, location.review_count, storeDetails);
             });
+
         }
     </script>
     <!-- Google Maps JavaScript API -->
