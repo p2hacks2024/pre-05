@@ -9,7 +9,7 @@ django.setup()
 from myapp.models import HakodateRestaurant
 
 def import_restaurants():
-    with open('02hakodate_restaurants_converted.json', 'r', encoding='utf-8') as file:
+    with open('03hakodate_restaurants_converted.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
         for item in data:
             HakodateRestaurant.objects.create(
@@ -17,8 +17,11 @@ def import_restaurants():
                 address=item['住所'],
                 latitude=item['緯度'],
                 longitude=item['経度'],
-                restaurant_id=item['shopid']
+                review_count=item.get('レビュー数', 0),
+                restaurant_id=item['shopid'],
+                url_pc=item['url']['pc'],
+                logo_image=item.get('ロゴ画像', 'https://imgfp.hotp.jp/IMGH/70/08/P033307008/P033307008_69.jpg')
             )
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     import_restaurants()
