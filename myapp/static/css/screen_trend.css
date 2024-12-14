@@ -31,31 +31,76 @@ body {
     transform: scale(1.05); /* 少し拡大 */
 }
 
+/* 店舗リストのコンテナ */
 #store-names {
-    position: absolute;
-    left: 20px; /* 左側に余裕を持たせる */
-    width: 25%; /* 横幅を少し広げる */
+    position: fixed;
+    left: 10px;
+    top: 100px;
+    width: 486px;  /* 972px / 2 = 486px に縮小 */
     max-height: 70vh;
     overflow-y: auto;
-    background-color: rgba(255, 255, 255, 0.9); /* 半透明の白背景 */
-    color: #0078d7; /* 青い文字色 */
-    padding: 15px;
-    border-radius: 12px; /* 角を柔らかく */
-    border: 2px solid #0078d7; /* 青色の枠線 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 影を少し強調 */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 1000;
-    display: none;
-    word-wrap: break-word;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    padding: 15px;  /* パディングも少し大きく */
 }
 
+/* レビュー表示用のポップアップ */
+#review-popup {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 972px;  /* こちらも972pxに拡大 */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 20px;  /* パディングも調整 */
+    display: none;
+    z-index: 1000;
+}
+
+/* スクロールバーのスタイル */
 #store-names::-webkit-scrollbar {
-    width: 8px; /* スクロールバーの幅を増やす */
+    width: 10px;  /* 20pxから10pxに変更 */
+}
+
+#store-names::-webkit-scrollbar-track {
+    background: #f1f1f1;  /* スクロールバーの背景色を追加 */
+    border-radius: 8px;
 }
 
 #store-names::-webkit-scrollbar-thumb {
-    background-color: #0078d7; /* スクロールバーを青色に */
+    background-color: #0078d7;
     border-radius: 10px;
+    border: 4px solid #f1f1f1;  /* スクロールバーの外枠を追加 */
+}
+
+/* 店舗ボタンのスタイル */
+.store-name {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.store-name:hover {
+    background-color: #f5f5f5;
+}
+
+/* レビューポップアップの矢印 */
+#review-popup:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 20px;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
 }
 
 .store-name {
@@ -84,11 +129,82 @@ body {
     transform: translateX(10px); /* 少し右にスライド */
 }
 
-
-
-
 .store-name::before {
     content: '🏠';
     margin-right: 10px;
     color: #0078d7; /* アイコンの色を青に */
+}
+
+/* レビュー表示用の新しいスタイル */
+#review-box {
+    position: fixed;
+    right: 20px;  /* leftからrightに変更 */
+    bottom: 20px;
+    width: 486px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 2000;
+    display: none;
+    border: 1px solid #0078d7;
+    animation: slideUpRight 0.3s ease-out;  /* アニメーション名を変更 */
+    cursor: pointer; /* クリック可能なことを示す */
+}
+
+#review-box:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* ホバー時に影を強調 */
+}
+
+/* アニメーションを右下から */
+@keyframes slideUpRight {
+    from {
+        transform: translate(100px, 100px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+#review-box .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #0078d7;
+    font-size: 20px;
+}
+
+#review-box .store-title {
+    color: #0078d7;
+    font-size: 18px;  /* サイズを大きく */
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#review-box .review-text {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+    max-height: 150px;  /* 高さを制限 */
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* アニメーションを下から上に */
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

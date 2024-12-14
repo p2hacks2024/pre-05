@@ -35,6 +35,14 @@
         <button onclick="filterRestaurants('very-many')">大絶賛</button>
         <button onclick="filterRestaurants('very-very-many')">世界レベル！</button>
     </div>
+    <div id="review-popup">
+        <h3 class="store-title"></h3>
+        <p class="review-text"></p>
+    </div>
+    <div id="review-box">
+        <div class="store-title"></div>
+        <div class="review-text"></div>
+    </div>
     <script>
         let map;  // 地図オブジェクトをグローバルに宣言
 
@@ -118,7 +126,7 @@
         vec3 hash31(float p) {
             vec3 p3 = fract(vec3(p) * MOD3);
             p3 += dot(p3, p3.yzx + 19.19);
-            return fract(vec3((p3.x + p3.y) * p3.z, (p3.x + p3.z) * p3.y, (p3.y + p3.z) * p3.x));
+            return fract(vec3((p3.x + p3.y) * p3.z, (p3.x + p3.z) * p3.y, (p3.x + p3.z) * p3.x));
         }
         
         float light(vec2 uv, vec2 pos, float size) {
@@ -316,25 +324,44 @@
                         }
                     });
 
-                    // InfoWindowを作成
-                    const infowindow = new google.maps.InfoWindow({
-                        content: `<div class="info-window">
-                                    <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
-                                    <p class="address">${this.storeDetails.description}</p>
-                                  </div>`
-                    });
+        // InfoWindowを作成部分を修正（レビューの行を削除）
+        const infowindow = new google.maps.InfoWindow({
+            content: `<div class="info-window">
+                        <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
+                        <p class="address">${this.storeDetails.description}</p>
+                      </div>`
+        });
 
-                    // マーカークリック時に情報ウィンドウを表示
-                    marker.addListener('click', () => {
-                        infowindow.open(this.map, marker);
-                    });
+        // マーカークリック時の処理を修正（情報ウィンドウのみを表示）
+        marker.addListener('click', () => {
+            infowindow.open(this.map, marker);
+        });
 
-                    // 店舗名ボタンクリック時に同様に情報ウィンドウを表示
-                    const storeButton = document.querySelector(`.store-name[data-latitude="${this.lat}"][data-longitude="${this.lng}"]`);
-                    storeButton.addEventListener('click', () => {
-                        infowindow.open(this.map, marker);
-                    });
-                }
+        // 店舗名ボタンクリック時に同様に情報ウィンドウを表示
+        const storeButton = document.querySelector(`.store-name[data-latitude="${this.lat}"][data-longitude="${this.lng}"]`);
+        storeButton.addEventListener('click', () => {
+            // 情報ウィンドウを表示
+            infowindow.open(this.map, marker);
+
+            // レビューボックスの表示制御
+            const reviewBox = document.getElementById('review-box');
+            const currentStoreName = reviewBox.querySelector('.store-title').textContent;
+            
+            // 同じ店舗をクリックした場合は表示/非表示を切り替え
+            if (currentStoreName === this.storeDetails.name && reviewBox.style.display === 'block') {
+                reviewBox.style.display = 'none';
+            } else {
+                // 異なる店舗の場合は新しい情報を表示
+                reviewBox.querySelector('.store-title').textContent = this.storeDetails.name;
+                reviewBox.querySelector('.review-text').textContent = 
+                    decodeURIComponent(this.storeDetails.pickup_review) || 'レビューはありません';
+                reviewBox.style.display = 'block';
+            }
+
+            // 自動非表示のタイマーを削除
+            // setTimeout の部分を削除
+        });
+    }
 
                 positionFirework() {
                     const projection = this.getProjection();
@@ -356,16 +383,44 @@
                 }
             }
 
-            // 店舗ボタンのクリッ処理を追加
-            document.querySelectorAll('.store-name').forEach(button => {
-                button.addEventListener('click', () => {
-                    const lat = button.dataset.latitude;
-                    const lng = button.dataset.longitude;
-                    const storeDetails = JSON.parse('{{ fireworks_locations|escapejs }}').find(store => store.latitude === lat && store.longitude === lng);
-                    if (storeDetails) {
-                        new FireworkOverlay(map, lat, lng, 100, storeDetails);
-                    }
-                });
+// 店舗ボタンのクリック処理を修正
+document.querySelectorAll('.store-name').forEach(button => {
+    button.addEventListener('click', () => {
+        const lat = parseFloat(button.dataset.latitude);
+        const lng = parseFloat(button.dataset.longitude);
+        const storeDetails = JSON.parse('{{ fireworks_locations|escapejs }}').find(
+            store => Math.abs(store.latitude - lat) < 0.0001 && Math.abs(store.longitude - lng) < 0.0001
+        );
+        if (storeDetails) {
+            const reviewBox = document.getElementById('review-box');
+            const currentStoreName = reviewBox.querySelector('.store-title').textContent;
+            
+            // 同じ店舗をクリックした場合は表示/非表示を切り替え
+            if (currentStoreName === decodeURIComponent(storeDetails.name) && reviewBox.style.display === 'block') {
+                reviewBox.style.display = 'none';
+            } else {
+                // 異なる店舗の場合は新しい情報を表示
+                reviewBox.querySelector('.store-title').textContent = decodeURIComponent(storeDetails.name);
+                reviewBox.querySelector('.review-text').textContent = 
+                    decodeURIComponent(storeDetails.pickup_review) || 'レビューはありません';
+                reviewBox.style.display = 'block';
+            }
+
+            // 地図の処理
+            const overlay = new FireworkOverlay(map, lat, lng, 100, storeDetails);
+            map.setCenter({ lat: lat, lng: lng });
+            map.setZoom(16);
+        }
+    });
+});
+
+            // ポップアップ以外をクリックしたときに非表示にする
+            document.addEventListener('click', (e) => {
+                const popup = document.getElementById('review-popup');
+                const storeNames = document.getElementById('store-names');
+                if (!popup.contains(e.target) && !storeNames.contains(e.target)) {
+                    popup.style.display = 'none';
+                }
             });
 
             // views.pyから渡された花火の位置情報を使用して花火を表示
@@ -378,9 +433,10 @@
                     name: decodeURIComponent(location.name),
                     description: decodeURIComponent(location.description),
                     review_count: location.review_count, // レビュー数を追加
-                    url_pc: location.url_pc // URLを追加
+                    url_pc: location.url_pc, // URLを追加
+                    pickup_review: decodeURIComponent(location.pickup_review || '') // pickup_reviewを追加
                 };
-                console.log(storeDetails); // デバッグ用のログ    
+                console.log('Store Details:', storeDetails); // デバッグログを追加    
                 //花火の大きさを変更
                 let fireworkSize;
                 if (storeDetails.review_count > 1000) {

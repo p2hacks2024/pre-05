@@ -4,6 +4,7 @@ import json
 import random
 import os
 from dotenv import load_dotenv
+import urllib.parse  # ファイルの先頭に追加
 
 load_dotenv()
 
@@ -40,6 +41,7 @@ def screen(request):
             'longitude': restaurant.longitude,
             'description': restaurant.address,  # 店の住所を説明として追加
             'review_count': restaurant.review_count,  # レビュー数を追加
+            'pickup_review': urllib.parse.quote(restaurant.pickup_review) if restaurant.pickup_review else '',  # URLエンコード
             'url_pc': restaurant.url_pc  # URLを追加
         })
 
