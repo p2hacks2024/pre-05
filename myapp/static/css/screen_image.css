@@ -1,39 +1,69 @@
 /* 画像の位置を指定するCSS */
 #top-left-image {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20px; /* 上からの位置を少し余裕を持たせる */
+    left: 20px; /* 左からの位置を少し余裕を持たせる */
     z-index: 1000; /* 地図の上に表示するために高い値を設定 */
-    width: 100px; /* 画像の幅を指定 */
+    width: 100px; /* 画像の幅を元に戻す */
     height: auto; /* 高さを自動調整 */
-    border: 2px solid black; /* 黒い枠線を追加 */
-    background-color: black; /* 背景色を黒に設定 */
+    border: 2px solid #0078d7; /* 鮮やかな青色の枠線 */
+    background-color: #0078d7; /* 半透明の白背景 */
     border-radius: 50%; /* 丸くする */
-    padding: 5px; /* 枠線と画像の間に余白を追加 */
+    padding: 8px; /* 枠線と画像の間に余白を追加 */
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* 柔らかい影 */
     overflow: hidden; /* 画像が丸の外に出ないようにする */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバー時のアニメーション */
 }
+
+#top-left-image:hover {
+    transform: scale(1.1); /* ホバー時に少し拡大 */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 影を強調 */
+}
+
 #top-left-image img {
-    width: 90%; /* 画像の幅を指定 */
+    width: 90%; /* 画像の幅を元に戻す */
     height: auto; /* 高さを自動調整 */
     border-radius: 50%; /* 画像も丸くする */
-}
-#image-container img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 画像コンテナのスタイル */
 #image-container {
     position: absolute;
-    top: 170px;
-    /* トレンドのお店と店名の下に配置 */
-    left: 10px;
-    width: 100%;
-    padding: 10px;
+    top: 200px; /* トレンドのお店と店名の下に配置 */
+    left: 20px; /* 左からの位置を調整 */
+    width: 90%; /* 画面幅の90%を使用 */
+    max-width: 400px; /* 最大幅を設定 */
+    padding: 15px;
     box-sizing: border-box;
     z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95); /* 半透明の白背景 */
+    border-radius: 12px; /* 角を滑らかに */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 柔らかい影 */
+    overflow: hidden; /* コンテナの外に画像が出ないようにする */
+    animation: fadeIn 0.8s ease-in-out; /* フェードインアニメーション */
+}
+
+#image-container img {
+    width: 100%; /* コンテナの幅にフィット */
+    border-radius: 12px; /* 画像の角を滑らかに */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 軽い影 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバー時のアニメーション */
+}
+
+#image-container img:hover {
+    transform: scale(1.05); /* ホバー時に拡大 */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* 影を強調 */
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

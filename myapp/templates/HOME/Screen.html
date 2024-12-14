@@ -26,10 +26,10 @@
     <div id="store-names" style="display: none;"></div>
     <div class="filter-menu">
         <button onclick="filterRestaurants('all')">すべて</button>
-        <button onclick="filterRestaurants('few')">開拓者向け (0〜50件)</button>
-        <button onclick="filterRestaurants('medium')">失敗しない (51〜200件)</button>
-        <button onclick="filterRestaurants('many')"> 人気店(201〜500件)</button>
-        <button onclick="filterRestaurants('very-many')">大絶賛(501件以上)</button>
+        <button onclick="filterRestaurants('few')">開拓者向け </button>
+        <button onclick="filterRestaurants('medium')">失敗しない </button>
+        <button onclick="filterRestaurants('many')"> 人気店</button>
+        <button onclick="filterRestaurants('very-many')">大絶賛</button>
         <button onclick="filterRestaurants('very-very-many')">世界レベル！</button>
     </div>
     <script>
@@ -253,7 +253,7 @@
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.7648, lng: 140.7267 },  // 函館山の緯度経度
                 zoom: 15,
-                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 tilt: 45,//角度をつける
                 styles: [
