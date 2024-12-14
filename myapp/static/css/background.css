@@ -60,21 +60,6 @@ body {
   left: 0;
 }
 
-.side-text {
-  width: 400px;
-  position: absolute; /* 絶対位置に変更 */
-  top: 55%; /* 上から50%の位置に配置 */
-  left: 200px; /* 左から20pxの位置に配置 */
-  transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.986); /* 薄い白色 */
-  font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
-  font-weight: 700; /* 太字に設定 */
-  font-size: 24px; /* フォントサイズを調整 */
-  line-height: 2; /* 行間を調整 */
-  z-index: 1;
-  text-align: left;
-}
-
 .bg .bg-wrap {
   position: relative;
   display: inline-block;
