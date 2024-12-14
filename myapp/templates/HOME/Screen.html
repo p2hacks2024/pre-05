@@ -17,7 +17,6 @@
         }
 
         /* フィルターメニューのスタイル */
-        /* フィルターメニューのスタイル */
         .filter-menu {
             position: absolute;
             top: 10px;
@@ -253,6 +252,7 @@
             // JSONデータをパース
             const locations = JSON.parse('{{ fireworks_locations|escapejs }}');
             const storeNamesDiv = document.getElementById('store-names');
+            const trendNameDiv = document.getElementById('trend-name');
 
             // 各店舗名を追加
             locations.forEach((location) => {
@@ -273,11 +273,15 @@
                         const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
                         storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
                         storeNamesDiv.style.display = 'block';
+                        trendNameDiv.textContent = '閉じる';  // ボタンの名前を変更
+
                     } else {
                         storeNamesDiv.style.display = 'none';
+                        trendNameDiv.textContent = 'トレンドのお店▼';  // ボタンの名前を元に戻す
                 }
             });
-    });
+            
+        });
 
     </script>
 
@@ -571,9 +575,10 @@
                 description: decodeURIComponent(location.description),
                 review_count: location.review_count // レビュー数を追加
             };
-            console.log(storeDetails); // デバッグ用のログ    
+            //console.log(storeDetails); // デバッグ用のログ    
              new FireworkOverlay(map, lat, lng, location.review_count, storeDetails);
             });
+
         }
 </script>
 <!-- Google Maps JavaScript API -->
