@@ -70,6 +70,12 @@ body {
     margin-top: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    width: 100%; /* 親要素に合わせて横幅を100%に */
+    height: 50px; /* 高さを固定 */
+    line-height: normal; /* テキストの縦位置を中央揃えしない */
+    text-align: left; /* テキストを左揃え */
+    padding-left: 20px; /* 左に余白を追加 */
+    box-sizing: border-box; /* パディングやボーダーを含めてサイズを調整 */
 }
 
 .store-name:hover {
@@ -77,6 +83,9 @@ body {
     color: #fff; /* 文字色を白に */
     transform: translateX(10px); /* 少し右にスライド */
 }
+
+
+
 
 .store-name::before {
     content: '🏠';
