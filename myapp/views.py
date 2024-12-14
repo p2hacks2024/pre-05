@@ -9,7 +9,7 @@ import urllib.parse  # ファイルの先頭に追加
 load_dotenv()
 
 def Start_Screen(request):
-    return render(request, 'HOME/StartScreen.html')
+    return render(request, 'HOME/index.html')
 
 def screen(request):
     google_map_api_key = os.getenv('GOOGLE_MAP_API_KEY')
