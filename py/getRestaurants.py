@@ -52,6 +52,8 @@ def get_data(keywords, count=None):
             '経度': store.get('lng', 'N/A'),
             '住所': store.get('address', 'N/A'),
             'shopid': store.get('id', 'N/A'),
+            'url': store.get('urls', 'N/A'),
+            'ロゴ画像': store.get('logo_image', 'N/A'),
         } for store in stores])
 
         # 全て取得する場合
@@ -68,7 +70,8 @@ def get_data(keywords, count=None):
 def save_to_json(results, filename='hakodate_restaurants.json'):
     try:
         if results:
-            output_directory = os.path.join('D:\\VScode_project\\TrendFlash3\\pre-05')
+            output_directory = 'js'  # ディレクトリを修正
+            os.makedirs(output_directory, exist_ok=True)  # ディレクトリが存在しない場合は作成
             output_file_path = os.path.join(output_directory, filename)
             with open(output_file_path, 'w', encoding='utf-8') as f:
                 json.dump(results, f, ensure_ascii=False, indent=2)

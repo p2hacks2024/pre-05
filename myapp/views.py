@@ -2,11 +2,17 @@ from django.shortcuts import render
 from .models import HakodateRestaurant
 import json
 import random
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def Start_Screen(request):
     return render(request, 'HOME/StartScreen.html')
 
 def screen(request):
+    google_map_api_key = os.getenv('GOOGLE_MAP_API_KEY')
+
     filter_value = request.GET.get('filter', 'all')
     
     if filter_value == 'few':
@@ -39,6 +45,7 @@ def screen(request):
    #print("Fireworks Locations:", json.dumps(fireworks_locations, indent=2))
 
     context = {
+        'google_map_api_key': google_map_api_key,
         'fireworks_locations': json.dumps(fireworks_locations),
     }
 
