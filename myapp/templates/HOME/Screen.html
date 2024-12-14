@@ -58,22 +58,22 @@
 
 
             // トレンドボックスをクリックしたときに店舗名を表示
-            document.getElementById('trend-name').addEventListener('click', function() {
+            document.getElementById('trend-name').addEventListener('click', function () {
                 const storeNamesDiv = document.getElementById('store-names');
                 console.log('Trend box clicked');  // デバッグ用ログ
-                    if (storeNamesDiv.style.display === 'none') {
+                if (storeNamesDiv.style.display === 'none') {
                     // トレンドボックスの下に位置を設定
                     const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
                     storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
                     storeNamesDiv.style.display = 'block';
-                        trendNameDiv.textContent = '閉じる';  // ボタンの名前を変更
+                    trendNameDiv.textContent = '閉じる';  // ボタンの名前を変更
 
                 } else {
                     storeNamesDiv.style.display = 'none';
-                        trendNameDiv.textContent = 'トレンドのお店▼';  // ボタンの名前を元に戻す
+                    trendNameDiv.textContent = 'トレンドのお店▼';  // ボタンの名前を元に戻す
                 }
             });
-            
+
         });
 
         function navigateToStartScreen() {
@@ -316,10 +316,13 @@ class FireworkOverlay extends google.maps.OverlayView {
             }
         });
 
-        // InfoWindow作成
-        const infowindow = new google.maps.InfoWindow({
-            content: `<div class="info-window"><h3>${this.storeDetails.name}</h3><p class="address">${this.storeDetails.description}</p></div>`
-        });
+                    // InfoWindowを作成
+                    const infowindow = new google.maps.InfoWindow({
+                        content: `<div class="info-window">
+                                    <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
+                                    <p class="address">${this.storeDetails.description}</p>
+                                  </div>`
+                    });
 
         // マーカークリック時に情報ウィンドウを表示
         marker.addListener('click', () => {
@@ -374,7 +377,8 @@ document.querySelectorAll('.store-name').forEach(button => {
                 const storeDetails = {
                     name: decodeURIComponent(location.name),
                     description: decodeURIComponent(location.description),
-                    review_count: location.review_count // レビュー数を追加
+                    review_count: location.review_count, // レビュー数を追加
+                    url_pc: location.url_pc // URLを追加
                 };
                 console.log(storeDetails); // デバッグ用のログ    
                 //花火の大きさを変更
@@ -392,8 +396,8 @@ document.querySelectorAll('.store-name').forEach(button => {
         }
     </script>
     <!-- Google Maps JavaScript API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_api_key }}&callback=initMap"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_api_key }}&callback=initMap" async
+        defer></script>
 
 </body>
 
