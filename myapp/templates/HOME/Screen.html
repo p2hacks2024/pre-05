@@ -26,7 +26,7 @@
     <div id="store-names" style="display: none;">
 
     </div>
-
+    <!-- フィルター定義 -->
     <div class="filter-menu">
         <button onclick="filterRestaurants('all')">すべて</button>
         <button onclick="filterRestaurants('few')">開拓者向け </button>
@@ -65,31 +65,31 @@
             });
 
 
-            // トレンドボックスをクリックしたときに店舗名を表示
-            document.getElementById('trend-name').addEventListener('click', function () {
-                const storeNamesDiv = document.getElementById('store-names');
-                console.log('Trend box clicked');  // デバッグ用ログ
-                if (storeNamesDiv.style.display === 'none') {
-                    // トレンドボックスの下に位置を設定
-                    const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
-                    storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
-                    storeNamesDiv.style.display = 'block';
-                    trendNameDiv.textContent = '閉じる▲';  // ボタンの名前を変更
+        // トレンドボックスをクリックしたときに店舗名を表示
+        document.getElementById('trend-name').addEventListener('click', function () {
+            const storeNamesDiv = document.getElementById('store-names');
+            console.log('Trend box clicked');  // デバッグ用ログ
+            if (storeNamesDiv.style.display === 'none') {
+                 // トレンドボックスの下に位置を設定
+                const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
+                 storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
+                 storeNamesDiv.style.display = 'block';
+                 trendNameDiv.textContent = '閉じる▲';  // ボタンの名前を変更
 
-                } else {
-                    storeNamesDiv.style.display = 'none';
-                    trendNameDiv.textContent = '本日のおすすめ▼';  // ボタンの名前を元に戻す
-                }
-            });
+             } else {
+                 storeNamesDiv.style.display = 'none';
+                 trendNameDiv.textContent = '本日のおすすめ▼';  // ボタンの名前を元に戻す
+             }
+         });
 
-        });
+     });
 
         function navigateToStartScreen() {
-    // 地図の中心を遷移先の位置に設定
-    map.setCenter({ lat: centerLat, lng: centerLng });
-    // 画面遷移（URL遷移）
-    window.location.href = "{% url 'myapp:Start_Screen' %}";
-}
+        // 地図の中心を遷移先の位置に設定
+        map.setCenter({ lat: centerLat, lng: centerLng });
+        // 画面遷移（URL遷移）
+        window.location.href = "{% url 'myapp:Start_Screen' %}";
+    }
 
 
         function filterRestaurants(filter) {
@@ -103,7 +103,8 @@
         }
     </script>
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+    <!-- フラグメントシェーダのコードを追加 -->
+    <script id="fragmentShader" type="x-shader/x-fragment"> 
         #ifdef GL_ES
         precision mediump float;
         #endif
