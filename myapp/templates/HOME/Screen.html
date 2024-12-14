@@ -24,9 +24,9 @@
 
     <!-- 店名 -->
     <div id="store-names" style="display: none;">
-        
+
     </div>
-    
+
     <div class="filter-menu">
         <button onclick="filterRestaurants('all')">すべて</button>
         <button onclick="filterRestaurants('few')">開拓者向け </button>
@@ -48,13 +48,13 @@
 
             // 各店舗名を追加
             locations.forEach((location) => {
-    const storeButton = document.createElement('button'); // divではなくbuttonを作成
-    storeButton.className = 'store-name';
-    storeButton.textContent = location.name;
-    storeButton.dataset.latitude = location.latitude;
-    storeButton.dataset.longitude = location.longitude;
-    storeNamesDiv.appendChild(storeButton); // ボタンを追加
-});
+                const storeButton = document.createElement('button'); // divではなくbuttonを作成
+                storeButton.className = 'store-name';
+                storeButton.textContent = location.name;
+                storeButton.dataset.latitude = location.latitude;
+                storeButton.dataset.longitude = location.longitude;
+                storeNamesDiv.appendChild(storeButton); // ボタンを追加
+            });
 
 
             // トレンドボックスをクリックしたときに店舗名を表示
@@ -77,16 +77,16 @@
         });
 
         function navigateToStartScreen() {
-    // 遷移先の位置を指定（ここでは緯度・経度を仮定）
-    const centerLat = 41.7648; // 例: 函館の緯度
-    const centerLng = 140.7267; // 例: 函館の経度
+            // 遷移先の位置を指定（ここでは緯度・経度を仮定）
+            const centerLat = 41.7648; // 例: 函館の緯度
+            const centerLng = 140.7267; // 例: 函館の経度
 
-    // 地図の中心を遷移先の位置に設定
-    map.setCenter({ lat: centerLat, lng: centerLng });
+            // 地図の中心を遷移先の位置に設定
+            map.setCenter({ lat: centerLat, lng: centerLng });
 
-    // 画面遷移（URL遷移）
-    window.location.href = "{% url 'myapp:Start_Screen' %}";
-}
+            // 画面遷移（URL遷移）
+            window.location.href = "{% url 'myapp:Start_Screen' %}";
+        }
 
 
         function filterRestaurants(filter) {
@@ -281,40 +281,40 @@
                 ]
             });
             // 地図のオーバーレイを作成して花火を描画
-           
+
             // FireworkOverlay クラスの変更
-class FireworkOverlay extends google.maps.OverlayView {
-    constructor(map, lat, lng, baseSize = 100, storeDetails) {
-        super();
-        this.map = map;
-        this.lat = lat;
-        this.lng = lng;
-        this.baseSize = baseSize;
-        this.storeDetails = storeDetails; 
-        this.div = null;
-        this.setMap(map);
-    }
+            class FireworkOverlay extends google.maps.OverlayView {
+                constructor(map, lat, lng, baseSize = 100, storeDetails) {
+                    super();
+                    this.map = map;
+                    this.lat = lat;
+                    this.lng = lng;
+                    this.baseSize = baseSize;
+                    this.storeDetails = storeDetails;
+                    this.div = null;
+                    this.setMap(map);
+                }
 
-    // ボタンクリック時にもマーカークリック時と同じ情報ウィンドウを表示
-    onAdd() {
-        const div = document.createElement('canvas');
-        div.classList.add('fireworks');
-        renderfireworks(div);
-        this.div = div;
-        const panes = this.getPanes();
-        panes.overlayLayer.appendChild(div);
-        this.positionFirework();
+                // ボタンクリック時にもマーカークリック時と同じ情報ウィンドウを表示
+                onAdd() {
+                    const div = document.createElement('canvas');
+                    div.classList.add('fireworks');
+                    renderfireworks(div);
+                    this.div = div;
+                    const panes = this.getPanes();
+                    panes.overlayLayer.appendChild(div);
+                    this.positionFirework();
 
-        // マーカー追加
-        const marker = new google.maps.Marker({
-            position: { lat: this.lat, lng: this.lng },
-            map: this.map,
-            title: '花火の位置',
-            icon: {
-                url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                scaledSize: new google.maps.Size(30, 30)
-            }
-        });
+                    // マーカー追加
+                    const marker = new google.maps.Marker({
+                        position: { lat: this.lat, lng: this.lng },
+                        map: this.map,
+                        title: '花火の位置',
+                        icon: {
+                            url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                            scaledSize: new google.maps.Size(30, 30)
+                        }
+                    });
 
                     // InfoWindowを作成
                     const infowindow = new google.maps.InfoWindow({
@@ -324,49 +324,49 @@ class FireworkOverlay extends google.maps.OverlayView {
                                   </div>`
                     });
 
-        // マーカークリック時に情報ウィンドウを表示
-        marker.addListener('click', () => {
-            infowindow.open(this.map, marker);
-        });
+                    // マーカークリック時に情報ウィンドウを表示
+                    marker.addListener('click', () => {
+                        infowindow.open(this.map, marker);
+                    });
 
-        // 店舗名ボタンクリック時に同様に情報ウィンドウを表示
-        const storeButton = document.querySelector(`.store-name[data-latitude="${this.lat}"][data-longitude="${this.lng}"]`);
-        storeButton.addEventListener('click', () => {
-            infowindow.open(this.map, marker);
-        });
-    }
+                    // 店舗名ボタンクリック時に同様に情報ウィンドウを表示
+                    const storeButton = document.querySelector(`.store-name[data-latitude="${this.lat}"][data-longitude="${this.lng}"]`);
+                    storeButton.addEventListener('click', () => {
+                        infowindow.open(this.map, marker);
+                    });
+                }
 
-    positionFirework() {
-        const projection = this.getProjection();
-        const reviewOffset = this.storeDetails.review_count / 70000; 
-        const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
-        const position = projection.fromLatLngToDivPixel(latLngWithOffset);
-        const zoomLevel = this.map.getZoom();
-        const baseZoom = 15;
-        const scale = Math.pow(2, (zoomLevel - baseZoom));
-        const size = this.baseSize * scale;
-        this.div.style.width = `${size}px`;
-        this.div.style.height = `${size}px`;
-        this.div.style.left = `${position.x - size / 2}px`;
-        this.div.style.top = `${position.y - size / 2}px`;
-    }
+                positionFirework() {
+                    const projection = this.getProjection();
+                    const reviewOffset = this.storeDetails.review_count / 70000;
+                    const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
+                    const position = projection.fromLatLngToDivPixel(latLngWithOffset);
+                    const zoomLevel = this.map.getZoom();
+                    const baseZoom = 15;
+                    const scale = Math.pow(2, (zoomLevel - baseZoom));
+                    const size = this.baseSize * scale;
+                    this.div.style.width = `${size}px`;
+                    this.div.style.height = `${size}px`;
+                    this.div.style.left = `${position.x - size / 2}px`;
+                    this.div.style.top = `${position.y - size / 2}px`;
+                }
 
-    draw() {
-        this.positionFirework();
-    }
-}
+                draw() {
+                    this.positionFirework();
+                }
+            }
 
-// 店舗ボタンのクリッ処理を追加
-document.querySelectorAll('.store-name').forEach(button => {
-    button.addEventListener('click', () => {
-        const lat = button.dataset.latitude;
-        const lng = button.dataset.longitude;
-        const storeDetails = JSON.parse('{{ fireworks_locations|escapejs }}').find(store => store.latitude === lat && store.longitude === lng);
-        if (storeDetails) {
-            new FireworkOverlay(map, lat, lng, 100, storeDetails);
-        }
-    });
-});
+            // 店舗ボタンのクリッ処理を追加
+            document.querySelectorAll('.store-name').forEach(button => {
+                button.addEventListener('click', () => {
+                    const lat = button.dataset.latitude;
+                    const lng = button.dataset.longitude;
+                    const storeDetails = JSON.parse('{{ fireworks_locations|escapejs }}').find(store => store.latitude === lat && store.longitude === lng);
+                    if (storeDetails) {
+                        new FireworkOverlay(map, lat, lng, 100, storeDetails);
+                    }
+                });
+            });
 
             // views.pyから渡された花火の位置情報を使用して花火を表示
             const fireworksLocations = JSON.parse('{{ fireworks_locations|escapejs }}');
@@ -398,6 +398,10 @@ document.querySelectorAll('.store-name').forEach(button => {
     <!-- Google Maps JavaScript API -->
     <script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_api_key }}&callback=initMap" async
         defer></script>
+
+    <footer>
+        Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパーグルメ Webサービス</a>
+    </footer>
 
 </body>
 
