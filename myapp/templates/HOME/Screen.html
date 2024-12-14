@@ -253,13 +253,12 @@
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.7648, lng: 140.7267 },  // 函館山の緯度経度
                 zoom: 15,
-                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,  // 通常の地図を表示
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
-                tilt: 45,//角度をつける
                 styles: [
-                    { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
-                    { featureType: "transit", elementType: "labels", stylers: [{ visibility: "off" }] },
-                    { featureType: "road", elementType: "labels", stylers: [{ visibility: "off" }] },
+                    { featureType: "poi", elementType: "labels", stylers: [{ visibility: "on" }] },
+                    { featureType: "transit", elementType: "labels", stylers: [{ visibility: "on" }] },
+                    { featureType: "road", elementType: "labels", stylers: [{ visibility: "on" }] },
                     { featureType: "administrative", elementType: "labels", stylers: [{ visibility: "on" }] }
                 ]
             });
@@ -310,8 +309,9 @@
                 positionFirework() {
 
                     const projection = this.getProjection();
-                    const reviewOffset = this.storeDetails.review_count / 40000; // レビュー数に基づくオフセットを計算
-                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat + reviewOffset, this.lng));
+                    const reviewOffset = this.storeDetails.review_count / 70000; // レビュー数に基づくオフセットを計算
+                    const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
+                    const position = projection.fromLatLngToDivPixel(latLngWithOffset);
                     // 現在のズームレベルを取得
                     const zoomLevel = this.map.getZoom();
                     // ズームレベルに基づいてスケールを計算(指数関数的にでかくなってくれる)
@@ -319,13 +319,10 @@
                     const scale = Math.pow(2, (zoomLevel - baseZoom));
                     // 基本サイズ100pxをスケールで調整
                     const size = this.baseSize * scale;
-                    let fireworkSize = this.baseSize * scale; // `let` を使用して変数を宣言
+
+                    let fireworkSize = this.firewoekSize * scale; // `let` を使用して変数を宣言
 
                     // キャンバスのサイズを更新
-                    // レビュー数が1000件を超えた場合、上昇度を抑える
-                    if (this.storeDetails.review_count > 1000) {
-                        fireworkSize = 1000 + (this.storeDetails.review_count / 50000);
-                    }
                     this.div.style.width = `${size}px`;
                     this.div.style.height = `${size}px`;
                     this.div.style.left = `${position.x - size / 2}px`;
@@ -348,7 +345,16 @@
                     review_count: location.review_count // レビュー数を追加
                 };
                 console.log(storeDetails); // デバッグ用のログ    
-                new FireworkOverlay(map, lat, lng, location.review_count, storeDetails);
+                //花火の大きさを変更
+                let fireworkSize;
+                if (storeDetails.review_count > 1000) {
+                    fireworkSize = 1000 + (storeDetails.review_count / 100);
+                } else if (storeDetails.review_count <= 100) {
+                    fireworkSize = 100; // レビュー数が100件以下の場合のサイズ設定
+                } else {
+                    fireworkSize = storeDetails.review_count;
+                }
+                new FireworkOverlay(map, lat, lng, fireworkSize, storeDetails);
             });
         }
     </script>
