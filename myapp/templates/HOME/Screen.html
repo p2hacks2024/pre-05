@@ -1,253 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>函館トレンドグルメ</title>
-    <style>
-        /* 全体のレイアウト */
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: #333;
-            background-color: #f4f4f4;
-            opacity: 0; /* フェードインのために初期状態を透明に */
-            animation: fadeIn 1s forwards; /* フェードインのアニメーションを追加 */
-        }
-
-        /* フィルターメニューのスタイル */
-        /* フィルターメニューのスタイル */
-        .filter-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            background-color: #999999;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(136, 128, 128, 0.2);
-            display: flex;
-            gap: 15px; /* ボタン間のスペース */
-            flex-wrap: wrap; /* ボタンが多い場合折り返す */
-        }
-
-        .filter-menu button {
-            background-color: #000000; /* ボタンの背景色 */
-            color: white; /* 文字色 */
-            border: none;
-            border-radius: 6px;
-            padding: 12px 30px; /* 横長にする */
-            font-size: 16px; /* フォントサイズを大きくする */
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            min-width: 150px; /* 最低幅を設定 */
-            text-align: center; /* テキストを中央揃え */
-        }
-
-        .filter-menu button:hover {
-            background-color: #000000; /* ホバー時の色 */
-            transform: scale(1.05); /* 拡大 */
-        }
-
-        .filter-menu button:active {
-            background-color: #000000; /* クリック時の色 */
-            transform: scale(0.95); /* 縮小 */
-        }
-        
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-
-        /* 画像の位置を指定するCSS */
-        #top-left-image {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1000; /* 地図の上に表示するために高い値を設定 */
-            width: 100px; /* 画像の幅を指定 */
-            height: auto; /* 高さを自動調整 */
-            border: 2px solid black; /* 黒い枠線を追加 */
-            background-color: black; /* 背景色を黒に設定 */
-            border-radius: 50%; /* 丸くする */
-            padding: 5px; /* 枠線と画像の間に余白を追加 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden; /* 画像が丸の外に出ないようにする */
-        }
-        #top-left-image img {
-            width: 90%; /* 画像の幅を指定 */
-            height: auto; /* 高さを自動調整 */
-            border-radius: 50%; /* 画像も丸くする */
-        }
-        #image-container img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        /* 地図のスタイル */
-        #map {
-            height: 100vh; /* 画面全体の高さに設定 */
-            width: 100%;
-            position: relative;
-        }
-
-        /* 花火のスタイル */
-        .fireworks {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-        }
-
-        @keyframes firework {
-            0% { transform: scale(0.5); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-
-        /* 画像コンテナのスタイル */
-        #image-container {
-            position: absolute;
-            top: 170px;  /* トレンドのお店と店名の下に配置 */
-            left: 10px;
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
-        /* InfoWindowのスタイル */
-        /* クリック後に表示されるUIのスタイル */
-        .info-window {
-                font-family: 'Arial', sans-serif;
-                font-size: 14px;
-                line-height: 1.5;
-                color: black; /* 文字色を黒に設定 */
-                background-color: white; /* 背景色を白に設定 */
-                padding: 0 10px 10px 10px; /* 上側のパディングを削除 */
-                border-radius: 10px;
-                border: 2px solid #000;  /* 黒い枠線を追加 */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* 影を強調 */
-                max-width: 300px;
-            }
-
-            .info-window h3 {
-                margin: 0; /* マージンを削除 */
-                padding: 0 0 5px 0; /* 下に少し余白を追加 */
-                font-size: 16px;
-                color: black; /* 文字色を黒に設定 */
-            }
-
-            .info-window p {
-                margin: 0; /* マージンを削除 */
-                padding: 5px 0 0 0; /* 上に少し余白を追加 */
-                color: black; /* 文字色を黒に設定 */
-            }
-
-            .info-window .address {
-                font-size: 12px;
-                color: black; /* 文字色を黒に設定 */
-            }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/screen_filter.css' %}">
+    <link rel="stylesheet" href="{% static 'css/screen_image.css' %}">
+    <link rel="stylesheet" href="{% static 'css/screen_fireworks.css' %}">
+    <link rel="stylesheet" href="{% static 'css/screen_infowindow.css' %}">
+    <link rel="stylesheet" href="{% static 'css/screen_map.css' %}">
+    <link rel="stylesheet" href="{% static 'css/screen_trend.css' %}">
 </head>
 
 <body>
-    <img id="top-left-image" src="{% static 'images/icon.png' %}" alt="Top Left Image" onclick="navigateToStartScreen()">
+    <img id="top-left-image" src="{% static 'images/icon.png' %}" alt="Top Left Image"
+        onclick="navigateToStartScreen()">
     <div id="map"></div>
 
     <!-- トレンドのお店 -->
     <div id="trend-name">トレンドのお店▼</div>
 
     <!-- 店名 -->
-     <div id="store-names" style="display: none;"></div>
-
-    <style>
-       @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #000;  /* 背景色を黒に */
-            color: #fff;  /* 文字色を白に */
-            margin: 0;
-            padding: 0;
-        }
-
-        #trend-name {
-            position: absolute;  /* 絶対位置を指定 */
-            top: 150px;  /* 上からの位置を指定 */
-            left: 10px;  /* 左からの位置を指定 */
-            background-color: #000;  /* 背景色を黒に */
-            color: #fff;  /* 文字色を白に */
-            padding: 10px 20px;  /* 内側の余白を指定 */
-            border-radius: 5px;  /* 角を丸くする */
-            border: 2px solid #000;  /* 黒い枠線を追加 */
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);  /* 影を強調 */
-            font-size: 18px;  /* フォントサイズを指定 */
-            z-index: 1000;  /* 重なり順を指定 */
-            cursor: pointer;  /* クリック可能にする */
-            transition: background-color 0.3s ease, transform 0.3s ease;  /* 背景色と変形にアニメーションを追加 */
-        }
-
-        #trend-name:hover {
-            background-color: #ccc;  /* ホバー時の背景色をグレーに */
-            color: #000;  /* ホバー時の文字色を黒に */
-            transform: scale(1.05);  /* ホバー時に拡大 */
-        }
-
-        #store-names {
-            position: absolute;  /* 絶対位置を指定 */
-            left: 10px;  /* 左からの位置を指定 */
-            width: 20%;  /* 画面の幅の1/5に設定 */
-            max-height: 70vh;  /* 画面の縦幅の70%を最大高さに設定 */
-            overflow-y: auto;  /* 縦方向のスクロールを有効にする */
-            background-color: #000;  /* 背景色を黒に */
-            color: #fff;  /* 文字色を白に */
-            padding: 10px;  /* 内側の余白を指定 */
-            border-radius: 5px;  /* 角を丸くする */
-            border: 2px solid #000;  /* 黒い枠線を追加 */
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);  /* 影を強調 */
-            z-index: 1000;  /* 重なり順を指定 */
-            display: none;  /* 初期状態では非表示 */
-            word-wrap: break-word;  /* 幅が足りない場合は改行 */
-            transition: max-height 0.3s ease;  /* 高さの変化にアニメーションを追加 */
-        }
-
-        /* カスタムスクロールバーのスタイル */
-        #store-names::-webkit-scrollbar {
-            width: 0;  /* スクロールバーの幅を0に設定 */
-        }
-
-        .store-name {
-            position: relative;  /* 親要素に対して相対的に配置 */
-            background-color: #000;  /* 背景色を黒に */
-            color: #fff;  /* 文字色を白に */
-            padding: 10px;  /* 内側の余白を指定 */
-            border-radius: 5px;  /* 角を丸くする */
-            border: 2px solid #000;  /* 黒い枠線を追加 */
-            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);  /* 影を追加 */
-            font-size: 16px;  /* フォントサイズを指定 */
-            z-index: 1000;  /* 重なり順を指定 */
-            margin-top: 10px;  /* 各店舗名の間にスペースを追加 */
-            cursor: pointer;  /* クリック可能にする */
-            transition: background-color 0.3s ease, transform 0.3s ease;  /* 背景色と変形にアニメーションを追加 */
-        }
-
-        .store-name:hover {
-            background-color: #ccc;  /* ホバー時の背景色をグレーに */
-            color: #000;  /* ホバー時の文字色を黒に */
-            transform: translateX(10px);  /* ホバー時に右に移動 */
-        }
-
-        .store-name::before {
-            content: '🏠';  /* アイコンを追加 */
-            margin-right: 10px;  /* アイコンとテキストの間にスペースを追加 */
-        }
-    </style>
-
+    <div id="store-names" style="display: none;"></div>
+    <div class="filter-menu">
+        <button onclick="filterRestaurants('all')">すべて</button>
+        <button onclick="filterRestaurants('few')">開拓者向け (0〜50件)</button>
+        <button onclick="filterRestaurants('medium')">失敗しない (51〜200件)</button>
+        <button onclick="filterRestaurants('many')"> 人気店(201〜500件)</button>
+        <button onclick="filterRestaurants('very-many')">大絶賛(501件以上)</button>
+    </div>
     <script>
         let map;  // 地図オブジェクトをグローバルに宣言
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM fully loaded and parsed');  // デバッグ用ログ
 
             // JSONデータをパース
@@ -265,32 +52,20 @@
             });
 
             // トレンドボックスをクリックしたときに店舗名を表示
-            document.getElementById('trend-name').addEventListener('click', function() {
+            document.getElementById('trend-name').addEventListener('click', function () {
                 const storeNamesDiv = document.getElementById('store-names');
                 console.log('Trend box clicked');  // デバッグ用ログ
-                    if (storeNamesDiv.style.display === 'none') {
+                if (storeNamesDiv.style.display === 'none') {
                     // トレンドボックスの下に位置を設定
-                        const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
-                        storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
-                        storeNamesDiv.style.display = 'block';
-                    } else {
-                        storeNamesDiv.style.display = 'none';
+                    const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
+                    storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
+                    storeNamesDiv.style.display = 'block';
+                } else {
+                    storeNamesDiv.style.display = 'none';
                 }
             });
-    });
+        });
 
-    </script>
-
-
-        <div class="filter-menu">
-            <button onclick="filterRestaurants('all')">すべて</button>
-            <button onclick="filterRestaurants('few')">開拓者向け (0〜50件)</button>
-            <button onclick="filterRestaurants('medium')">失敗しない (51〜200件)</button>
-            <button onclick="filterRestaurants('many')"> 人気店(201〜500件)</button>
-            <button onclick="filterRestaurants('very-many')">大絶賛(501件以上)</button>
-        </div>
-
-    <script>
 
         function navigateToStartScreen() {
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
@@ -301,12 +76,12 @@
             url.searchParams.set('filter', filter); // URLのパラメータを更新
             window.location.href = url.toString(); // 更新されたURLにリダイレクト
         }
-        
+
         function navigateToStartScreen() {
             window.location.href = "{% url 'myapp:Start_Screen' %}"; // URLパターン名を指定
         }
     </script>
-    
+
     <script id="fragmentShader" type="x-shader/x-fragment">
         #ifdef GL_ES
         precision mediump float;
@@ -388,8 +163,8 @@
 
 
     <script>
-        function renderfireworks(canvas){
-   
+        function renderfireworks(canvas) {
+
             //webGLのコンテキストを取得
             const gl = canvas.getContext('webgl');
             //背景を透明にする
@@ -401,7 +176,7 @@
                 canvas.height = 100; //画面の高さ
                 gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
             };
-            
+
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
             //頂点シェーダのソースコード
@@ -444,10 +219,10 @@
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
                 -1, -1,
                 1, -1,
-                -1,  1,
-                -1,  1,
+                -1, 1,
+                -1, 1,
                 1, -1,
-                1,  1,
+                1, 1,
             ]), gl.STATIC_DRAW);
 
             const positionLocation = gl.getAttribLocation(program, "a_position");
@@ -462,7 +237,7 @@
                 gl.uniform2f(iResolutionLocation, canvas.width, canvas.height);
                 gl.uniform1f(iGlobalTimeLocation, (performance.now() - startTime) / 1000);
 
-               gl.drawArrays(gl.TRIANGLES, 0, 6);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
                 requestAnimationFrame(render);
             };
             //レンダリングを開始
@@ -471,7 +246,7 @@
 
 
         // initMap関数をwindowオブジェクトに設定
-        window.initMap = function() {
+        window.initMap = function () {
 
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
@@ -481,15 +256,15 @@
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 tilt: 45,//角度をつける
                 styles: [
-                { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
-                { featureType: "transit", elementType: "labels", stylers: [{ visibility: "off" }] },
-                { featureType: "road", elementType: "labels", stylers: [{ visibility: "off" }] },
-                { featureType: "administrative", elementType: "labels", stylers: [{ visibility: "on" }] }
-            ]
-        });
+                    { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+                    { featureType: "transit", elementType: "labels", stylers: [{ visibility: "off" }] },
+                    { featureType: "road", elementType: "labels", stylers: [{ visibility: "off" }] },
+                    { featureType: "administrative", elementType: "labels", stylers: [{ visibility: "on" }] }
+                ]
+            });
             // 地図のオーバーレイを作成して花火を描画
             class FireworkOverlay extends google.maps.OverlayView {
-                constructor(map, lat, lng, baseSize = 100,storeDetails) {
+                constructor(map, lat, lng, baseSize = 100, storeDetails) {
                     super();
                     this.map = map;
                     this.lat = lat;
@@ -515,27 +290,27 @@
                         map: this.map,
                         title: '花火の位置',
                         icon: {
-                                url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png', // カスタムアイコンのURL
-                                scaledSize: new google.maps.Size(30, 30) // アイコンのサイズを指定
-                            }
-            });
+                            url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png', // カスタムアイコンのURL
+                            scaledSize: new google.maps.Size(30, 30) // アイコンのサイズを指定
+                        }
+                    });
 
-            // InfoWindowを作成
-            const infowindow = new google.maps.InfoWindow({
-                content: `<div class="info-window"><h3>${this.storeDetails.name}</h3><p class="address">${this.storeDetails.description}</p></div>`
-            });
-    
-            // マーカークリック時にInfoWindowを表示
-            marker.addListener('click', () => {
-                infowindow.open(this.map, marker);
-            });     
-                } 
+                    // InfoWindowを作成
+                    const infowindow = new google.maps.InfoWindow({
+                        content: `<div class="info-window"><h3>${this.storeDetails.name}</h3><p class="address">${this.storeDetails.description}</p></div>`
+                    });
+
+                    // マーカークリック時にInfoWindowを表示
+                    marker.addListener('click', () => {
+                        infowindow.open(this.map, marker);
+                    });
+                }
                 // 花火の位置を設定
                 positionFirework() {
-                    
+
                     const projection = this.getProjection();
                     const reviewOffset = this.storeDetails.review_count / 40000; // レビュー数に基づくオフセットを計算
-                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat+reviewOffset, this.lng));
+                    const position = projection.fromLatLngToDivPixel(new google.maps.LatLng(this.lat + reviewOffset, this.lng));
                     // 現在のズームレベルを取得
                     const zoomLevel = this.map.getZoom();
                     // ズームレベルに基づいてスケールを計算(指数関数的にでかくなってくれる)
@@ -546,14 +321,14 @@
                     let fireworkSize = this.baseSize * scale; // `let` を使用して変数を宣言
 
                     // キャンバスのサイズを更新
-                     // レビュー数が1000件を超えた場合、上昇度を抑える
-                     if (this.storeDetails.review_count > 1000) {
-                        fireworkSize = 1000 + (this.storeDetails.review_count / 50000) ;
+                    // レビュー数が1000件を超えた場合、上昇度を抑える
+                    if (this.storeDetails.review_count > 1000) {
+                        fireworkSize = 1000 + (this.storeDetails.review_count / 50000);
                     }
                     this.div.style.width = `${size}px`;
                     this.div.style.height = `${size}px`;
-                    this.div.style.left = `${position.x - size/2}px`;
-                    this.div.style.top = `${position.y - size/2}px`;
+                    this.div.style.left = `${position.x - size / 2}px`;
+                    this.div.style.top = `${position.y - size / 2}px`;
                 }
                 // オーバーレイを描画
                 draw() {
@@ -565,19 +340,21 @@
             fireworksLocations.forEach(location => {
                 const lat = location.latitude;
                 const lng = location.longitude;
-            //クリックしたときに店名を表示
-            const storeDetails = {
-                name: decodeURIComponent(location.name),
-                description: decodeURIComponent(location.description),
-                review_count: location.review_count // レビュー数を追加
-            };
-            console.log(storeDetails); // デバッグ用のログ    
-             new FireworkOverlay(map, lat, lng, location.review_count, storeDetails);
+                //クリックしたときに店名を表示
+                const storeDetails = {
+                    name: decodeURIComponent(location.name),
+                    description: decodeURIComponent(location.description),
+                    review_count: location.review_count // レビュー数を追加
+                };
+                console.log(storeDetails); // デバッグ用のログ    
+                new FireworkOverlay(map, lat, lng, location.review_count, storeDetails);
             });
         }
-</script>
-<!-- Google Maps JavaScript API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap" async defer></script>
+    </script>
+    <!-- Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvqWPVxtUSmCUwOnivbYBd9lhlixufhMY&callback=initMap"
+        async defer></script>
 
 </body>
+
 </html>

@@ -1,0 +1,47 @@
+/* 全体のレイアウト */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    opacity: 0; /* フェードインのために初期状態を透明に */
+    animation: fadeIn 1s forwards; /* フェードインのアニメーションを追加 */
+}
+
+/* フィルターメニューのスタイル */
+.filter-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #999999;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(136, 128, 128, 0.2);
+    display: flex;
+    gap: 15px; /* ボタン間のスペース */
+    flex-wrap: wrap; /* ボタンが多い場合折り返す */
+}
+
+.filter-menu button {
+    background-color: #000000; /* ボタンの背景色 */
+    color: white; /* 文字色 */
+    border: none;
+    border-radius: 6px;
+    padding: 12px 30px; /* 横長にする */
+    font-size: 16px; /* フォントサイズを大きくする */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    min-width: 150px; /* 最低幅を設定 */
+    text-align: center; /* テキストを中央揃え */
+}
+
+.filter-menu button:hover {
+    background-color: #000000; /* ホバー時の色 */
+    transform: scale(1.05); /* 拡大 */
+}
+
+.filter-menu button:active {
+    background-color: #000000; /* クリック時の色 */
+    transform: scale(0.95); /* 縮小 */
+}

@@ -1,0 +1,39 @@
+/* 画像の位置を指定するCSS */
+#top-left-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* 地図の上に表示するために高い値を設定 */
+    width: 100px; /* 画像の幅を指定 */
+    height: auto; /* 高さを自動調整 */
+    border: 2px solid black; /* 黒い枠線を追加 */
+    background-color: black; /* 背景色を黒に設定 */
+    border-radius: 50%; /* 丸くする */
+    padding: 5px; /* 枠線と画像の間に余白を追加 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* 画像が丸の外に出ないようにする */
+}
+#top-left-image img {
+    width: 90%; /* 画像の幅を指定 */
+    height: auto; /* 高さを自動調整 */
+    border-radius: 50%; /* 画像も丸くする */
+}
+#image-container img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 画像コンテナのスタイル */
+#image-container {
+    position: absolute;
+    top: 170px;
+    /* トレンドのお店と店名の下に配置 */
+    left: 10px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1000;
+}

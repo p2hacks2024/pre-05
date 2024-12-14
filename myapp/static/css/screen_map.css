@@ -1,0 +1,17 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 地図のスタイル */
+#map {
+    height: 100vh;
+    /* 画面全体の高さに設定 */
+    width: 100%;
+    position: relative;
+}
