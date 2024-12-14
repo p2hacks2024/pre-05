@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>函館トレンドグルメ</title>
+    <title>TREND FLASH</title>
     <link rel="stylesheet" href="{% static 'css/screen_filter.css' %}">
     <link rel="stylesheet" href="{% static 'css/screen_image.css' %}">
     <link rel="stylesheet" href="{% static 'css/screen_fireworks.css' %}">
@@ -20,7 +20,7 @@
     <div id="map"></div>
 
     <!-- トレンドのお店 -->
-    <div id="trend-name">トレンドのお店▼</div>
+    <div id="trend-name">本日のおすすめ▼</div>
 
     <!-- 店名 -->
     <div id="store-names" style="display: none;">
@@ -66,24 +66,19 @@
                     const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
                     storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
                     storeNamesDiv.style.display = 'block';
-                    trendNameDiv.textContent = '閉じる';  // ボタンの名前を変更
+                    trendNameDiv.textContent = '閉じる▲';  // ボタンの名前を変更
 
                 } else {
                     storeNamesDiv.style.display = 'none';
-                    trendNameDiv.textContent = 'トレンドのお店▼';  // ボタンの名前を元に戻す
+                    trendNameDiv.textContent = '本日のおすすめ▼';  // ボタンの名前を元に戻す
                 }
             });
 
         });
 
         function navigateToStartScreen() {
-    // 遷移先の位置を指定（ここでは緯度・経度を仮定）
-    const centerLat = 41.7648; // 例: 函館の緯度
-    const centerLng = 140.7267; // 例: 函館の経度
-
     // 地図の中心を遷移先の位置に設定
     map.setCenter({ lat: centerLat, lng: centerLng });
-
     // 画面遷移（URL遷移）
     window.location.href = "{% url 'myapp:Start_Screen' %}";
 }
@@ -265,7 +260,6 @@
 
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function () {
-
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.7648, lng: 140.7267 },  // 函館山の緯度経度
@@ -279,7 +273,6 @@
                     { featureType: "administrative", elementType: "labels", stylers: [{ visibility: "on" }] }
                 ]
             });
-            // 地図のオーバーレイを作成して花火を描画
            
             // FireworkOverlay クラスの変更
 class FireworkOverlay extends google.maps.OverlayView {
