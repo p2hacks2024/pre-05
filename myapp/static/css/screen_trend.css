@@ -84,9 +84,6 @@ body {
     transform: translateX(10px); /* 少し右にスライド */
 }
 
-
-
-
 .store-name::before {
     content: '🏠';
     margin-right: 10px;

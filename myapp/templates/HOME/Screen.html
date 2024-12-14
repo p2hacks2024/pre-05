@@ -269,8 +269,7 @@
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.7648, lng: 140.7267 },  // 函館山の緯度経度
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 15,  // ズーム値
                 mapTypeId: google.maps.MapTypeId.ROADMAP,  // 通常の地図を表示
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 styles: [
@@ -316,13 +315,13 @@ class FireworkOverlay extends google.maps.OverlayView {
             }
         });
 
-                    // InfoWindowを作成
-                    const infowindow = new google.maps.InfoWindow({
-                        content: `<div class="info-window">
-                                    <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
-                                    <p class="address">${this.storeDetails.description}</p>
-                                  </div>`
-                    });
+        // InfoWindowを作成
+        const infowindow = new google.maps.InfoWindow({
+            content: `<div class="info-window">
+                    <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
+                    <p class="address">${this.storeDetails.description}</p>
+                    </div>`
+            });
 
         // マーカークリック時に情報ウィンドウを表示
         marker.addListener('click', () => {
@@ -338,7 +337,14 @@ class FireworkOverlay extends google.maps.OverlayView {
 
     positionFirework() {
         const projection = this.getProjection();
-        const reviewOffset = this.storeDetails.review_count / 70000; 
+        let reviewOffset;
+        if (this.storeDetails.review_count > 1000) {
+            reviewOffset = +0.015;
+        } else if (this.storeDetails.review_count < 100) {
+            reviewOffset = 0.0015;
+        } else {
+            reviewOffset = this.storeDetails.review_count / 65000;
+        }
         const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
         const position = projection.fromLatLngToDivPixel(latLngWithOffset);
         const zoomLevel = this.map.getZoom();
