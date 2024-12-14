@@ -22,6 +22,16 @@
         opacity: 0;
       }
     }
+
+    .side-text {
+      text-align: left; /* 左揃えにします */
+      width: 700px; /* テキストを三行に収めるための幅を設定します */
+      margin-left: -70px; /* テキストをもう少し左にずらします */
+    }
+
+    .side-text p {
+      font-size: 1.1em; /* フォントサイズを大きくします */
+    }
   </style>
 </head>
 <body>
@@ -30,7 +40,7 @@
     <span class="bg-wrap"><span class="inn title-large">Trend Flash</span></span><br>
     <span class="bg-wrap"><span class="inn title-small">函館の味をもっと身近に</span></span>
   </div>
-    <div class="side-text">
+  <div class="side-text">
       <p>普段、忙しくてお店を選ぶ時間がない。</p>
       <p>そんなあなたに、トレンドの味をお届けします。</p>
       <p>新しい函館の味をお楽しみください。</p>
@@ -38,6 +48,9 @@
   <div id="root"></div>
   <div class="fuwafuwa"></div>
   <button class="custom-btn btn-1" onclick="navigateToScreen()">Get Started</button>
+  <a href="https://github.com/p2hacks2024/pre-05" target="_blank" style="position: fixed; bottom: 10px; right: 10px;">
+    <img src="{% static 'images/github.png' %}" alt="GitHub" style="width: 50px; height: 50px; opacity: 0.7;">
+  </a>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.production.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.12.0/umd/react-dom.production.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js'></script>
