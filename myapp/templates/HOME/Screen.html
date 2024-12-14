@@ -314,7 +314,14 @@
                 positionFirework() {
 
                     const projection = this.getProjection();
-                    const reviewOffset = this.storeDetails.review_count / 70000; // レビュー数に基づくオフセットを計算
+                    let reviewOffset;
+                    if (this.storeDetails.review_count > 1000) {
+                        reviewOffset = this.storeDetails.review_count / 600000 + 0.015; // レビュー数が1000件を超える場合のオフセット
+                    } else if (this.storeDetails.review_count <= 100) {
+                        reviewOffset = 0.002; // レビュー数が100件以下の場合のオフセット
+                    } else {
+                        reviewOffset = this.storeDetails.review_count / 60000; // その他の場合のオフセット
+                    }
                     const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
                     const position = projection.fromLatLngToDivPixel(latLngWithOffset);
                     // 現在のズームレベルを取得
