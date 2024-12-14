@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>函館トレンドグルメ</title>
+    <title>TREND FLASH</title>
     <link rel="stylesheet" href="{% static 'css/screen_filter.css' %}">
     <link rel="stylesheet" href="{% static 'css/screen_image.css' %}">
     <link rel="stylesheet" href="{% static 'css/screen_fireworks.css' %}">
@@ -20,7 +20,7 @@
     <div id="map"></div>
 
     <!-- トレンドのお店 -->
-    <div id="trend-name">トレンドのお店▼</div>
+    <div id="trend-name">本日のおすすめ▼</div>
 
     <!-- 店名 -->
     <div id="store-names" style="display: none;">
@@ -74,27 +74,22 @@
                     const trendNameRect = document.getElementById('trend-name').getBoundingClientRect();
                     storeNamesDiv.style.top = `${trendNameRect.bottom + window.scrollY}px`;
                     storeNamesDiv.style.display = 'block';
-                    trendNameDiv.textContent = '閉じる';  // ボタンの名前を変更
+                    trendNameDiv.textContent = '閉じる▲';  // ボタンの名前を変更
 
                 } else {
                     storeNamesDiv.style.display = 'none';
-                    trendNameDiv.textContent = 'トレンドのお店▼';  // ボタンの名前を元に戻す
+                    trendNameDiv.textContent = '本日のおすすめ▼';  // ボタンの名前を元に戻す
                 }
             });
 
         });
 
         function navigateToStartScreen() {
-            // 遷移先の位置を指定（ここでは緯度・経度を仮定）
-            const centerLat = 41.7648; // 例: 函館の緯度
-            const centerLng = 140.7267; // 例: 函館の経度
-
-            // 地図の中心を遷移先の位置に設定
-            map.setCenter({ lat: centerLat, lng: centerLng });
-
-            // 画面遷移（URL遷移）
-            window.location.href = "{% url 'myapp:Start_Screen' %}";
-        }
+    // 地図の中心を遷移先の位置に設定
+    map.setCenter({ lat: centerLat, lng: centerLng });
+    // 画面遷移（URL遷移）
+    window.location.href = "{% url 'myapp:Start_Screen' %}";
+}
 
 
         function filterRestaurants(filter) {
@@ -273,12 +268,10 @@
 
         // initMap関数をwindowオブジェクトに設定
         window.initMap = function () {
-
             // 地図の作成
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.7648, lng: 140.7267 },  // 函館山の緯度経度
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 15,  // ズーム値
                 mapTypeId: google.maps.MapTypeId.ROADMAP,  // 通常の地図を表示
                 mapTypeControl: false,  // ここで地図タイプの選択タブを非表示にする
                 styles: [
@@ -288,8 +281,7 @@
                     { featureType: "administrative", elementType: "labels", stylers: [{ visibility: "on" }] }
                 ]
             });
-            // 地図のオーバーレイを作成して花火を描画
-
+           
             // FireworkOverlay クラスの変更
             class FireworkOverlay extends google.maps.OverlayView {
                 constructor(map, lat, lng, baseSize = 100, storeDetails) {
@@ -324,13 +316,13 @@
                         }
                     });
 
-        // InfoWindowを作成部分を修正（レビューの行を削除）
+        // InfoWindowを作成
         const infowindow = new google.maps.InfoWindow({
             content: `<div class="info-window">
-                        <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
-                        <p class="address">${this.storeDetails.description}</p>
-                      </div>`
-        });
+                    <h3><a href="${this.storeDetails.url_pc}" target="_blank">${this.storeDetails.name}</a></h3>
+                    <p class="address">${this.storeDetails.description}</p>
+                    </div>`
+            });
 
         // マーカークリック時の処理を修正（情報ウィンドウのみを表示）
         marker.addListener('click', () => {
@@ -363,20 +355,27 @@
         });
     }
 
-                positionFirework() {
-                    const projection = this.getProjection();
-                    const reviewOffset = this.storeDetails.review_count / 70000;
-                    const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
-                    const position = projection.fromLatLngToDivPixel(latLngWithOffset);
-                    const zoomLevel = this.map.getZoom();
-                    const baseZoom = 15;
-                    const scale = Math.pow(2, (zoomLevel - baseZoom));
-                    const size = this.baseSize * scale;
-                    this.div.style.width = `${size}px`;
-                    this.div.style.height = `${size}px`;
-                    this.div.style.left = `${position.x - size / 2}px`;
-                    this.div.style.top = `${position.y - size / 2}px`;
-                }
+    positionFirework() {
+        const projection = this.getProjection();
+        let reviewOffset;
+        if (this.storeDetails.review_count > 1000) {
+            reviewOffset = +0.015;
+        } else if (this.storeDetails.review_count < 100) {
+            reviewOffset = 0.0015;
+        } else {
+            reviewOffset = this.storeDetails.review_count / 65000;
+        }
+        const latLngWithOffset = new google.maps.LatLng(this.lat + reviewOffset, this.lng);
+        const position = projection.fromLatLngToDivPixel(latLngWithOffset);
+        const zoomLevel = this.map.getZoom();
+        const baseZoom = 15;
+        const scale = Math.pow(2, (zoomLevel - baseZoom));
+        const size = this.baseSize * scale;
+        this.div.style.width = `${size}px`;
+        this.div.style.height = `${size}px`;
+        this.div.style.left = `${position.x - size / 2}px`;
+        this.div.style.top = `${position.y - size / 2}px`;
+    }
 
                 draw() {
                     this.positionFirework();

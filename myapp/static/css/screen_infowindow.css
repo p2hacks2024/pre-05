@@ -11,55 +11,9 @@
     padding: 0 10px 10px 10px;
     /* 上側のパディングを削除 */
     border-radius: 10px;
-    border: 2px solid #000;
+    border: 2px solid #0078d7;
     /* 黒い枠線を追加 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* 影を強調 */
     max-width: 300px;
-}
-
-.info-window h3 {
-    margin: 0;
-    /* マージンを削除 */
-    padding: 0 0 5px 0;
-    /* 下に少し余白を追加 */
-    font-size: 16px;
-    color: black;
-    /* 文字色を黒に設定 */
-}
-
-.info-window h3 a {
-    color: #0066cc;
-    text-decoration: none;
-}
-
-.info-window h3 a:hover {
-    text-decoration: underline;
-}
-
-.info-window p {
-    margin: 0;
-    /* マージンを削除 */
-    padding: 5px 0 0 0;
-    /* 上に少し余白を追加 */
-    color: black;
-    /* 文字色を黒に設定 */
-}
-
-.info-window .address {
-    font-size: 12px;
-    color: black;
-    /* 文字色を黒に設定 */
-}
-
-/* レビュー表示用のスタイル追加 */
-.info-window .review {
-    font-size: 13px;
-    color: #333;
-    margin-top: 8px;
-    padding: 8px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    line-height: 1.4;
-    font-style: italic;
 }
